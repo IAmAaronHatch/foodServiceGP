@@ -12,6 +12,7 @@
     "react": "^16.5.1",
     "react-dom": "^16.5.1",
     "react-redux": "^5.0.7",
+    "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
     "react-scripts": "1.1.5",
     "redux": "^4.0.0",
@@ -24,7 +25,7 @@
     "eject": "react-scripts eject"
   },
   "description": "This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).",
-  "main": "index.js",
+  "main": "server/server.js",
   "devDependencies": {},
   "keywords": [],
   "author": "",
@@ -36,5 +37,20 @@
   "bugs": {
     "url": "https://github.com/IAmAaronHatch/foodServiceGP/issues"
   },
-  "homepage": "https://github.com/IAmAaronHatch/foodServiceGP#readme"
+  "homepage": "https://github.com/IAmAaronHatch/foodServiceGP#readme",
+  "nodemonConfig": {
+    "ext": "js, sql",
+    "ignore": [
+      "src/*",
+      "public/*"
+    ]
+  },
+  "proxy": {
+    "/auth/callback": {
+      "target": "http://localhost:4001"
+    },
+    "/api": {
+      "target": "http://localhost:4001"
+    }
+  }
 }
