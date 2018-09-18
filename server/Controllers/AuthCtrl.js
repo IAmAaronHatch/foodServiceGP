@@ -20,7 +20,7 @@ module.exports = {
 
       let userInfoResponse = await axios.get(`${auth0domain}/userinfo?access_token=${accessToken}`)
       let userInfo = userInfoResponse.data
-console.log(userInfo)
+
       let db = req.app.get('db')
       let users = await db.findUserByAuthId(userInfo.sub)
 

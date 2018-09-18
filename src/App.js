@@ -18,6 +18,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+      {/* test auth0 button */}
         <button onClick={this.login}>Login</button>
       </div>
     );

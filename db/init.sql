@@ -3,6 +3,12 @@ CREATE TABLE users (
     auth_id TEXT,
     name VARCHAR,
     email VARCHAR,
-    password VARCHAR(32),
-    profile_picture TEXT
+    picture TEXT
+)
+CREATE TABLE favorites (
+    id SERIAL PRIMARY KEY,
+    user_id integer,
+    rest_id VARCHAR,
+    order integer
+
 )
