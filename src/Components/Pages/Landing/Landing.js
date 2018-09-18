@@ -72,7 +72,7 @@ class Landing extends Component {
           <br />
           <button onClick={this.login}>Login</button>
         </Modal>
-        <Map/>
+        {/* <Map/> */}
       </div>
     );
   }
