@@ -2,10 +2,10 @@ import React from 'react'
 import { Route, Switch } from 'react-router-dom'
 
 //importing components 
-import Landing from './App'
+import Landing from './Components/Pages/Landing/Landing'
 import PrimaryView from './Components/Pages/PrimaryView'
 import FullView from './Components/Pages/FullView'
-import Favorites from './Components/Pages/Favorites'
+import Favorites from './Components/Pages/Favorites/Favorites'
 
 export default function () {
     return (

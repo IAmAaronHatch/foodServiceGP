@@ -1,0 +1,84 @@
+
+.topmodal {
+  display: flex;
+  flex-direction: row;
+}
+.dropbtn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content span {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content span:hover {background-color: #f1f1f1}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown:hover .dropbtn {
+  background-color: #c5e6c6;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+/* ///////// */
+
+.type-drop {
+  position: relative;
+  display: inline-block;
+}
+.type-dropbtn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.type-dropcontent {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.type-dropcontent .type-span {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.type-dropcontent .type-span:hover {background-color: #f1f1f1}
+
+.type-drop:hover .type-dropcontent {
+  display: block;
+}
+
+.type-drop:hover .type-dropbtn {
+  background-color: #c5e6c6;
+}
