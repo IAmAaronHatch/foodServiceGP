@@ -4,11 +4,11 @@ import {loadModules} from 'esri-loader'
 
 const styles = {
 container: {
-height: '92.3vh',
+height: '99.9vh',
 
 },
 mapDiv: {
-height: '50%',
+height: '100%',
 
 },
 }
