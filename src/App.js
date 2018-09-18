@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import routing from './routing'
 
 
 
@@ -18,8 +18,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-      {/* test auth0 button */}
-        <button onClick={this.login}>Login</button>
+        { routing }
       </div>
     );
   }
