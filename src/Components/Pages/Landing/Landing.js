@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import axios from 'axios'
 import './Landing.css'
 import Modal from 'react-modal'
+import Map from '../../RP/Map'
+
 
 class Landing extends Component {
   constructor() {
@@ -39,7 +41,10 @@ class Landing extends Component {
     return (
       <div className="App">
         <Modal
-          isOpen={this.state.modalIsOpen}>
+          isOpen={this.state.modalIsOpen}
+          // className='modal'
+          // overlayClassName='Overlay'
+          >
           <div className='dropdown'>
             <button className='dropbtn'>Price</button>
             <div className='dropdown-content'>
@@ -73,8 +78,10 @@ class Landing extends Component {
           <br />
           <button onClick={this.login}>Login</button>
         </Modal>
+        <Map/>
       </div>
     );
   }
 }
+
 export default Landing;

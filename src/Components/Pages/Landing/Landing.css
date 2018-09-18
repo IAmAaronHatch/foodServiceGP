@@ -82,3 +82,8 @@
 .type-drop:hover .type-dropbtn {
   background-color: #c5e6c6;
 }
+
+.modal {
+  height: 50vh;
+  width: 80%;
+}
