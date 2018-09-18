@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
+import axios from 'axios'
 import './Landing.css'
 import Modal from 'react-modal'
-
-
 
 class Landing extends Component {
   constructor() {
@@ -12,7 +11,6 @@ class Landing extends Component {
       modalIsOpen: true
     }
   }
-
 
   login = () => {
     let auth0domain = `https://${process.env.REACT_APP_AUTH0_DOMAIN}`
@@ -33,10 +31,13 @@ class Landing extends Component {
     this.setState({ modalIsOpen: false })
   }
 
+  componentDidMount() {
+    axios.get(`htt`)
+  }
+
   render() {
     return (
       <div className="App">
-        {/* <Routing /> */}
         <Modal
           isOpen={this.state.modalIsOpen}>
           <div className='dropdown'>
@@ -76,5 +77,4 @@ class Landing extends Component {
     );
   }
 }
-
 export default Landing;
