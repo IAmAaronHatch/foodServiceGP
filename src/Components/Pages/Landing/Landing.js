@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './Landing.css'
 import Modal from 'react-modal'
-
+import Map from '../../RP/Map'
 
 
 class Landing extends Component {
@@ -72,6 +72,7 @@ class Landing extends Component {
           <br />
           <button onClick={this.login}>Login</button>
         </Modal>
+        <Map/>
       </div>
     );
   }
