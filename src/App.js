@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import routing from './routing'
-
+import Routing from './routing'
+import Map from './Components/RP/Map'
 
 
 class App extends Component {
@@ -18,7 +18,9 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        { routing }
+      Hello
+        {/* < Routing /> */}
+        <Map />
       </div>
     );
   }
