@@ -16,17 +16,28 @@ height: '100%',
 
 class Map extends Component {
 	componentDidMount() {
-    loadModules(['esri/Map', 'esri/views/MapView']).then(([Map, MapView]) => {
+    loadModules(['esri/Map', 'esri/views/MapView', 'esri/widgets/Locate']).then(([Map, MapView, Locate]) => {
 
       const map = new Map({
-        basemap: 'streets'
+        basemap: 'streets-navigation-vector'
       });
 
       const mapView = new MapView({
         container: 'mapDiv',
         map,
         zoom: 3
-      });
+			});
+			
+			const locate = new Locate({
+				view: mapView,
+				useHeadingEnabled: false,
+				goToOverride: function(view, options) {
+					options.target.scale = 1500;
+					return view.goTo(options.target);
+				}
+			});
+		
+			mapView.ui.add(locate, "top-left");
 
       this.setState({
         map,
