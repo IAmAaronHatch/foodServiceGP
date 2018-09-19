@@ -1,5 +1,6 @@
 import React from 'react'
 import { Route, Switch } from 'react-router-dom'
+import Map from './Components/RP/Map'
 
 //importing components 
 import Landing from './Components/Pages/Landing/Landing'
@@ -11,6 +12,7 @@ export default function () {
     return (
         <Switch>
             <Route exact path='/' component={Landing} />
+            <Route path='/map' component={Map}/>
             <Route path='/restaurants' component={PrimaryView} />
             <Route path='/restaurants/:restId' component={FullView} />
             <Route path='/favorites' component={Favorites} />
