@@ -33,17 +33,17 @@ class Landing extends Component {
     this.setState({ modalIsOpen: false })
   }
 
-  componentDidMount() {
-    axios.get(`htt`)
-  }
+  // componentDidMount() {
+  //   axios.get(`htt`)
+  // }
 
   render() {
     return (
       <div className="App">
         <Modal
           isOpen={this.state.modalIsOpen}
-          // className='modal'
-          // overlayClassName='Overlay'
+          className='modal'
+          overlayClassName='Overlay'
           >
           <div className='dropdown'>
             <button className='dropbtn'>Price</button>

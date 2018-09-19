@@ -10,6 +10,7 @@
   font-size: 16px;
   border: none;
   cursor: pointer;
+  margin-left: 10px;
 }
 
 .dropdown-content {
@@ -84,6 +85,11 @@
 }
 
 .modal {
-  height: 50vh;
-  width: 80%;
+  top: 100px;
+  left: 100px;
+  right: 100px;
+  bottom: 100px;
+  position: absolute;
+  background-color: whitesmoke;
+  border-radius: 5px;
 }
