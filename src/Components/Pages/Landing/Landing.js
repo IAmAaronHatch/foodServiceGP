@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
-import axios from 'axios'
+// import axios from 'axios'
 import './Landing.css'
 import Modal from 'react-modal'
 import Map from '../../RP/Map'
+import { connect } from 'react-redux'
+import { getRestaurants } from '../../../Redux/reducers/rest'
+import { Link } from 'react-router-dom'
 
 
 class Landing extends Component {
@@ -32,12 +35,13 @@ class Landing extends Component {
   closeModal = () => {
     this.setState({ modalIsOpen: false })
   }
+  componentWillMount() {
+    Modal.setAppElement('body');
+}
 
-  // componentDidMount() {
-  //   axios.get(`htt`)
-  // }
 
   render() {
+    console.log(this.props)
     return (
       <div className="App">
         <Modal
@@ -56,32 +60,23 @@ class Landing extends Component {
             </div>
           </div>
 
-            <div className='type-drop'>
-              <button className='type-dropbtn'>Type</button>
-              <div className='type-dropcontent'>
-                <span className='type-span'>Random</span>
-                <span className='type-span'>Type 1</span>
-
-                {/* Here we will need to get all the restaurant info, and map through the 'cuisines' category to get the types of food */}
-
-              </div>
-            </div>
             
-          
+        
           <button>Location</button>
           <span>- or -</span>
           <input placeholder='zipcode' />
           <button >Search</button>
 
           <br />
-          <button>Randomize!</button>
+          <Link to='/restaurants'><button>Randomize!</button></Link>
           <br />
           <button onClick={this.login}>Login</button>
+          <button onClick={() => this.props.getRestaurants()}>Get Rest</button>
         </Modal>
-        {/* <Map/> */}
+        <Map styles={{ height: 'calc(120vh - 175px)' }}/>
       </div>
     );
   }
 }
 
-export default Landing;
+export default connect(null, {getRestaurants})(Landing);

@@ -3,16 +3,16 @@ import {loadModules, loadCss} from 'esri-loader'
 
 loadCss('https://js.arcgis.com/4.8/esri/css/main.css');
 
-const styles = {
-container: {
-height: '100vh',
+// const styles = {
+// container: {
+// height: '100vh',
 
-},
-mapDiv: {
-height: '100%',
+// },
+// mapDiv: {
+// height: '100%',
 
-},
-}
+// },
+// }
 
 class Map extends Component {
 	componentDidMount() {
@@ -39,7 +39,7 @@ class Map extends Component {
   render() {
     return (
       <div>
-        <div id="mapDiv" style={{height: 'calc(100vh - 190px)'}}>
+        <div id="mapDiv" style={this.props.styles}>
         </div>
       </div>
     );
