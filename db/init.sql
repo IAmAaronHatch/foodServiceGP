@@ -12,3 +12,7 @@ CREATE TABLE favorites (
     order integer
 
 )
+CREATE TABLE cuisine (
+    name VARCHAR,
+    cuisine_id INTEGER
+)

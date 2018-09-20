@@ -73,16 +73,16 @@ geoFindMe=()=> {
             <button className='dropbtn'>Price</button>
             <div className='dropdown-content'>
               <span>Random</span>
-              <span>$</span>
-              <span>$$</span>
-              <span>$$$</span>
-              <span>$$$$</span>
+              <span onClick={() => this.props.setPriceRange(1)}>$</span>
+              <span onClick={() => this.props.setPriceRange(2)}>$$</span>
+              <span onClick={() => this.props.setPriceRange(3)}>$$$</span>
+              <span onClick={() => this.props.setPriceRange(4)}>$$$$</span>
             </div>
           </div>
           <div className='type-drop'>
             <button className='type-dropbtn'>Cuisine</button>
             <div className='type-dropcontent'>
-              <span>Ethiopian</span>
+              <span onClick={() => this.props.setCuisine()}></span>
             </div>
           </div>
 
