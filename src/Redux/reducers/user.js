@@ -1,4 +1,4 @@
-// import axios from 'axios'
+import axios from 'axios'
 
 let initialState = {
     data: null,
@@ -6,10 +6,14 @@ let initialState = {
     userLon: null,
 }
 
-// const FULFILLED = '_FULFILLED'
+const FULFILLED = '_FULFILLED'
 
-// const GET_USER = 'GET_USER'
-// const LOGOUT = 'LOGOUT'
+const GET_USER = 'GET_USER'
+const LOGOUT = 'LOGOUT'
+
+//Lat and Lon 
+const GET_LAT = 'GET_LAT'
+const GET_LON = 'GET_LON'
 
 export default function reducer (state = initialState, action) {
     switch(action.type) {
@@ -19,16 +23,30 @@ export default function reducer (state = initialState, action) {
 
 //Action Creators
 
-// export function getUser() {
-//     return {
-//         type: GET_USER,
-//         payload: axios.get('/api/currentUser')
-//     }
-// }
+export function getUser() {
+    return {
+        type: GET_USER,
+        payload: axios.get('/api/currentUser')
+    }
+}
 
-// export function logout() {
-//     return {
-//         type: LOGOUT,
-//         payload: axios.get('/api/logout')
-//     }
-// }
+export function logout() {
+    return {
+        type: LOGOUT,
+        payload: axios.get('/api/logout')
+    }
+}
+
+export function getLat (lat) {
+    return {
+        type: GET_LAT,
+        payload: lat
+    }
+}
+
+export function getLon (lon) {
+    return {
+        type: GET_LON,
+        payload: lon
+    }
+}
