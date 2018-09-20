@@ -1,7 +1,9 @@
 // import axios from 'axios'
 
 let initialState = {
-    data: null
+    data: null,
+    userLat: null,
+    userLon: null,
 }
 
 // const FULFILLED = '_FULFILLED'
