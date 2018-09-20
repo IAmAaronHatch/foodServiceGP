@@ -13,10 +13,11 @@ class Landing extends Component {
     super();
 
     this.state = {
-      modalIsOpen: true
+      modalIsOpen: true,
     }
   }
 
+  
   login = () => {
     let auth0domain = `https://${process.env.REACT_APP_AUTH0_DOMAIN}`
     let clientId = process.env.REACT_APP_AUTH0_CLIENT_ID
@@ -41,7 +42,7 @@ class Landing extends Component {
 
 
   render() {
-    console.log(this.props)
+    // console.log(this.props)
     return (
       <div className="App">
         <Modal

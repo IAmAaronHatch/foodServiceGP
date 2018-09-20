@@ -26,7 +26,7 @@ module.exports = {
 
       if (users.length) {
           req.session.user = users[0]
-          res.redirect('/favorites')
+          res.redirect('/#/favorites')
       }else{
           let users = await db.createUser(userInfo)
           req.session.user = users[0]
