@@ -6,6 +6,7 @@ import Map from '../../RP/Map'
 import { connect } from 'react-redux'
 import { getRestaurants } from '../../../Redux/reducers/rest'
 import { Link } from 'react-router-dom'
+import RandomBtn from '../../Reuse/RandomBtn';
 
 
 class Landing extends Component {
@@ -37,7 +38,7 @@ class Landing extends Component {
   }
   componentWillMount() {
     Modal.setAppElement('body');
-}
+  }
 
 geoFindMe=()=> {
   var output = document.getElementById("out");
@@ -61,14 +62,13 @@ geoFindMe=()=> {
 
 
   render() {
-    console.log(this.props)
     return (
       <div className="App">
         <Modal
           isOpen={this.state.modalIsOpen}
           className='modal'
           overlayClassName='Overlay'
-          >
+        >
           <div className='dropdown'>
             <button className='dropbtn'>Price</button>
             <div className='dropdown-content'>
@@ -79,24 +79,38 @@ geoFindMe=()=> {
               <span>$$$$</span>
             </div>
           </div>
+          <div className='type-drop'>
+            <button className='type-dropbtn'>Cuisine</button>
+            <div className='type-dropcontent'>
+              <span>Ethiopian</span>
+            </div>
+          </div>
 
-            
-        
           <button onClick={this.geoFindMe}>Location</button>
+
           <span>- or -</span>
           <input placeholder='zipcode' />
           <button >Search</button>
 
           <br />
+
           <Link to='/restaurants'><button>Randomize!</button></Link>
+          {/* This button will later be replaced with the RandomBtn component */}
+
           <br />
+
           <button onClick={this.login}>Login</button>
+          {/* Login successfully logs you in as well as takes you directly to favorites */}
+
           <button onClick={() => this.props.getRestaurants()}>Get Rest</button>
+          {/* This 'Get Rest' button replaces the functionality of the location button or the zip input. What it does it put the 20 restaurants onto state, which get location will later do while also submitting lat and lon onto the variables */}
+
+          <RandomBtn />
         </Modal>
-        <Map styles={{ height: 'calc(120vh - 175px)' }}/>
+        <Map styles={{ height: 'calc(120vh - 175px)' }} />
       </div>
     );
   }
 }
 
-export default connect(null, {getRestaurants})(Landing);
+export default connect(null, { getRestaurants })(Landing);

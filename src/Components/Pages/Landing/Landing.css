@@ -67,14 +67,14 @@
   z-index: 1;
 }
 
-.type-dropcontent .type-span {
+.type-dropcontent span {
   color: black;
   padding: 12px 16px;
   text-decoration: none;
   display: block;
 }
 
-.type-dropcontent .type-span:hover {background-color: #f1f1f1}
+.type-dropcontent span:hover {background-color: #f1f1f1}
 
 .type-drop:hover .type-dropcontent {
   display: block;
