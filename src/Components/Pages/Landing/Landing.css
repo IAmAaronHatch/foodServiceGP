@@ -10,6 +10,7 @@
   font-size: 16px;
   border: none;
   cursor: pointer;
+  margin-left: 10px;
 }
 
 .dropdown-content {
@@ -81,4 +82,14 @@
 
 .type-drop:hover .type-dropbtn {
   background-color: #c5e6c6;
+}
+
+.modal {
+  top: 100px;
+  left: 200px;
+  right: 200px;
+  bottom: 100px;
+  position: absolute;
+  background-color: whitesmoke;
+  border-radius: 5px;
 }
