@@ -40,6 +40,26 @@ class Landing extends Component {
     Modal.setAppElement('body');
   }
 
+geoFindMe=()=> {
+  var output = document.getElementById("out");
+
+  if (!navigator.geolocation){
+    output.innerHTML = "<p>Geolocation is not supported by your browser</p>";
+    return;
+  }
+
+  function success(position) {
+    var latitude  = position.coords.latitude;
+    var longitude = position.coords.longitude;
+    console.log(latitude, "lat", longitude, "long")
+  }
+
+  function error() {
+    alert('cannot find your location')
+  }
+  navigator.geolocation.watchPosition(success, error);
+}
+
 
   render() {
     return (
@@ -66,9 +86,8 @@ class Landing extends Component {
             </div>
           </div>
 
+          <button onClick={this.geoFindMe}>Location</button>
 
-
-          <button>Location</button>
           <span>- or -</span>
           <input placeholder='zipcode' />
           <button >Search</button>

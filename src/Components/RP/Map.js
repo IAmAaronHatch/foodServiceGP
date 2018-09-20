@@ -19,7 +19,13 @@ loadCss('https://js.arcgis.com/4.8/esri/css/main.css');
 class Map extends Component {
 	componentDidMount() {
 		//add any widgets or necessary features for the map.
-    loadModules(['esri/Map', 'esri/views/MapView', 'esri/widgets/Locate']).then(([Map, MapView, Locate]) => {
+		loadModules([
+			'esri/Map',
+			'esri/views/MapView',
+			'esri/widgets/Locate',
+			"esri/widgets/Track",
+			"esri/Graphic",
+		]).then(([Map, MapView, Locate, Track, Graphic]) => {
 
 			//determines type of map
 
@@ -30,23 +36,12 @@ class Map extends Component {
 			//initial scale and map size
 
       const mapView = new MapView({
-        container: 'mapDiv',
+				container: 'mapDiv',
+				// center: [lat, long],
         map,
         zoom: 3
 			});
-
-			//find my location
-			
-			const locate = new Locate({
-				view: mapView,
-				useHeadingEnabled: false,
-				goToOverride: function(view, options) {
-					options.target.scale = 5000;
-					return view.goTo(options.target);
-				}
-			});
-		//adds the button to the map
-			mapView.ui.add(locate, "top-left");
+//--------track current location end------------//
 
       this.setState({
         map,
