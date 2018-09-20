@@ -18,4 +18,5 @@ class PrimaryView extends Component {
     }
 }
 
+
 export default PrimaryView

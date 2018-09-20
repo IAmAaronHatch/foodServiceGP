@@ -3,9 +3,7 @@ CREATE TABLE users (
     auth_id TEXT,
     name VARCHAR,
     email VARCHAR,
-    picture TEXT,
-    lat NUMERIC,
-    lon NUMERIC
+    picture TEXT
 )
 CREATE TABLE favorites (
     id SERIAL PRIMARY KEY,
