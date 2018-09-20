@@ -1,9 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 class RandomBtn extends Component {
-logme = () => {
-    console.log('hi im props', this.props.rest.restaurants)
-}
 randomize = (arr) => {
     // let mapped = arr.map(x => x.sort(function (a, b) { return 0.5 - Math.random()}))
     let sorted = arr.sort(function(a, b){return 0.5 - Math.random()})
@@ -11,11 +8,11 @@ randomize = (arr) => {
 }
 
     render() {
-        console.log(1234123, this.props.rest)
+        console.log('props.rest', this.props.rest)
         return (
             <div>   
-                <button onClick={this.logme}>Click Me</button>
-                <button onClick={() => this.randomize(this.props.rest.restaurants)}>2</button>
+                <button onClick={() => this.randomize(this.props.rest.restaurants)}>Randomize!</button>
+                <button onClick={() => console.log(this.props.rest)}>Console log</button>       
             </div>
         )
     }
