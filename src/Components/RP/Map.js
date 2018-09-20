@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {loadModules, loadCss} from 'esri-loader'
+import { connect } from 'react-redux';
 
 
 //css strictly for the way the map views
@@ -37,7 +38,7 @@ class Map extends Component {
 
       const mapView = new MapView({
 				container: 'mapDiv',
-				// center: [lat, long],
+				center: [this.props.lat, this.props.lon],
         map,
         zoom: 3
 			});
@@ -62,4 +63,11 @@ class Map extends Component {
   }
 }
 
-export default Map;
+let mapStateToProps = state => {
+	return {
+		lat: state.user.userLat,
+		lon: state.user.userLon
+	}
+}
+
+export default connect(mapStateToProps)(Map);
