@@ -5,8 +5,8 @@ import Modal from 'react-modal'
 import Map from '../../RP/Map'
 import { connect } from 'react-redux'
 import { getRestaurants } from '../../../Redux/reducers/rest'
-import { Link } from 'react-router-dom'
 import RandomBtn from '../../Reuse/RandomBtn';
+import { setLat, setLon } from '../../../Redux/reducers/user'
 
 
 class Landing extends Component {
@@ -41,6 +41,7 @@ class Landing extends Component {
   }
 
 geoFindMe=()=> {
+  let { setLat, setLon} = this.props
   var output = document.getElementById("out");
 
   if (!navigator.geolocation){
@@ -49,9 +50,10 @@ geoFindMe=()=> {
   }
 
   function success(position) {
-    var latitude  = position.coords.latitude;
-    var longitude = position.coords.longitude;
-    console.log(latitude, "lat", longitude, "long")
+    var lat  = position.coords.latitude;
+    var lon = position.coords.longitude;
+    setLat(lat)
+    setLon(lon)
   }
 
   function error() {
@@ -94,15 +96,11 @@ geoFindMe=()=> {
 
           <br />
 
-          <Link to='/restaurants'><button>Randomize!</button></Link>
-          {/* This button will later be replaced with the RandomBtn component */}
-
-          <br />
 
           <button onClick={this.login}>Login</button>
           {/* Login successfully logs you in as well as takes you directly to favorites */}
 
-          <button onClick={() => this.props.getRestaurants()}>Get Rest</button>
+          <button onClick={() => this.props.getRestaurants(this.props.userLat, this.props.userLon)}>Get Rest</button>
           {/* This 'Get Rest' button replaces the functionality of the location button or the zip input. What it does it put the 20 restaurants onto state, which get location will later do while also submitting lat and lon onto the variables */}
 
           <RandomBtn />
@@ -113,4 +111,11 @@ geoFindMe=()=> {
   }
 }
 
-export default connect(null, { getRestaurants })(Landing);
+let mapStateToProps = state => {
+  return {
+    userLat: state.user.userLat,
+    userLon: state.user.userLon
+  }
+}
+
+export default connect(mapStateToProps, { getRestaurants, setLat, setLon })(Landing);

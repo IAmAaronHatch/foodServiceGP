@@ -6,17 +6,21 @@ let initialState = {
     userLon: null,
 }
 
-const FULFILLED = '_FULFILLED'
+// const FULFILLED = '_FULFILLED'
 
 const GET_USER = 'GET_USER'
 const LOGOUT = 'LOGOUT'
 
 //Lat and Lon 
-const GET_LAT = 'GET_LAT'
-const GET_LON = 'GET_LON'
+const SET_LAT = 'SET_LAT'
+const SET_LON = 'SET_LON'
 
-export default function reducer (state = initialState, action) {
-    switch(action.type) {
+export default function reducer(state = initialState, action) {
+    switch (action.type) {
+        case SET_LAT:
+            return { ...state, userLat: action.payload }
+        case SET_LON:
+            return { ...state, userLon: action.payload }
         default: return state
     }
 }
@@ -37,16 +41,16 @@ export function logout() {
     }
 }
 
-export function getLat (lat) {
+export function setLat(lat) {
     return {
-        type: GET_LAT,
+        type: SET_LAT,
         payload: lat
     }
 }
 
-export function getLon (lon) {
+export function setLon(lon) {
     return {
-        type: GET_LON,
+        type: SET_LON,
         payload: lon
     }
 }
