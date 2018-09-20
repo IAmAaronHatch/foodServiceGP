@@ -6,15 +6,23 @@ let initialState = {
     data: null
 }
 
-// const FULFILLED = '_FULFILLED'
+const FULFILLED = '_FULFILLED'
 
-// const GET_FAVORITES = 'GET_FAVORITES'
-// const CREATE_FAVORITES = 'CREATE_FAVORITES'
-// const UPDATE_ORDER = 'UPDATE_ORDER'
-// const DELETE_FAVORITE = 'DELETE_FAVORITE'
+const GET_FAVORITES = 'GET_FAVORITES'
+const CREATE_FAVORITES = 'CREATE_FAVORITES'
+const UPDATE_ORDER = 'UPDATE_ORDER'
+const DELETE_FAVORITE = 'DELETE_FAVORITE'
 
 export default function (state = initialState, action) {
-    switch(action.type) {
+    switch (action.type) {
+        case GET_FAVORITES + FULFILLED:
+            return { ...state, data: action.payload }
+        case CREATE_FAVORITES + FULFILLED:
+            return { ...state, data: action.payload }
+        case UPDATE_ORDER + FULFILLED:
+            return { ...state, data: action.payload }
+        case DELETE_FAVORITE + FULFILLED:
+            return { ...state, data: null}
         default: return state
     }
 }

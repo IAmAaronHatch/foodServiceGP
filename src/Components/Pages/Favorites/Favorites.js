@@ -14,8 +14,6 @@ class Favorites extends Component {
         return (
             <div>
                 Favorites
-
-                {/* axios.get('link', {header: {user-key:}}) */}
             </div>
         )
     }

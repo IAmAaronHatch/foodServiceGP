@@ -1,3 +1,3 @@
-INSERT INTO users (auth_id, name, email, picture)
-VALUES ( ${sub}, ${nickname}, ${email}, ${picture})
+INSERT INTO users (auth_id, name, email, picture, lat, lon)
+VALUES ( ${sub}, ${nickname}, ${email}, ${picture}, ${lat}, ${lon})
 RETURNING *;
