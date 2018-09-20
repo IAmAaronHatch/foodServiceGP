@@ -11,13 +11,16 @@ const FULFILLED = '_FULFILLED'
 const GET_USER = 'GET_USER'
 const LOGOUT = 'LOGOUT'
 
+const SET_LAT = 'SET_LAT'
+const SET_LON = 'SET_LON'
+
 export default function reducer(state = initialState, action) {
     switch (action.type) {
         case GET_USER + FULFILLED:
             return { ...state, data: action.payload.data }
-        case GET_LAT:
+        case SET_LAT:
             return { ...state, data: action.payload}
-        case GET_LON:
+        case SET_LON:
             return { ...state, data: action.payload }
         case LOGOUT + FULFILLED:
             return { ...state, data: null }
@@ -38,5 +41,19 @@ export function logout() {
     return {
         type: LOGOUT,
         payload: axios.get('/api/logout')
+    }
+}
+
+export function setLat(lat) {
+    return {
+        type: SET_LAT,
+        payload: lat
+    }
+}
+
+export function setLon(lon) {
+    return {
+        type: SET_LON,
+        payload: lon
     }
 }
