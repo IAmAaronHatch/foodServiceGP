@@ -19,7 +19,12 @@ height: '100%',
 class Map extends Component {
 	componentDidMount() {
 		//add any widgets or necessary features for the map.
-    loadModules(['esri/Map', 'esri/views/MapView', 'esri/widgets/Locate']).then(([Map, MapView, Locate]) => {
+		loadModules([
+			'esri/Map',
+			'esri/views/MapView',
+			'esri/widgets/Locate',
+			"esri/widgets/Track",
+		]).then(([Map, MapView, Locate, Track]) => {
 
 			//determines type of map
 
@@ -40,13 +45,38 @@ class Map extends Component {
 			const locate = new Locate({
 				view: mapView,
 				useHeadingEnabled: false,
+				//not needed because it's in the track function.
+				// goToOverride: function(view, options) {
+				// 	options.target.scale = 5000;
+				// 	return view.goTo(options.target);
+				// }
+			});
+			//adds the button to the map
+				mapView.ui.add(locate, "top-left");
+				//--------track current location start------//
+			var track = new Track({
+				view: mapView,
+				// graphic: new Graphic({
+				// 	symbol: {
+				// 		type: "simple-marker",
+				// 		size: "9px",
+				// 		color: "green",
+				// 		outline: {
+				// 			color: "#efefef",
+				// 			width: "1.2px"
+				// 		}
+				// 	}
+				// }),
+				useHeadingEnabled: false,
+				goToLocationEnabed: false,
 				goToOverride: function(view, options) {
-					options.target.scale = 5000;
-					return view.goTo(options.target);
+					options.target.scale = null;
+					return view.goTo(options);
 				}
 			});
-		//adds the button to the map
-			mapView.ui.add(locate, "top-left");
+		
+			mapView.ui.add(track, "top-left");
+//--------track current location end------------//
 
       this.setState({
         map,
