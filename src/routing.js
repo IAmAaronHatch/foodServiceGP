@@ -1,8 +1,8 @@
 import React from 'react'
 import { Route, Switch } from 'react-router-dom'
-import Map from './Components/RP/Map'
 
 //importing components 
+import Map from './Components/RP/Map'
 import Landing from './Components/Pages/Landing/Landing'
 import PrimaryView from './Components/Pages/PrimaryView'
 import FullView from './Components/Pages/FullView'
