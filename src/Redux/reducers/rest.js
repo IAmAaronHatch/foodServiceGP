@@ -12,7 +12,7 @@ const GET_REST = 'GET_REST'
 export default function reducer(state = initialState, action) {
     switch(action.type) {   
         case GET_REST + FULFILLED: 
-            return {...state, data: action.payload.data}
+            return {...state, data: action.payload.data.restaurants}
         default: return state
     }
 }
