@@ -4,11 +4,16 @@ CREATE TABLE users (
     name VARCHAR,
     email VARCHAR,
     picture TEXT
-)
+);
 CREATE TABLE favorites (
     id SERIAL PRIMARY KEY,
     user_id integer,
     rest_id VARCHAR,
-    order integer
+    rank integer,
+    name VARCHAR
 
-)
+);
+CREATE TABLE cuisine (
+    name VARCHAR,
+    cuisine_id INTEGER
+);

@@ -1,3 +1,4 @@
 SELECT *
-FROM favorites 
+FROM favorites
 WHERE user_id = ${id}
+ORDER BY rank
