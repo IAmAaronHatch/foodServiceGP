@@ -66,8 +66,7 @@ class ESRIMap extends Component {
 
 			var pt = new Point({
 				latitude: this.props.lat,
-				longitude: this.props.lon,
-				// spatialReference: 202
+				longitude: this.props.lon
 			});
 				this.state.mapView.goTo({target:pt, scale: 5000})
 			})
