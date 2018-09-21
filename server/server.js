@@ -4,6 +4,7 @@ const session = require('express-session')
 const massive = require('massive')
 const request = require('request')
 
+const FavsCtrl = require('./Controllers/FavsCtrl')
 const AuthCtrl = require('./Controllers/AuthCtrl')
 
 require('dotenv').config()
@@ -60,6 +61,8 @@ app.get('/api/logout', (req, res) => {
         req.session.destroy()
         res.sendStatus(200)
 })
+
+app.get('/api/favorites/:id', FavsCtrl.getAll)
 
 app.listen(port, () => {
         console.log(`Never gonna give  up, Never gonna let  down.`)
