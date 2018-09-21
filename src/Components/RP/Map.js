@@ -17,7 +17,14 @@ loadCss('https://js.arcgis.com/4.8/esri/css/main.css');
 // },
 // }
 
-class Map extends Component {
+class ESRIMap extends Component {
+	constructor(props){
+		super(props)
+		this.state={
+			map:{},
+			mapView:{}
+		}
+	}
 	componentDidMount() {
 		//add any widgets or necessary features for the map.
 		loadModules([
@@ -50,13 +57,21 @@ class Map extends Component {
 
     });
 	}
-	// componentDidUpdate(prevProps) {
-	// 	console.log(prevProps.lon, this.props.lon)
-	// 	if(prevProps.lon!==this.props.lon){
-	// 		this.state.mapView.goTo([this.props.lat, this.props.lon])
 
-	// 	}
-	// }
+//-------Move map to current location------//
+
+	componentDidUpdate(prevProps) {
+	if(prevProps.lon!==this.props.lon){
+		loadModules(['esri/Point']).then(([Point])=>{
+
+			var pt = new Point({
+				latitude: this.props.lat,
+				longitude: this.props.lon
+			});
+				this.state.mapView.goTo(pt)
+			})
+		}
+	}
 
   render() {
     return (
@@ -76,4 +91,4 @@ let mapStateToProps = state => {
 	}
 }
 
-export default connect(mapStateToProps)(Map);
+export default connect(mapStateToProps)(ESRIMap);
