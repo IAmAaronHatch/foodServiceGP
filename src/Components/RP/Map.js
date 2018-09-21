@@ -44,10 +44,11 @@ class ESRIMap extends Component {
 			//initial scale and map size
       const mapView = new MapView({
 				container: 'mapDiv',
-				center: [this.props.lat, this.props.lon],
+				center: [this.props.lon || -109.0452, this.props.lat || 36.9991],
         map,
-        zoom: 3
+        zoom: this.props.zoom || 3
 			});
+			console.log(mapView.center)
 //--------track current location end------------//
 
       this.setState({
