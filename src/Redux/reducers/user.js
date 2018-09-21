@@ -19,9 +19,9 @@ export default function reducer(state = initialState, action) {
         case GET_USER + FULFILLED:
             return { ...state, data: action.payload.data }
         case SET_LAT:
-            return { ...state, data: action.payload}
+            return { ...state, userLat: action.payload}
         case SET_LON:
-            return { ...state, data: action.payload }
+            return { ...state, userLon: action.payload }
         case LOGOUT + FULFILLED:
             return { ...state, data: null }
         default: return state

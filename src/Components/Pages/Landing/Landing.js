@@ -62,7 +62,6 @@ geoFindMe=()=> {
   navigator.geolocation.watchPosition(success, error);
 }
 
-
   render() {
     return (
       <div className="App">
@@ -93,7 +92,6 @@ geoFindMe=()=> {
           <span>- or -</span>
           <input placeholder='zipcode' />
           <button >Search</button>
-
           <br />
 
 

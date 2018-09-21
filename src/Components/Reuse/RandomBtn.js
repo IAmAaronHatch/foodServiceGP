@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+
 class RandomBtn extends Component {
 randomize = (arr) => {
     // let mapped = arr.map(x => x.sort(function (a, b) { return 0.5 - Math.random()}))
@@ -22,7 +23,7 @@ randomize = (arr) => {
 
 let mapStateToProps = state => {
     return {
-        rest: state.rest.data
+        rest: state.rest
     }
 }
 

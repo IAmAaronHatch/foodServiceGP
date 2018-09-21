@@ -35,7 +35,6 @@ class Map extends Component {
 			});
 			
 			//initial scale and map size
-
       const mapView = new MapView({
 				container: 'mapDiv',
 				center: [this.props.lat, this.props.lon],
@@ -50,7 +49,14 @@ class Map extends Component {
       });
 
     });
-  }
+	}
+	// componentDidUpdate(prevProps) {
+	// 	console.log(prevProps.lon, this.props.lon)
+	// 	if(prevProps.lon!==this.props.lon){
+	// 		this.state.mapView.goTo([this.props.lat, this.props.lon])
+
+	// 	}
+	// }
 
   render() {
     return (
