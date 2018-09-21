@@ -1,22 +1,25 @@
 import React, { Component } from 'react'
 import Map from '../RP/Map'
+import Nav from '../Reuse/Nav'
+import RandomBtn from '../Reuse/RandomBtn'
 
-class PrimaryView extends Component {
+class ListView extends Component {
 
     render() {
         return (
             <div>
+                <Nav/>
                 <div>
                     <Map styles={{ height: 'calc(55vh - 175px)'}}/>
                 </div>
                 <div style={{ height: '75vh', backgroundColor: 'red'}}>
                     List View
                 </div>
-                <button>Randomize!</button>
+                <RandomBtn/>
             </div>
         )
     }
 }
 
 
-export default PrimaryView
+export default ListView
