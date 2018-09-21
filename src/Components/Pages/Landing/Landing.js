@@ -66,7 +66,7 @@ geoFindMe=()=> {
   render() {
 
     return (
-      <div className="App">
+      <div>
         <Modal
           isOpen={this.state.modalIsOpen}
           className='modal'
@@ -105,7 +105,7 @@ geoFindMe=()=> {
 
           <RandomBtn />
         </Modal>
-        <Map styles={{ height: 'calc(120vh - 175px)' }} />
+        <Map styles={{ height: '100vh' }} />
       </div>
     );
   }

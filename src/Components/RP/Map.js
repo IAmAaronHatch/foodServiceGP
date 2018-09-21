@@ -62,13 +62,14 @@ class ESRIMap extends Component {
 
 	componentDidUpdate(prevProps) {
 	if(prevProps.lon!==this.props.lon){
-		loadModules(['esri/Point']).then(([Point])=>{
+		loadModules(['esri/geometry/Point']).then(([Point])=>{
 
 			var pt = new Point({
 				latitude: this.props.lat,
-				longitude: this.props.lon
+				longitude: this.props.lon,
+				// spatialReference: 202
 			});
-				this.state.mapView.goTo(pt)
+				this.state.mapView.goTo({target:pt, scale: 5000})
 			})
 		}
 	}

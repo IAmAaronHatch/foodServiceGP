@@ -50,7 +50,7 @@
   display: inline-block;
 }
 .type-dropbtn {
-  background-color: #4CAF50;
+  background-color: rgba(76, 175, 79);
   color: white;
   padding: 16px;
   font-size: 16px;
@@ -85,11 +85,11 @@
 }
 
 .modal {
-  top: 100px;
-  left: 200px;
-  right: 200px;
-  bottom: 100px;
+  top: 10%;
+  left: 20%;
+  right: 20%;
+  bottom: 10%;
   position: absolute;
-  background-color: whitesmoke;
+  background-color: rgba(245, 245, 245, 0.75);
   border-radius: 5px;
 }
