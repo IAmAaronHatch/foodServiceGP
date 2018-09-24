@@ -1,29 +1,38 @@
-import axios from 'axios'
+
 
 let initialState = {
-    data: null,
-    restLat: null,
-    restLon: null
+    data: [],
+    fiveList: [],
+    restLat: '',
+    restLon: ''
 }
-const FULFILLED = '_FULFILLED'
+// const FULFILLED = '_FULFILLED'
 
 const GET_REST = 'GET_REST'
+const GET_FIVE_LIST = 'GET_FIVE_LIST'
 
 export default function reducer(state = initialState, action) {
     switch(action.type) {   
-        case GET_REST + FULFILLED: 
-            return {...state, data: action.payload.data}
+        case GET_REST: 
+            return {...state, data: action.payload}
+        case GET_FIVE_LIST:
+            return {...state, fiveList: action.payload}
         default: return state
     }
 }
 
-// getRestaurants()
-export function getRestaurants(lat, lon, cuisine) {
-    console.log('getRestaurants', lat, lon)
+export function getRestaurants(restaurants){
     return {
         type: GET_REST,
-        payload: axios.get(`https://developers.zomato.com/api/v2.1/search?lat=${lat}&lon=${lon}&cuisines=${cuisine}&sort=real_distance`, { headers: { 'user-key': process.env.REACT_APP_API_KEY}})
+        payload: restaurants
+    }
+}
+export function getFiveList(fiveRest){
+    return {
+        type: GET_FIVE_LIST,
+        payload: fiveRest
     }
 }
 
-// TEST CONFIRMED: the api will call with a null value ^ test included a null 'cuisine' value
+//getCuisine
+//this function will fetch the list of cuisines from the db, and then on the front end on landing, we can map over and display that list

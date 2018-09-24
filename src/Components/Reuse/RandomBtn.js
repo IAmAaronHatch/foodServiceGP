@@ -1,24 +1,39 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { getRestaurants } from '../../Redux/reducers/rest';
+import axios from 'axios'
+import { getRestaurants, getFiveList } from '../../Redux/reducers/rest';
 class RandomBtn extends Component {
-    handleRestaurants = (userLat, userLon) => {
-        //axios.get('yoururl').then(response => {
-        //  let randomRest = this.randomize(data)
-        //  Dispatch your action creator to update redux
-        // })
-    }
-    randomize = (arr) => {
-        let sorted = arr.sort(function (a, b) { return 0.5 - Math.random() })
-        return sorted.splice(4, 15)
+
+    newRestaurants = (userLat, userLon, start,cuisine) => {
+        let { getRestaurants } = this.props
+        axios.get(`https://developers.zomato.com/api/v2.1/search?start=${start}&count=${20}&lat=${userLat}&lon=${userLon}&radius=5000&cuisine=${cuisine}`, { headers: { 'user-key': process.env.REACT_APP_API_KEY } }).then(response => {
+            getRestaurants(response.data.restaurants)
+        })
     }
 
+    // newRestaurants takes in the users lat and lon, makes a call to Zomato api, and returns an array of obj restaurants
+
+    randomize = (rest) => {
+        let { getFiveList } = this.props
+        let sorted = [...rest]
+        let fiveList = sorted.sort(function (a, b) { return 0.5 - Math.random() })
+        fiveList.splice(4, 15)
+        return getFiveList(fiveList)
+    }
+    //randomize is what takes in that data array from redux, sorts it based on the index randomly, creates a new array, and gets 5 off of that new array. 
+
+    componentDidUpdate(prevProps) {
+        if(prevProps.rest.length !== this.props.rest.length){
+            this.randomize(this.props.rest)
+        }
+    }
+
+
     render() {
-        console.log('props.rest', this.props.rest)
         return (
             <div>
-                <button onClick={() => this.randomize(this.props.rest.restaurants)}>Randomize!</button>
-                <button onClick={() => console.log(this.props.rest)}>Console log</button>
+                <button onClick={() => this.newRestaurants(this.props.userLat, this.props.userLon)}>getRestaurants</button>
+               
             </div>
         )
     }
@@ -30,8 +45,8 @@ let mapStateToProps = state => {
     return {
         rest: state.rest.data,
         userLat: state.user.userLat,
-        userLon: state.user.userLon
+        userLon: state.user.userLon,
     }
 }
 
-export default connect(mapStateToProps, { getRestaurants })(RandomBtn)
+export default connect(mapStateToProps, { getRestaurants, getFiveList } )(RandomBtn)

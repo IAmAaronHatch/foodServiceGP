@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {loadModules, loadCss} from 'esri-loader'
+import { connect } from 'react-redux';
 
 
 //css strictly for the way the map views
@@ -16,7 +17,14 @@ loadCss('https://js.arcgis.com/4.8/esri/css/main.css');
 // },
 // }
 
-class Map extends Component {
+class ESRIMap extends Component {
+	constructor(props){
+		super(props)
+		this.state={
+			map:{},
+			mapView:{}
+		}
+	}
 	componentDidMount() {
 		//add any widgets or necessary features for the map.
 		loadModules([
@@ -34,13 +42,13 @@ class Map extends Component {
 			});
 			
 			//initial scale and map size
-
       const mapView = new MapView({
 				container: 'mapDiv',
-				// center: [lat, long],
+				center: [this.props.lon || -109.0452, this.props.lat || 36.9991],
         map,
-        zoom: 3
+        zoom: this.props.zoom || 3
 			});
+			console.log(mapView.center)
 //--------track current location end------------//
 
       this.setState({
@@ -49,7 +57,22 @@ class Map extends Component {
       });
 
     });
-  }
+	}
+
+//-------Move map to current location------//
+
+	componentDidUpdate(prevProps) {
+	if(prevProps.lon!==this.props.lon){
+		loadModules(['esri/geometry/Point']).then(([Point])=>{
+
+			var pt = new Point({
+				latitude: this.props.lat,
+				longitude: this.props.lon
+			});
+				this.state.mapView.goTo({target:pt, scale: 5000})
+			})
+		}
+	}
 
   render() {
     return (
@@ -62,4 +85,11 @@ class Map extends Component {
   }
 }
 
-export default Map;
+let mapStateToProps = state => {
+	return {
+		lat: state.user.userLat,
+		lon: state.user.userLon
+	}
+}
+
+export default connect(mapStateToProps)(ESRIMap);
