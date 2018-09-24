@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Map from '../RP/Map'
+import Map from '../../RP/Map'
 
 class PrimaryView extends Component {
 
