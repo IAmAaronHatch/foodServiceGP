@@ -13,7 +13,7 @@ export default function () {
         <Switch>
             <Route exact path='/' component={Landing} />
             <Route path='/map' component={ESRIMap}/>
-            <Route path='/restaurants' component={ListView} />
+            <Route exact path='/restaurants' component={ListView} />
             <Route path='/restaurants/:restId' component={FullView} />
             <Route path='/favorites' component={Favorites} />
         </Switch>

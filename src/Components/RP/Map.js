@@ -30,10 +30,8 @@ class ESRIMap extends Component {
 		loadModules([
 			'esri/Map',
 			'esri/views/MapView',
-			'esri/widgets/Locate',
-			"esri/widgets/Track",
 			"esri/Graphic",
-		]).then(([Map, MapView, Locate, Track, Graphic]) => {
+		]).then(([Map, MapView, Graphic]) => {
 
 			//determines type of map
 
@@ -48,8 +46,6 @@ class ESRIMap extends Component {
         map,
         zoom: this.props.zoom || 3
 			});
-			console.log(mapView.center)
-//--------track current location end------------//
 
       this.setState({
         map,
@@ -62,16 +58,52 @@ class ESRIMap extends Component {
 //-------Move map to current location------//
 
 	componentDidUpdate(prevProps) {
-	if(prevProps.lon!==this.props.lon){
-		loadModules(['esri/geometry/Point']).then(([Point])=>{
+		let {lat, lon, restaurants} = this.props;
+		loadModules(['esri/geometry/Point', 'esri/Graphic', 'esri/symbols/SimpleMarkerSymbol']).then(([Point, Graphic, Simple])=>{
+			if(prevProps.lon!==lon){
 
-			var pt = new Point({
-				latitude: this.props.lat,
-				longitude: this.props.lon
-			});
-				this.state.mapView.goTo({target:pt, scale: 5000})
-			})
-		}
+				let pt = new Point({
+					latitude: lat,
+					longitude: lon
+				});
+				let symbol = new Simple({
+					style:"diamond",
+					outline: {
+						style: "none"
+				},
+				color: [0, 112, 255, 1]
+				})
+				let PG = new Graphic({
+					geometry: pt,
+					symbol
+				})
+					this.state.mapView.graphics.add(PG)
+					this.state.mapView.goTo({target:PG, scale: 5000})
+			}
+				
+			if(restaurants.length){
+				restaurants.forEach((rest)=>{
+					let { location } = rest.restaurant
+					let point = new Point({
+						latitude: location.latitude,
+						longitude: location.longitude
+					})
+
+					let symbol = new Simple({
+						style:"circle",
+						outline: {
+							style: "none"
+					},
+					color: [0, 112, 255, 1]
+					})
+					let PG= new Graphic({
+						geometry: point,
+						symbol
+					})
+						this.state.mapView.graphics.add(PG)
+				})
+			}
+		})
 	}
 
   render() {
@@ -88,7 +120,8 @@ class ESRIMap extends Component {
 let mapStateToProps = state => {
 	return {
 		lat: state.user.userLat,
-		lon: state.user.userLon
+		lon: state.user.userLon,
+		restaurants: state.rest.data
 	}
 }
 
