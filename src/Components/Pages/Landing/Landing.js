@@ -60,7 +60,7 @@ geoFindMe=()=> {
   function error() {
     alert('cannot find your location')
   }
-  navigator.geolocation.watchPosition(success, error);
+  navigator.geolocation.getCurrentPosition(success, error);
 }
 
   render() {
