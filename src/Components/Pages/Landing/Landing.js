@@ -4,7 +4,6 @@ import './Landing.css'
 import Modal from 'react-modal'
 import Map from '../../RP/Map'
 import { connect } from 'react-redux'
-import { getRestaurants } from '../../../Redux/reducers/rest'
 import RandomBtn from '../../Reuse/RandomBtn';
 import { setLat, setLon } from '../../../Redux/reducers/user'
 
@@ -92,7 +91,7 @@ geoFindMe=()=> {
           <button onClick={this.geoFindMe}>Location</button>
 
           <span>- or -</span>
-          <input placeholder='zipcode' />
+          <input placeholder='zip' />
           <button >Search</button>
           <br />
 
@@ -100,8 +99,6 @@ geoFindMe=()=> {
           <button onClick={this.login}>Login</button>
           {/* Login successfully logs you in as well as takes you directly to favorites */}
 
-          <button onClick={() => this.props.getRestaurants(this.props.userLat, this.props.userLon)}>Get Rest</button>
-          {/* This 'Get Rest' button replaces the functionality of the location button or the zip input. What it does it put the 20 restaurants onto state, which get location will later do while also submitting lat and lon onto the variables */}
 
           <RandomBtn />
         </Modal>
@@ -118,4 +115,4 @@ let mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, { getRestaurants, setLat, setLon })(Landing);
+export default connect(mapStateToProps, { setLat, setLon })(Landing);
