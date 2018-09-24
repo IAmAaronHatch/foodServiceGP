@@ -10,9 +10,9 @@ class ListView extends Component {
             <div>
                 <Nav/>
                 <div>
-                    <Map styles={{ height: 'calc(55vh - 175px)'}} zoom='10'/>
+                    <Map styles={{ height: '40vh'}} zoom='10'/>
                 </div>
-                <div style={{ height: '75vh', backgroundColor: 'red'}}>
+                <div style={{ height: '60vh', backgroundColor: 'render'}}>
                     List View
                 </div>
                 <RandomBtn/>
