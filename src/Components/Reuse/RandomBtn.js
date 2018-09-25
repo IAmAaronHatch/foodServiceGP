@@ -2,51 +2,53 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import axios from 'axios'
 import { getRestaurants, getFiveList } from '../../Redux/reducers/rest';
-class RandomBtn extends Component {
+import {withRouter} from 'react-router-dom'
 
-    newRestaurants = (userLat, userLon, start,cuisine) => {
-        let { getRestaurants } = this.props
-        axios.get(`https://developers.zomato.com/api/v2.1/search?start=${start}&count=${20}&lat=${userLat}&lon=${userLon}&radius=5000&cuisine=${cuisine}`, { headers: { 'user-key': process.env.REACT_APP_API_KEY } }).then(response => {
-            getRestaurants(response.data.restaurants)
+
+class RandomBtn extends Component {
+ 
+    newRestaurants = () => {
+        let { userLat, userLon, cat, price, getRestaurants } = this.props
+
+        axios.post('/api/yelp', { lat: userLat, lon: userLon, price: price, cat: cat }).then(response => {
+            getRestaurants(response.data)
         })
     }
 
-    // newRestaurants takes in the users lat and lon, makes a call to Zomato api, and returns an array of obj restaurants
-
     randomize = (rest) => {
-        let { getFiveList } = this.props
+        let { getFiveList, history } = this.props
         let sorted = [...rest]
         let fiveList = sorted.sort(function (a, b) { return 0.5 - Math.random() })
-        fiveList.splice(4, 15)
-        return getFiveList(fiveList)
+        fiveList.splice(4, 45)
+        getFiveList(fiveList)
+        console.log(history)
+        history.push('/restaurants')
     }
-    //randomize is what takes in that data array from redux, sorts it based on the index randomly, creates a new array, and gets 5 off of that new array. 
 
     componentDidUpdate(prevProps) {
-        if(prevProps.rest.length !== this.props.rest.length){
+        if(this.props.rest.length>0){
             this.randomize(this.props.rest)
         }
-    }
 
+    }
 
     render() {
         return (
             <div>
-                <button onClick={() => this.newRestaurants(this.props.userLat, this.props.userLon)}>getRestaurants</button>
-               
+                <button onClick={this.newRestaurants}>Randomize!</button>
             </div>
         )
     }
 }
-
-//this.props.rests == [{},{},{}] == {restaurant: {}}
 
 let mapStateToProps = state => {
     return {
         rest: state.rest.data,
         userLat: state.user.userLat,
         userLon: state.user.userLon,
+        cat: state.rest.userCuisine,
+        price: state.rest.price,
     }
 }
 
-export default connect(mapStateToProps, { getRestaurants, getFiveList } )(RandomBtn)
+export default withRouter(connect(mapStateToProps, { getRestaurants, getFiveList } )(RandomBtn))
