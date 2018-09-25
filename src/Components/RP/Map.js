@@ -78,7 +78,7 @@ class ESRIMap extends Component {
 					symbol
 				})
 					this.state.mapView.graphics.add(PG)
-					this.state.mapView.goTo({target:PG, scale: 10000})
+					this.state.mapView.goTo({target:PG, zoom:12})
 			}
 				
 			if(restaurants.length){
