@@ -21,6 +21,9 @@
     "redux-promise-middleware": "^5.1.1",
     "request": "^2.88.0"
   },
+  "devDependencies": {
+    "cypress": "^3.1.0"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
@@ -30,10 +33,6 @@
   },
   "description": "This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).",
   "main": "server/server.js",
-  "devDependencies": {
-    "cypress": "^2.1.0",
-    "react-scripts": "^1.1.5"
-  },
   "keywords": [],
   "author": "",
   "license": "ISC",

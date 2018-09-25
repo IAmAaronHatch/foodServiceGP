@@ -4,7 +4,7 @@ import { Route, Switch } from 'react-router-dom'
 //importing components 
 import ESRIMap from './Components/RP/Map'
 import Landing from './Components/Pages/Landing/Landing'
-import ListView from './Components/Pages/ListView/ListView'
+import ListView from './Components/Pages/ListView'
 import FullView from './Components/Pages/FullView/FullView'
 import Favorites from './Components/Pages/Favorites/Favorites'
 

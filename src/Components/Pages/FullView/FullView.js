@@ -49,7 +49,7 @@ class FullView extends Component {
             <div>
                 FullView
 
-                <iframe src={this.props.restaurant.menu}>
+                <iframe src={this.props.restaurant.menu} title="menu">
                     You're browser does not support Iframes.
                 </iframe>
             </div>
