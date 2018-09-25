@@ -4,8 +4,8 @@ import {loadModules, loadCss} from 'esri-loader'
 loadCss('https://js.arcgis.com/4.8/esri/css/main.css');
 
 class FullView extends Component {
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
 
         this.state = {
 
@@ -48,6 +48,10 @@ class FullView extends Component {
         return (
             <div>
                 FullView
+
+                <iframe src={this.props.restaurant.menu}>
+                    You're browser does not support Iframes.
+                </iframe>
             </div>
         )
     }

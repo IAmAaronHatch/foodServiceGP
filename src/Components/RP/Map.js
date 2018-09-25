@@ -121,7 +121,7 @@ let mapStateToProps = state => {
 	return {
 		lat: state.user.userLat,
 		lon: state.user.userLon,
-		restaurants: state.rest.data
+		restaurants: state.rest.fiveList
 	}
 }
 
