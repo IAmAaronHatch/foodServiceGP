@@ -4,7 +4,9 @@ const session = require('express-session')
 const massive = require('massive')
 const request = require('request')
 
+
 const FavsCtrl = require('./Controllers/FavsCtrl')
+const RestCtrl = require('./Controllers/RestCtrl')
 const AuthCtrl = require('./Controllers/AuthCtrl')
 
 require('dotenv').config()
@@ -64,6 +66,12 @@ app.get('/api/logout', (req, res) => {
 
 app.get('/api/favorites/:id', FavsCtrl.getAll)
 
+
+// YELP API
+app.post('/api/yelp', RestCtrl.getRest)
+
+
+
 app.listen(port, () => {
-        console.log(`Never gonna give  up, Never gonna let  down.`)
+        console.log(`Never gonna give ${port} up, Never gonna let ${port} down.`)
 })

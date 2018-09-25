@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
-// import axios from 'axios'
+import axios from 'axios'
 import './Landing.css'
 import Modal from 'react-modal'
 import Map from '../../RP/Map'
 import { connect } from 'react-redux'
 import RandomBtn from '../../Reuse/RandomBtn';
 import { setLat, setLon } from '../../../Redux/reducers/user'
+import { setCuisine, setPrice } from '../../../Redux/reducers/rest'
+
 
 
 class Landing extends Component {
@@ -62,6 +64,10 @@ geoFindMe=()=> {
   navigator.geolocation.getCurrentPosition(success, error);
 }
 
+  randomNum = () => {
+    return Math.floor(Math.random() * 4) + 1
+  }
+
   render() {
 
     return (
@@ -74,11 +80,11 @@ geoFindMe=()=> {
           <div className='dropdown'>
             <button className='dropbtn'>Price</button>
             <div className='dropdown-content'>
-              <span>Random</span>
-              <span onClick={() => this.props.setPriceRange(1)}>$</span>
-              <span onClick={() => this.props.setPriceRange(2)}>$$</span>
-              <span onClick={() => this.props.setPriceRange(3)}>$$$</span>
-              <span onClick={() => this.props.setPriceRange(4)}>$$$$</span>
+              <span onClick={() => this.props.setPrice(this.randomNum())}>Random</span>
+              <span onClick={() => this.props.setPrice('1')}>$</span>
+              <span onClick={() => this.props.setPrice('2')}>$$</span>
+              <span onClick={() => this.props.setPrice('3')}>$$$</span>
+              <span onClick={() => this.props.setPrice('4')}>$$$$</span>
             </div>
           </div>
           <div className='type-drop'>
@@ -101,6 +107,12 @@ geoFindMe=()=> {
 
 
           <RandomBtn />
+          <button onClick={()=>{
+            let {userLat, userLon, cat, price} = this.props
+            axios.post('/api/yelp', {lat: userLat, lon: userLon, price: price, cat: cat}).then(response => {
+              console.log(response.data)
+            })
+          }}>Yelp</button>
         </Modal>
         <Map styles={{ height: '100vh' }} />
       </div>
@@ -111,8 +123,10 @@ geoFindMe=()=> {
 let mapStateToProps = state => {
   return {
     userLat: state.user.userLat,
-    userLon: state.user.userLon
+    userLon: state.user.userLon,
+    cat: state.rest.userCuisine,
+    price: state.rest.price,
   }
 }
 
-export default connect(mapStateToProps, { setLat, setLon })(Landing);
+export default connect(mapStateToProps, { setLat, setLon, setCuisine, setPrice })(Landing);
