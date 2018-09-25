@@ -14,7 +14,6 @@ let initialState = {
 
 const GET_REST = 'GET_REST'
 const GET_FIVE_LIST = 'GET_FIVE_LIST'
-const GET_CUISINE = 'GET_CUISINE'
 const SET_CUISINE = 'SET_CUISINE'
 const SET_PRICE = 'SET_PRICE'
 

@@ -8,9 +8,9 @@ import {withRouter} from 'react-router-dom'
 class RandomBtn extends Component {
  
     newRestaurants = () => {
-        let { userLat, userLon, cat, price, getRestaurants } = this.props
+        let { userLat, userLon, cat, price, getRestaurants, userCity } = this.props
 
-        axios.post('/api/yelp', { lat: userLat, lon: userLon, price: price, cat: cat }).then(response => {
+        axios.post('/api/yelp', { lat: userLat, lon: userLon, price: price, cat: cat, local: userCity }).then(response => {
             getRestaurants(response.data)
         })
     }
@@ -21,12 +21,11 @@ class RandomBtn extends Component {
         let fiveList = sorted.sort(function (a, b) { return 0.5 - Math.random() })
         fiveList.splice(4, 45)
         getFiveList(fiveList)
-        console.log(history)
-        history.push('/restaurants')
+        history.push('/restaurants') 
     }
 
     componentDidUpdate(prevProps) {
-        if(this.props.rest.length>0){
+        if (prevProps.rest.length !== this.props.rest.length){
             this.randomize(this.props.rest)
         }
 
@@ -46,6 +45,7 @@ let mapStateToProps = state => {
         rest: state.rest.data,
         userLat: state.user.userLat,
         userLon: state.user.userLon,
+        userCity: state.user.userCity,
         cat: state.rest.userCuisine,
         price: state.rest.price,
     }
