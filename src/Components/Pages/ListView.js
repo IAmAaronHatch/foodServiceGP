@@ -23,12 +23,12 @@ class ListView extends Component {
                 </div>
                 <div style={{ height: '60vh', backgroundColor: 'render'}}>
                    <ul> {fiveList.map((rest)=>(
-                       <li className="restListItem" key={rest.restaurant.id} >
-                        <h3>Name: {rest.restaurant.name}</h3>
-                        <h3>Address: {rest.restaurant.addresss}</h3>
-                        <h3>Type: {rest.restaurant.category}</h3>
-                        <h3>Price Range: {rest.restaurant.price_range}</h3>
-                        <Link to={`/restaurants/${rest.restaurant.id}`} restaurant={rest.restaurant}>View More</Link>
+                       <li className="restListItem" key={rest.id} >
+                        <h3>Name: {rest.name}</h3>
+                        <h3>Address: {rest.location.address1}</h3>
+                        <h3>Type: {rest.categories}</h3>
+                        <h3>Price Range: {rest.price}</h3>
+                        <Link to={`/restaurants/${rest.id}`} restaurant={rest}>View More</Link>
                        </li>
                     ))}
                    </ul>                       
