@@ -20,7 +20,7 @@ randomize = (arr) => {
     }
 }
 
-//this.props.rest.restaurants == [{},{},{}] == {restaurant: {}}
+//this.props.rests == [{},{},{}] == {restaurant: {}}
 
 let mapStateToProps = state => {
     return {

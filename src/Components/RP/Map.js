@@ -83,7 +83,7 @@ class ESRIMap extends Component {
 				
 			if(restaurants.length){
 				restaurants.forEach((rest)=>{
-					let { location } = rest.restaurant
+					let { location } = rest
 					let point = new Point({
 						latitude: location.latitude,
 						longitude: location.longitude
