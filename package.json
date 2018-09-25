@@ -9,6 +9,7 @@
     "esri-loader": "^2.4.0",
     "express": "^4.16.3",
     "express-session": "^1.15.6",
+    "jest": "^23.6.0",
     "massive": "^5.4.0",
     "react": "^16.5.1",
     "react-dom": "^16.5.1",
@@ -16,22 +17,24 @@
     "react-redux": "^5.0.7",
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
-    "react-scripts": "1.1.5",
     "redux": "^4.0.0",
     "redux-promise-middleware": "^5.1.1",
     "request": "^2.88.0",
     "yelp": "^1.0.2",
     "yelp-fusion": "^2.2.1"
   },
+  "devDependencies": {
+    "cypress": "^3.1.0"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "test": "jest",
+    "eject": "react-scripts eject",
+    "cypress": "cypress open"
   },
   "description": "This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).",
   "main": "server/server.js",
-  "devDependencies": {},
   "keywords": [],
   "author": "",
   "license": "ISC",
