@@ -4,7 +4,7 @@ let initialState = {
     fiveList: [],
     restLat: '',
     restLon: '',
-    userCuisine: 'food',
+    userCuisine: 'restaurants',
     price: '1, 2, 3, 4',
 }
 //cuisine will be set to a number value to later be matched to a type of cuisine of the database

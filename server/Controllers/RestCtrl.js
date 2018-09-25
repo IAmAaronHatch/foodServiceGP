@@ -6,9 +6,10 @@ module.exports = {
         const client = yelp.client(process.env.REACT_APP_API_YELP_KEY);
         let {lat, lon, price, cat} =req.body
         const searchRequest = {
-            term: cat,
+            term: 'food',
             latitude: lat,
             longitude: lon,
+            categories: cat,
             limit: 50,
             price: `${price}`,
             open_now: true

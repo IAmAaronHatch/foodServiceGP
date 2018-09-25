@@ -105,14 +105,7 @@ geoFindMe=()=> {
           <button onClick={this.login}>Login</button>
           {/* Login successfully logs you in as well as takes you directly to favorites */}
 
-
           <RandomBtn />
-          <button onClick={()=>{
-            let {userLat, userLon, cat, price} = this.props
-            axios.post('/api/yelp', {lat: userLat, lon: userLon, price: price, cat: cat}).then(response => {
-              console.log(response.data)
-            })
-          }}>Yelp</button>
         </Modal>
         <Map styles={{ height: '100vh' }} />
       </div>
@@ -124,8 +117,7 @@ let mapStateToProps = state => {
   return {
     userLat: state.user.userLat,
     userLon: state.user.userLon,
-    cat: state.rest.userCuisine,
-    price: state.rest.price,
+    
   }
 }
 
