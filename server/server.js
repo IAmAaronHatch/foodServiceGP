@@ -4,7 +4,6 @@ const session = require('express-session')
 const massive = require('massive')
 const request = require('request')
 
-
 const FavsCtrl = require('./Controllers/FavsCtrl')
 const RestCtrl = require('./Controllers/RestCtrl')
 const AuthCtrl = require('./Controllers/AuthCtrl')
@@ -53,6 +52,8 @@ app.use(bodyParser.json())
 //   }, function(error, response, body){
 //     console.log(body);
 //   });
+
+app.get('/api/cuisine', RestCtrl.getCuisine)
 
 app.get('/auth/callback', AuthCtrl.auth)
 
