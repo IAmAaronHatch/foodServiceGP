@@ -65,6 +65,9 @@ app.get('/api/logout', (req, res) => {
 })
 
 app.get('/api/favorites/:id', FavsCtrl.getAll)
+// app.put('/api/favorite', FavsCtrl)
+// app.post('/api/favorite', FavsCtrl)
+// app.delete('/api/favorite', FavsCtrl)
 
 
 // YELP API

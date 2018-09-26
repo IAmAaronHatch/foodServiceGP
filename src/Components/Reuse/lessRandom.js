@@ -9,7 +9,6 @@ class LessRandom extends Component {
         let sorted = [...rest]
         let newFive = sorted.sort(function(a,b) {return 0.5 - Math.random() })
         newFive.splice(4, 45)
-        console.log(newFive)
         getFiveList(newFive)
 
     }

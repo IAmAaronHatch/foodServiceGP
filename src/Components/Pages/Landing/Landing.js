@@ -42,6 +42,7 @@ class Landing extends Component {
   }
 
 geoFindMe=()=> {
+
   let { setLat, setLon} = this.props
   var output = document.getElementById("out");
 
