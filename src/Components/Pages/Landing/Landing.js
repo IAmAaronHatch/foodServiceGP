@@ -5,7 +5,7 @@ import Map from '../../RP/Map'
 import { connect } from 'react-redux'
 import RandomBtn from '../../Reuse/RandomBtn';
 import { setLat, setLon, setCity } from '../../../Redux/reducers/user'
-import { setCuisine, setPrice } from '../../../Redux/reducers/rest'
+import { setCuisine, setPrice, getCuisine } from '../../../Redux/reducers/rest'
 
 
 class Landing extends Component {
@@ -17,7 +17,9 @@ class Landing extends Component {
       input: ''
     }
   }
-
+componentDidMount = () => {
+  this.props.getCuisine()
+}
   
   login = () => {
     let auth0domain = `https://${process.env.REACT_APP_AUTH0_DOMAIN}`
@@ -40,6 +42,7 @@ class Landing extends Component {
   componentWillMount() {
     Modal.setAppElement('body');
   }
+
 
 geoFindMe=()=> {
 
@@ -96,7 +99,12 @@ geoFindMe=()=> {
           <div className='type-drop'>
             <button className='type-dropbtn'>Cuisine</button>
             <div className='type-dropcontent'>
-              <span onClick={() => this.props.setCuisine()}></span>
+            {this.props.cuisine.map((cuisine) => (
+              <span key={cuisine.name} onClick={() => this.props.setCuisine(cuisine.cuisine_id)}>
+              {cuisine.name}
+              </span>
+             ))}
+
             </div>
           </div>
 
@@ -123,8 +131,8 @@ let mapStateToProps = state => {
   return {
     userLat: state.user.userLat,
     userLon: state.user.userLon,
-    
+    cuisine: state.rest.cuisine
   }
 }
 
-export default connect(mapStateToProps, { setLat, setLon, setCuisine, setPrice, setCity })(Landing);
+export default connect(mapStateToProps, { setLat, setLon, setCuisine, setPrice, setCity, getCuisine })(Landing);

@@ -15,5 +15,5 @@ CREATE TABLE favorites (
 );
 CREATE TABLE cuisine (
     name VARCHAR,
-    cuisine_id INTEGER
+    cuisine_id VARCHAR
 );

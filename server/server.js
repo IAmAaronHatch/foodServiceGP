@@ -2,8 +2,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const session = require('express-session')
 const massive = require('massive')
-const request = require('request')
-
+// const request = require('request')
 
 const FavsCtrl = require('./Controllers/FavsCtrl')
 const RestCtrl = require('./Controllers/RestCtrl')
@@ -53,6 +52,8 @@ app.use(bodyParser.json())
 //   }, function(error, response, body){
 //     console.log(body);
 //   });
+
+app.get('/api/cuisine', RestCtrl.getCuisine)
 
 app.get('/auth/callback', AuthCtrl.auth)
 
