@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Map from '../RP/Map'
 import Nav from '../Reuse/Nav'
-import RandomBtn from '../Reuse/RandomBtn'
+import LessRandom from '../Reuse/lessRandom';
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
@@ -34,7 +34,7 @@ class ListView extends Component {
                     ))}
                    </ul>                       
                 </div>
-                <RandomBtn/>
+                <LessRandom/>
             </div>
         )
     }

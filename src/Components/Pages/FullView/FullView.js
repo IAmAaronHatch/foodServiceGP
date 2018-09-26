@@ -15,7 +15,7 @@ class FullView extends Component {
         }
     }
 
-    componentDidMount(){
+    componentDidMount() {
 
         let geoFindMe= async ()=> {
             let { setLat, setLon} = this.props
@@ -142,6 +142,7 @@ class FullView extends Component {
                 mapView,
             });
     
+
         });
     }
 
