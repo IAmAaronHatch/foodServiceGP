@@ -1,4 +1,4 @@
-// import axios from 'axios'
+import axios from 'axios'
 
 
 //Im setting data = null for now, we can go back in and decide if we want to break this down at all or just send all the info through and sort through it later.
@@ -22,7 +22,7 @@ export default function (state = initialState, action) {
         case UPDATE_ORDER + FULFILLED:
             return { ...state, data: action.payload }
         case DELETE_FAVORITE + FULFILLED:
-            return { ...state, data: null}
+            return { ...state, data: action.payload }
         default: return state
     }
 }
@@ -32,12 +32,15 @@ export default function (state = initialState, action) {
 //updateOrder()
 //deleteFavorite()
 
-// export function getFavorites () {
-//     return {
-//         type: GET_FAVORITES,
-//         payload:
-//     }
-// }
+export function getFavorites () {
+    let favoritesList = axios.get('/api/favorites').then(results => {
+        return results.data
+    })
+    return {
+        type: GET_FAVORITES,
+        payload: favoritesList
+    }
+}
 
 // export function createFavorite () {
 //     return {
@@ -53,9 +56,12 @@ export default function (state = initialState, action) {
 //     }
 // }
 
-// export function deleteFavorite (id) {
-//     return {
-//         type: DELETE_FAVORITE,
-//         payload: 
-//     }
-// }
+export function deleteFavorite (id) {
+    let deleted = axios.delete(`/api/favorite/${id}`).then(results => {
+        return results.data
+    })
+    return {
+        type: DELETE_FAVORITE,
+        payload: deleted
+    }
+}
