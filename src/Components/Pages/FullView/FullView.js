@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
 import {loadModules, loadCss} from 'esri-loader'
+import { setLat, setLon } from '../../../Redux/reducers/user'
+import { connect } from 'react-redux'
+
 
 loadCss('https://js.arcgis.com/4.8/esri/css/main.css');
 
@@ -14,31 +17,130 @@ class FullView extends Component {
 
     componentDidMount(){
 
+        let geoFindMe= async ()=> {
+            let { setLat, setLon} = this.props
+            var output = document.getElementById("out");
+          
+            if (!navigator.geolocation){
+              output.innerHTML = "<p>Geolocation is not supported by your browser</p>";
+              return;
+            }
+          
+            function success(position) {
+              var lat  = position.coords.latitude;
+              var lon = position.coords.longitude;
+              setLat(lat)
+              setLon(lon)
+            }
+          
+            function error() {
+              alert('cannot find your location')
+            }
+           await navigator.geolocation.getCurrentPosition(success, error);
+          }
+          geoFindMe()
+
         loadModules([
 			'esri/Map',
 			'esri/views/MapView',
-			'esri/widgets/Locate',
-			"esri/widgets/Track",
             "esri/Graphic",
             'esri/geometry/Point',
-		]).then(([Map, MapView, Locate, Track, Graphic, Point]) => {
+            "esri/layers/GraphicsLayer",
+            "esri/tasks/RouteTask",
+            "esri/tasks/support/RouteParameters",
+            "esri/tasks/support/FeatureSet",
+            "esri/core/urlUtils",
+		]).then(([Map, MapView, Graphic, Point, GraphicsLayer, RouteTask, RouteParameters, FeatureSet, urlUtils]) => {
 
-        const map = new Map({
-            basemap: 'streets-navigation-vector'
-                });
+            urlUtils.addProxyRule({
+                urlPrefix: "route.arcgis.com",
+                proxyUrl: "/sproxy/"
+            });
+
+            const routeTask = new RouteTask({
+                url: "https://route.arcgis.com/arcgis/rest/services/World/Route/NAServer/Route_World"
+            });
+
+            const routeLayer = new GraphicsLayer();
+
+            const routeParams = new RouteParameters({
+                stops: new FeatureSet(),
+                outSpatialReference: { // autocasts as new SpatialReference()
+                    wkid: 3857
+                }
+            });
+        
+            // Define the symbology used to display the stops
+            const stopSymbol = {
+                type: "simple-marker", // autocasts as new SimpleMarkerSymbol()
+                style: "cross",
+                size: 15,
+                outline: { // autocasts as new SimpleLineSymbol()
+                    width: 4
+                }
+            };
+        
+              // Define the symbology used to display the route
+            const routeSymbol = {
+                type: "simple-line", // autocasts as SimpleLineSymbol()
+                color: [0, 0, 255, 0.5],
+                width: 5
+            };
+
+            const map = new Map({
+                basemap: 'streets-navigation-vector',
+                layers: [routeLayer],
+            });
                 
-                //initial scale and map size
-          const mapView = new MapView({
-                    container: 'mapDiv',
-                    center: [this.props.lon || -109.0452, this.props.lat || 36.9991],
-            map,
-            zoom: this.props.zoom || 3
+            //initial scale and map size
+            const mapView = new MapView({
+                container: 'mapDiv',
+                center: [this.props.lon || -109.0452, this.props.lat || 36.9991],
+                map,
+                zoom: 11
+            });
+
+            let cur = new Point({
+                latitude: this.props.lat,
+                longitude: this.props.lon
+            })
+            
+            let rest = new Point({
+                latitude: '40.7134',
+                longitude: '-111.87175'
+            })
+
+            function addStop(point) {
+                // Add a point at the location of the map click
+                var stop = new Graphic({
+                    geometry: point,
+                    symbol: stopSymbol
                 });
 
-          this.setState({
-            map,
-            mapView
-          });
+                routeLayer.add(stop);
+            
+                // Execute the route task if 2 or more stops are input
+                routeParams.stops.features.push(stop);
+
+                if (routeParams.stops.features.length >= 2) {
+                    routeTask.solve(routeParams).then(showRoute);
+                }
+            }
+
+            //Adds points to the routeParams
+            addStop(cur)
+            addStop(rest)
+            // Adds the solved route to the map as a graphic
+            function showRoute(data) {
+                var routeResult = data.routeResults[0].route;
+                routeResult.symbol = routeSymbol;
+                routeLayer.add(routeResult);
+            }
+
+            this.setState({
+                map,
+                mapView,
+            });
     
         });
     }
@@ -46,15 +148,16 @@ class FullView extends Component {
 
     render() {
         return (
-            <div>
-                FullView
-
-                <iframe src={this.props.restaurant.menu} title="menu">
-                    You're browser does not support Iframes.
-                </iframe>
-            </div>
+            <div id="mapDiv" style={{ minHeight: '100vh'}}></div>
         )
     }
 }
 
-export default FullView
+let mapStateToProps=state=>{
+    return {
+		lat: state.user.userLat,
+        lon: state.user.userLon
+    }
+}
+
+export default connect(mapStateToProps, { setLat, setLon })(FullView)

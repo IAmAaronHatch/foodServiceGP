@@ -49,7 +49,7 @@ class ESRIMap extends Component {
 
       this.setState({
         map,
-        mapView
+				mapView,
       });
 
     });
@@ -80,7 +80,7 @@ class ESRIMap extends Component {
 					this.state.mapView.graphics.add(PG)
 					this.state.mapView.goTo({target:PG, zoom:12})
 			}
-				
+//------Adds a graphic for each restaurant in 5 list------//
 			if(restaurants.length){
 				restaurants.forEach((rest)=>{
 					let { latitude, longitude } = rest.coordinates
