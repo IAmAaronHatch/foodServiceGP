@@ -58,7 +58,7 @@ class FullView extends Component {
             });
 
             const routeTask = new RouteTask({
-                url: "https://route.arcgis.com/arcgis/rest/services/World/Route/NAServer/Route_World"
+                url: "https://utility.arcgis.com/usrsvcs/appservices/E2uQI1CqLxhWKDdv/rest/services/World/Route/NAServer/Route_World/solve"
             });
 
             const routeLayer = new GraphicsLayer();
