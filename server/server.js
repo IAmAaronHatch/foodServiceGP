@@ -2,7 +2,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const session = require('express-session')
 const massive = require('massive')
-const request = require('request')
+// const request = require('request')
 
 const FavsCtrl = require('./Controllers/FavsCtrl')
 const RestCtrl = require('./Controllers/RestCtrl')
@@ -65,7 +65,7 @@ app.get('/api/logout', (req, res) => {
         res.sendStatus(200)
 })
 
-app.get('/api/favorites/:id', FavsCtrl.getAll)
+// app.get('/api/favorites/:id', FavsCtrl.getAll)
 
 
 // YELP API
