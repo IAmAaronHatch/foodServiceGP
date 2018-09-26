@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import axios from 'axios'
+// import axios from 'axios'
 import './Landing.css'
 import Modal from 'react-modal'
 import Map from '../../RP/Map'

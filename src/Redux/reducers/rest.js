@@ -1,3 +1,4 @@
+import axios from 'axios'
 
 let initialState = {
     data: [],
@@ -6,6 +7,7 @@ let initialState = {
     restLon: '',
     userCuisine: 'restaurants',
     price: '1, 2, 3, 4',
+    cuisine: []
 }
 //cuisine will be set to a number value to later be matched to a type of cuisine of the database
 
@@ -24,6 +26,8 @@ export default function reducer(state = initialState, action) {
             return {...state, data: action.payload}
         case GET_FIVE_LIST:
             return {...state, fiveList: action.payload}
+        case GET_CUISINE:
+            return {...state, cuisine: action.payload}
         case SET_CUISINE:
             return {...state, userCuisine: action.payload}
         case SET_PRICE:
@@ -56,6 +60,17 @@ export function setPrice (num) {
     return {
         type: SET_PRICE,
         payload: num
+    }
+}
+
+export function getCuisine (){
+    let list = axios.get('/api/cuisine').then(results => {
+        console.log(results)
+        
+    })
+    return {
+        type: GET_CUISINE,
+        payload: list
     }
 }
 

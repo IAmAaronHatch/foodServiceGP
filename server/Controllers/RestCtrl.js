@@ -1,5 +1,5 @@
-
 const yelp = require('yelp-fusion');
+
 module.exports = {
     getRest: (req, res) => {
         const client = yelp.client(process.env.REACT_APP_API_YELP_KEY);
