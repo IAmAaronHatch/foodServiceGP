@@ -26,33 +26,6 @@ app.use(session({
 
 app.use(bodyParser.json())
 
-// request.post({
-//     url: 'https://www.arcgis.com/sharing/rest/oauth2/token/',
-//     json: true,
-//     form: {
-//       'f': 'json',
-//       'client_id': process.env.ESRI_CLIENT_ID,
-//       'client_secret': process.env.ESRI_SECRET,
-//       'grant_type': 'client_credentials',
-//       'expiration': '1440'
-//     }
-// }, function(error, response, body){
-//     process.env.ESRI_TEMP_TOKEN=body.access_token;
-//     console.log(body);
-    
-// });
-
-// request.post({
-//     url: 'http://geoenrich.arcgis.com/arcgis/rest/services/World/GeoenrichmentServer/Geoenrichment/enrich',
-//     json:true,
-//     form: {
-//       f: 'json',
-//       token: process.env.ESRI_TEMP_TOKEN,
-//     }
-//   }, function(error, response, body){
-//     console.log(body);
-//   });
-
 app.get('/api/cuisine', RestCtrl.getCuisine)
 
 app.get('/auth/callback', AuthCtrl.auth)

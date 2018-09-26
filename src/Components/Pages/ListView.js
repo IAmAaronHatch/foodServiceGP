@@ -22,9 +22,10 @@ class ListView extends Component {
                     <Map styles={{ height: '40vh'}} zoom='10'/>
                 </div>
                 <div style={{ height: '60vh', backgroundColor: 'render'}}>
-                   <ul> {fiveList.map((rest)=>(
+                   <ul>
+                        {fiveList.map((rest)=>(
                        <li className="restListItem" key={rest.id} >
-                        <h3>Name: {rest.name}</h3>
+                        <h3>Name:{rest.name}</h3>
                         <h3>Address: {rest.location.address1}</h3>
                         <h3>Type: {rest.categories[0].alias}</h3>
                         <h3>Price Range: {rest.price}</h3>
