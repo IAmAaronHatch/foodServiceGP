@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
-// import axios from 'axios'
+import axios from 'axios'
 import './Landing.css'
 import Modal from 'react-modal'
 import Map from '../../RP/Map'
 import { connect } from 'react-redux'
-import { getRestaurants } from '../../../Redux/reducers/rest'
 import RandomBtn from '../../Reuse/RandomBtn';
 import { setLat, setLon } from '../../../Redux/reducers/user'
+import { setCuisine, setPrice } from '../../../Redux/reducers/rest'
+
 
 
 class Landing extends Component {
@@ -63,6 +64,10 @@ geoFindMe=()=> {
   navigator.geolocation.getCurrentPosition(success, error);
 }
 
+  randomNum = () => {
+    return Math.floor(Math.random() * 4) + 1
+  }
+
   render() {
 
     return (
@@ -75,11 +80,11 @@ geoFindMe=()=> {
           <div className='dropdown'>
             <button className='dropbtn'>Price</button>
             <div className='dropdown-content'>
-              <span>Random</span>
-              <span onClick={() => this.props.setPriceRange(1)}>$</span>
-              <span onClick={() => this.props.setPriceRange(2)}>$$</span>
-              <span onClick={() => this.props.setPriceRange(3)}>$$$</span>
-              <span onClick={() => this.props.setPriceRange(4)}>$$$$</span>
+              <span onClick={() => this.props.setPrice(this.randomNum())}>Random</span>
+              <span onClick={() => this.props.setPrice('1')}>$</span>
+              <span onClick={() => this.props.setPrice('2')}>$$</span>
+              <span onClick={() => this.props.setPrice('3')}>$$$</span>
+              <span onClick={() => this.props.setPrice('4')}>$$$$</span>
             </div>
           </div>
           <div className='type-drop'>
@@ -92,16 +97,13 @@ geoFindMe=()=> {
           <button onClick={this.geoFindMe}>Location</button>
 
           <span>- or -</span>
-          <input placeholder='zipcode' />
+          <input placeholder='zip' />
           <button >Search</button>
           <br />
 
 
           <button onClick={this.login}>Login</button>
           {/* Login successfully logs you in as well as takes you directly to favorites */}
-
-          <button onClick={() => this.props.getRestaurants(this.props.userLat, this.props.userLon)}>Get Rest</button>
-          {/* This 'Get Rest' button replaces the functionality of the location button or the zip input. What it does it put the 20 restaurants onto state, which get location will later do while also submitting lat and lon onto the variables */}
 
           <RandomBtn />
         </Modal>
@@ -114,8 +116,9 @@ geoFindMe=()=> {
 let mapStateToProps = state => {
   return {
     userLat: state.user.userLat,
-    userLon: state.user.userLon
+    userLon: state.user.userLon,
+    
   }
 }
 
-export default connect(mapStateToProps, { getRestaurants, setLat, setLon })(Landing);
+export default connect(mapStateToProps, { setLat, setLon, setCuisine, setPrice })(Landing);

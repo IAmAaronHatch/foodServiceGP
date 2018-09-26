@@ -78,15 +78,15 @@ class ESRIMap extends Component {
 					symbol
 				})
 					this.state.mapView.graphics.add(PG)
-					this.state.mapView.goTo({target:PG, scale: 5000})
+					this.state.mapView.goTo({target:PG, scale: 10000})
 			}
 				
 			if(restaurants.length){
 				restaurants.forEach((rest)=>{
-					let { location } = rest.restaurant
+					let { latitude, longitude } = rest.coordinates
 					let point = new Point({
-						latitude: location.latitude,
-						longitude: location.longitude
+						latitude,
+						longitude
 					})
 
 					let symbol = new Simple({
@@ -121,7 +121,7 @@ let mapStateToProps = state => {
 	return {
 		lat: state.user.userLat,
 		lon: state.user.userLon,
-		restaurants: state.rest.data
+		restaurants: state.rest.fiveList
 	}
 }
 

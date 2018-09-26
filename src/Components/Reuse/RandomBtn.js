@@ -1,31 +1,54 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import axios from 'axios'
+import { getRestaurants, getFiveList } from '../../Redux/reducers/rest';
+import {withRouter} from 'react-router-dom'
+
 
 class RandomBtn extends Component {
-randomize = (arr) => {
-    // let mapped = arr.map(x => x.sort(function (a, b) { return 0.5 - Math.random()}))
-    let sorted = arr.sort(function(a, b){return 0.5 - Math.random()})
-    sorted.splice(4, 15)
-    return sorted
-}
+ 
+    newRestaurants = () => {
+        let { userLat, userLon, cat, price, getRestaurants } = this.props
+
+        axios.post('/api/yelp', { lat: userLat, lon: userLon, price: price, cat: cat }).then(response => {
+            getRestaurants(response.data)
+        })
+    }
+
+    randomize = (rest) => {
+        let { getFiveList, history } = this.props
+        let sorted = [...rest]
+        let fiveList = sorted.sort(function (a, b) { return 0.5 - Math.random() })
+        fiveList.splice(4, 45)
+        getFiveList(fiveList)
+        console.log(history)
+        history.push('/restaurants')
+    }
+
+    componentDidUpdate(prevProps) {
+        if(this.props.rest.length>0){
+            this.randomize(this.props.rest)
+        }
+
+    }
 
     render() {
-        console.log('props.rest', this.props.rest)
         return (
-            <div>   
-                <button onClick={() => this.randomize(this.props.rest.data)}>Randomize!</button>
-                <button onClick={() => console.log(this.props.rest)}>Console log</button>       
+            <div>
+                <button onClick={this.newRestaurants}>Randomize!</button>
             </div>
         )
     }
 }
 
-//this.props.rest.restaurants == [{},{},{}] == {restaurant: {}}
-
 let mapStateToProps = state => {
     return {
-        rest: state.rest
+        rest: state.rest.data,
+        userLat: state.user.userLat,
+        userLon: state.user.userLon,
+        cat: state.rest.userCuisine,
+        price: state.rest.price,
     }
 }
 
-export default connect(mapStateToProps)(RandomBtn)
+export default withRouter(connect(mapStateToProps, { getRestaurants, getFiveList } )(RandomBtn))
