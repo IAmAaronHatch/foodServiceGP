@@ -12,7 +12,7 @@ let initialState = {
 //cuisine will be set to a number value to later be matched to a type of cuisine of the database
 
 
-// const FULFILLED = '_FULFILLED'
+const FULFILLED = '_FULFILLED'
 
 const GET_REST = 'GET_REST'
 const GET_FIVE_LIST = 'GET_FIVE_LIST'
@@ -26,7 +26,7 @@ export default function reducer(state = initialState, action) {
             return {...state, data: action.payload}
         case GET_FIVE_LIST:
             return {...state, fiveList: action.payload}
-        case GET_CUISINE:
+        case GET_CUISINE + FULFILLED:
             return {...state, cuisine: action.payload}
         case SET_CUISINE:
             return {...state, userCuisine: action.payload}
@@ -49,10 +49,10 @@ export function getFiveList(fiveRest){
     }
 }
 
-export function setCuisine () {
+export function setCuisine (param) {
     return {
         type: SET_CUISINE,
-        payload: ''
+        payload: param
     }
 }
 
@@ -65,8 +65,7 @@ export function setPrice (num) {
 
 export function getCuisine (){
     let list = axios.get('/api/cuisine').then(results => {
-        console.log(results)
-        
+        return results.data
     })
     return {
         type: GET_CUISINE,

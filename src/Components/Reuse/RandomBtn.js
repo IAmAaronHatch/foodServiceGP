@@ -21,7 +21,6 @@ class RandomBtn extends Component {
         let fiveList = sorted.sort(function (a, b) { return 0.5 - Math.random() })
         fiveList.splice(4, 45)
         getFiveList(fiveList)
-        console.log(history)
         history.push('/restaurants')
     }
 
