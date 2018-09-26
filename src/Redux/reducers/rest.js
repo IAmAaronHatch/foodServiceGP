@@ -13,7 +13,7 @@ let initialState = {
 
 
 const FULFILLED = '_FULFILLED'
-
+const GET_CUISINE = 'GET_CUISINE'
 const GET_REST = 'GET_REST'
 const GET_FIVE_LIST = 'GET_FIVE_LIST'
 const SET_CUISINE = 'SET_CUISINE'
