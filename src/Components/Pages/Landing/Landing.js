@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
-// import axios from 'axios'
 import './Landing.css'
 import Modal from 'react-modal'
 import Map from '../../RP/Map'
 import { connect } from 'react-redux'
 import RandomBtn from '../../Reuse/RandomBtn';
-import { setLat, setLon } from '../../../Redux/reducers/user'
+import { setLat, setLon, setCity } from '../../../Redux/reducers/user'
 import { setCuisine, setPrice, getCuisine } from '../../../Redux/reducers/rest'
-
 
 
 class Landing extends Component {
@@ -16,7 +14,7 @@ class Landing extends Component {
 
     this.state = {
       modalIsOpen: true,
-      listOpen: false
+      input: ''
     }
   }
 componentDidMount = () => {
@@ -47,6 +45,7 @@ componentDidMount = () => {
 
 
 geoFindMe=()=> {
+
   let { setLat, setLon} = this.props
   var output = document.getElementById("out");
 
@@ -70,6 +69,12 @@ geoFindMe=()=> {
 
   randomNum = () => {
     return Math.floor(Math.random() * 4) + 1
+  }
+
+  handleInput = (e) => {
+    this.setState({
+      input: e.target.value
+    })
   }
 
   render() {
@@ -106,8 +111,8 @@ geoFindMe=()=> {
           <button onClick={this.geoFindMe}>Location</button>
 
           <span>- or -</span>
-          <input placeholder='zip' />
-          <button >Search</button>
+          <input placeholder='city' onChange={this.handleInput} />
+          <button onClick={() => this.props.setCity(this.state.input)}>Search</button>
           <br />
 
 
@@ -130,4 +135,4 @@ let mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, { setLat, setLon, setCuisine, setPrice, getCuisine })(Landing);
+export default connect(mapStateToProps, { setLat, setLon, setCuisine, setPrice, setCity, getCuisine })(Landing);

@@ -12,34 +12,34 @@ class FullView extends Component {
         }
     }
 
-    componentDidMount(){
+    componentDidMount() {
 
         loadModules([
-			'esri/Map',
-			'esri/views/MapView',
-			'esri/widgets/Locate',
-			"esri/widgets/Track",
+            'esri/Map',
+            'esri/views/MapView',
+            'esri/widgets/Locate',
+            "esri/widgets/Track",
             "esri/Graphic",
             'esri/geometry/Point',
-		]).then(([Map, MapView, Locate, Track, Graphic, Point]) => {
+        ]).then(([Map, MapView, Locate, Track, Graphic, Point]) => {
 
-        const map = new Map({
-            basemap: 'streets-navigation-vector'
-                });
-                
-                //initial scale and map size
-          const mapView = new MapView({
-                    container: 'mapDiv',
-                    center: [this.props.lon || -109.0452, this.props.lat || 36.9991],
-            map,
-            zoom: this.props.zoom || 3
-                });
+            const map = new Map({
+                basemap: 'streets-navigation-vector'
+            });
 
-          this.setState({
-            map,
-            mapView
-          });
-    
+            //initial scale and map size
+            const mapView = new MapView({
+                container: 'mapDiv',
+                center: [this.props.lon || -109.0452, this.props.lat || 36.9991],
+                map,
+                zoom: 11
+            });
+
+            this.setState({
+                map,
+                mapView
+            });
+
         });
     }
 
