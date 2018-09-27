@@ -10,7 +10,7 @@ const FULFILLED = '_FULFILLED'
 
 const GET_FAVORITES = 'GET_FAVORITES'
 const CREATE_FAVORITES = 'CREATE_FAVORITES'
-const UPDATE_ORDER = 'UPDATE_ORDER'
+const CHANGE_ORDER = 'CHANGE_ORDER'
 const DELETE_FAVORITE = 'DELETE_FAVORITE'
 
 export default function (state = initialState, action) {
@@ -19,7 +19,7 @@ export default function (state = initialState, action) {
             return { ...state, data: action.payload }
         case CREATE_FAVORITES + FULFILLED:
             return { ...state, data: action.payload }
-        case UPDATE_ORDER + FULFILLED:
+        case CHANGE_ORDER + FULFILLED:
             return { ...state, data: action.payload }
         case DELETE_FAVORITE + FULFILLED:
             return { ...state, data: action.payload }
@@ -42,19 +42,19 @@ export function getFavorites () {
     }
 }
 
-// export function createFavorite () {
-//     return {
-//         type: CREATE_FAVORITES,
-//         payload:
-//     }
-// }
+export function createFavorite () {
+    return {
+        type: CREATE_FAVORITES,
+        payload: axios.post('/api/favorite')
+    }
+}
 
-// export function updateOrder () {
-//     return {
-//         type: UPDATE_ORDER,
-//         payload:
-//     }
-// }
+export function changeOrder () {
+    return {
+        type: CHANGE_ORDER,
+        payload: axios.put('/api/favorite')
+    }
+}
 
 export function deleteFavorite (id) {
     let deleted = axios.delete(`/api/favorite/${id}`).then(results => {
