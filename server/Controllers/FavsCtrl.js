@@ -8,28 +8,28 @@ module.exports = {
             res.status(500).send(error)
         }
     },
-    createFavorite: async (req, res) => {
-        try {
-            let db = req.app.get('db')
-            let { favorite }
+    // createFavorite: async (req, res) => {
+    //     try {
+    //         let db = req.app.get('db')
+    //         let { favorite }
 
-        } catch (error) {
-            res.status(500).send(error)
-        }
-    },
-    changeOrder: async (req, res) => {
-        try {
-            let db = req.app.get('db')
-        } catch (error) {
-            res.status(500).send(error)
-        }
-    },
-    deleteFavorite: (req, res) => {
-        let {id} = req.params
-        let db = req.app.get('db')
-        db.deleteFavorite([id]).then(results => {
-            res.status(200).send(results)
-        })
-    }
+    //     } catch (error) {
+    //         res.status(500).send(error)
+    //     }
+    // },
+    // changeOrder: async (req, res) => {
+    //     try {
+    //         let db = req.app.get('db')
+    //     } catch (error) {
+    //         res.status(500).send(error)
+    //     }
+    // },
+    // deleteFavorite: (req, res) => {
+    //     let {id} = req.params
+    //     let db = req.app.get('db')
+    //     db.deleteFavorite([id]).then(results => {
+    //         res.status(200).send(results)
+    //     })
+    // }
     
 }
