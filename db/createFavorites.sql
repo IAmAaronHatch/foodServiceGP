@@ -1,5 +1,5 @@
 insert into favorites (
     user_id, rest_id, name
 ) values (
-    ${user_id}, ${restId}, ${name}
+    $2, $1, $3
 )

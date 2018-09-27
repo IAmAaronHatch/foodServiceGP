@@ -12,13 +12,13 @@ module.exports = {
         try {
             let db = req.app.get('db')
             let { restId } = req.params
-            let { user_id } = req.session.user.id
-                let { name } = req.body
-
-            let newFav = await db.createFavorites(restId, user_id, name)
-    res.status(200).send(newFav)
+            let user_id  = req.session.user.id
+            let { name } = req.body
+            let newFav = await db.createFavorites([restId, user_id, name])
+            res.status(200).send(newFav)
 
         } catch (error) {
+            console.log(error)
             res.status(500).send(error)
         }
     },

@@ -37,7 +37,15 @@ class ListView extends Component {
                                 <h3>Address: {rest.location.address1}</h3>
                                 <h3>Type: {rest.categories[0].alias}</h3>
                                 <h3>Price Range: {rest.price}</h3>
-                                <button onClick={() => { this.props.createFavorite(rest.id, user.id) }}>Add To Favorites</button>
+                                <div>
+
+                               
+                                {
+                                    user ? 
+                                        <button onClick={() => { this.props.createFavorite(rest.id, user.id, rest.name) }}>Add To Favorites</button>
+                                        : null
+                                }
+                                </div>
                                 <Link  onClick={() => this.coords(rest.coordinates.latitude, rest.coordinates.longitude)} restaurant={rest} to={`/restaurants/${rest.id}`}>View More</Link>
                             </li>
                         ))}

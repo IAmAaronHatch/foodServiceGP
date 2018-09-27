@@ -15,9 +15,8 @@
     "react-modal": "^3.5.1",
     "react-redux": "^5.0.7",
     "react-router": "^4.3.1",
-    "react-scripts": "1.1.4",
-    "react-router-dom": "^4.3.1",
     "react-scripts": "1.1.5",
+    "react-router-dom": "^4.3.1",
     "redux": "^4.0.0",
     "redux-promise-middleware": "^5.1.1",
     "request": "^2.88.0",
@@ -27,12 +26,16 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "test": "jest",
+    "eject": "react-scripts eject",
+    "cypress": "cypress open"
   },
   "description": "This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).",
   "main": "server/server.js",
-  "devDependencies": {},
+  "devDependencies": {
+    "cypress": "^3.1.0",
+    "jest": "^23.6.0"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",

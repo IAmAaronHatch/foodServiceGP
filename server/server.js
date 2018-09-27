@@ -43,7 +43,7 @@ app.get('/api/cuisine', RestCtrl.getCuisine)
 //Favs
 app.get('/api/favorites', FavsCtrl.getFavorites)
 // app.put('/api/favorite', FavsCtrl.changeOrder)
-// app.post('/api/favorite/:restId', FavsCtrl.createFavorites)
+app.post('/api/favorite/:restId', FavsCtrl.createFavorite)
 // app.delete('/api/favorite', FavsCtrl.deleteFavorites)
 
 
