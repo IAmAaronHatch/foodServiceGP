@@ -39,9 +39,9 @@ app.get('/api/logout', (req, res) => {
 })
 
 app.get('/api/favorites/:id', FavsCtrl.getFavorites)
-app.put('/api/favorite', FavsCtrl.changeOrder)
-app.post('/api/favorite', FavsCtrl.createFavorites)
-app.delete('/api/favorite', FavsCtrl.deleteFavorites)
+// app.put('/api/favorite', FavsCtrl.changeOrder)
+// app.post('/api/favorite', FavsCtrl.createFavorites)
+// app.delete('/api/favorite', FavsCtrl.deleteFavorites)
 
 
 // YELP API
