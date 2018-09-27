@@ -46,7 +46,7 @@ app.delete('/api/favorite', FavsCtrl.deleteFavorites)
 
 // YELP API
 app.post('/api/yelp', RestCtrl.getRest)
-
+app.get('/api/yelp/:id', RestCtrl.getById)
 
 
 app.listen(port, () => {

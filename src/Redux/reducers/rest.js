@@ -7,7 +7,8 @@ let initialState = {
     restLon: '',
     userCuisine: 'restaurants',
     price: '1, 2, 3, 4',
-    cuisine: []
+    cuisine: [],
+    phone: "+18014671311"
 }
 //cuisine will be set to a number value to later be matched to a type of cuisine of the database
 
