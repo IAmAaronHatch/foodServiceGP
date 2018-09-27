@@ -16,6 +16,9 @@ class FullView extends Component {
     }
 
     componentDidMount() {
+        if(!this.props.restLat){
+            this.props.history.push('/')
+        }
 
         let geoFindMe= async ()=> {
             let { setLat, setLon} = this.props
@@ -51,6 +54,7 @@ class FullView extends Component {
             "esri/tasks/support/FeatureSet",
             "esri/core/urlUtils",
 		]).then(([Map, MapView, Graphic, Point, GraphicsLayer, RouteTask, RouteParameters, FeatureSet, urlUtils]) => {
+            let { lat, lon, restLat, restLon } = this.props;
 
             urlUtils.addProxyRule({
                 urlPrefix: "route.arcgis.com",
@@ -95,19 +99,19 @@ class FullView extends Component {
             //initial scale and map size
             const mapView = new MapView({
                 container: 'mapDiv',
-                center: [this.props.lon || -109.0452, this.props.lat || 36.9991],
+                center: [lon || -109.0452, lat || 36.9991],
                 map,
                 zoom: 11
             });
 
             let cur = new Point({
-                latitude: this.props.lat,
-                longitude: this.props.lon
+                latitude: lat,
+                longitude: lon
             })
             
             let rest = new Point({
-                latitude: '40.7134',
-                longitude: '-111.87175'
+                latitude: restLat,
+                longitude: restLon
             })
 
             function addStop(point) {
@@ -157,7 +161,9 @@ class FullView extends Component {
 let mapStateToProps=state=>{
     return {
 		lat: state.user.userLat,
-        lon: state.user.userLon
+        lon: state.user.userLon,
+        restLat: state.rest.restLat,
+        restLon: state.rest.restLon
     }
 }
 

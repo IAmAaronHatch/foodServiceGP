@@ -18,6 +18,8 @@ const GET_REST = 'GET_REST'
 const GET_FIVE_LIST = 'GET_FIVE_LIST'
 const SET_CUISINE = 'SET_CUISINE'
 const SET_PRICE = 'SET_PRICE'
+const SET_REST_LAT = 'SET_REST_LAT'
+const SET_REST_LON = 'SET_REST_LON'
 
 export default function reducer(state = initialState, action) {
     switch(action.type) {   
@@ -31,6 +33,12 @@ export default function reducer(state = initialState, action) {
             return {...state, userCuisine: action.payload}
         case SET_PRICE:
             return {...state, price: action.payload}
+        case SET_REST_LAT: 
+
+            return { ...state, restLat: action.payload}
+        case SET_REST_LON: 
+            return { ...state, restLon: action.payload}
+
         default: return state
     }
 }
@@ -70,6 +78,20 @@ export function getCuisine (){
     return {
         type: GET_CUISINE,
         payload: list
+    }
+}
+
+export function setRestLat (lat){
+    return {
+        type: SET_REST_LAT,
+        payload: lat
+    }
+}
+
+export function setRestLon (lon){
+    return {
+        type: SET_REST_LON,
+        payload: lon
     }
 }
 
