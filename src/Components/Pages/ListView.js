@@ -4,6 +4,8 @@ import Nav from '../Reuse/Nav'
 import LessRandom from '../Reuse/lessRandom';
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { setRestLat, setRestLon } from '../../../Redux/reducers/rest'
+
 
 class ListView extends Component {
 
@@ -46,4 +48,4 @@ let mapStateToProps=(state)=>{
     }
 }
 
-export default connect(mapStateToProps)(ListView)
+export default connect(mapStateToProps, {  setRestLat, setRestLon })(ListView)
