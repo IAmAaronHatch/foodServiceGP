@@ -86,7 +86,7 @@ export function setRestLat (lat){
     }
 }
 
-export function setRestLat (lon){
+export function setRestLon (lon){
     return {
         type: SET_REST_LON,
         payload: lon
