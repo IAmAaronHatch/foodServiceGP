@@ -35,9 +35,11 @@ export default function reducer(state = initialState, action) {
         case SET_PRICE:
             return {...state, price: action.payload}
         case SET_REST_LAT: 
+
             return { ...state, restLat: action.payload}
         case SET_REST_LON: 
             return { ...state, restLon: action.payload}
+
         default: return state
     }
 }
