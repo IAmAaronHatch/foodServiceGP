@@ -1,5 +1,5 @@
 module.exports = {
-    getFavorites: async (req,res) =>{
+    getFavorites: async (req, res) => {
         try {
             let db = req.app.get('db')
             let favorites = await db.getFavorites(req.params)
@@ -8,15 +8,20 @@ module.exports = {
             res.status(500).send(error)
         }
     },
-    // createFavorite: async (req, res) => {
-    //     try {
-    //         let db = req.app.get('db')
-    //         let { favorite }
+    createFavorite: async (req, res) => {
+        try {
+            let db = req.app.get('db')
+            let { restId } = req.params
+            let { user_id } = req.session.user.id
+                let { name } = req.body
 
-    //     } catch (error) {
-    //         res.status(500).send(error)
-    //     }
-    // },
+            let newFav = await db.createFavorites(restId, user_id, name)
+    res.status(200).send(newFav)
+
+        } catch (error) {
+            res.status(500).send(error)
+        }
+    },
     // changeOrder: async (req, res) => {
     //     try {
     //         let db = req.app.get('db')
@@ -31,5 +36,5 @@ module.exports = {
     //         res.status(200).send(results)
     //     })
     // }
-    
+
 }
