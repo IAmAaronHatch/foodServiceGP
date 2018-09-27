@@ -84,6 +84,7 @@ class ESRIMap extends Component {
 	}
 
 	clear = () => {
+		// eslint-disable-next-line
 		this.state.mapView.graphics.items = []
 	}
 
