@@ -38,10 +38,10 @@ app.get('/api/logout', (req, res) => {
         res.sendStatus(200)
 })
 
-// app.get('/api/favorites/:id', FavsCtrl.getAll)
-// app.put('/api/favorite', FavsCtrl)
-// app.post('/api/favorite', FavsCtrl)
-// app.delete('/api/favorite', FavsCtrl)
+app.get('/api/favorites/:id', FavsCtrl.getFavorites)
+app.put('/api/favorite', FavsCtrl.changeOrder)
+app.post('/api/favorite', FavsCtrl.createFavorites)
+app.delete('/api/favorite', FavsCtrl.deleteFavorites)
 
 
 // YELP API

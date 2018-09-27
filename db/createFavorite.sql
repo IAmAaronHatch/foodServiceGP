@@ -1,5 +1,0 @@
--- insert into favorites (
---     user_id, rest_id
--- ) values (
---     ${user_id}, ${}
--- )

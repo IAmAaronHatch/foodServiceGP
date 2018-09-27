@@ -7,11 +7,11 @@ CREATE TABLE users (
 );
 CREATE TABLE favorites (
     id SERIAL PRIMARY KEY,
-    user_id integer,
+    user_id integer references users,
     rest_id VARCHAR,
     rank integer,
-    name VARCHAR
-
+    name VARCHAR,
+    phone TEXT,
 );
 CREATE TABLE cuisine (
     name VARCHAR,
