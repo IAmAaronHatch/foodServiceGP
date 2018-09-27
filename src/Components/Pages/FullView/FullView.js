@@ -16,6 +16,9 @@ class FullView extends Component {
     }
 
     componentDidMount() {
+        if(!this.props.restLat){
+            this.props.history.push('/')
+        }
 
         let geoFindMe= async ()=> {
             let { setLat, setLon} = this.props
