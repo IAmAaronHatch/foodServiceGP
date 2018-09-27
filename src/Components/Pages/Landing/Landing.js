@@ -6,6 +6,7 @@ import { connect } from 'react-redux'
 import RandomBtn from '../../Reuse/RandomBtn';
 import { setLat, setLon, setCity } from '../../../Redux/reducers/user'
 import { setCuisine, setPrice, getCuisine } from '../../../Redux/reducers/rest'
+import axios from 'axios'
 
 
 class Landing extends Component {
@@ -77,6 +78,11 @@ geoFindMe=()=> {
     })
   }
 
+  whatever = () => {
+    axios.get(`/api/yelp/${'WavvLdfdP6g8aZTtbBQHTw'}`).then(response => {
+      console.log(response.data)
+    })
+  }
   render() {
 
     return (
@@ -120,6 +126,8 @@ geoFindMe=()=> {
           {/* Login successfully logs you in as well as takes you directly to favorites */}
 
           <RandomBtn />
+
+          <button onClick={this.whatever}>Yelp id Test</button>
         </Modal>
         <Map styles={{ height: '100vh' }} />
       </div>
@@ -131,7 +139,8 @@ let mapStateToProps = state => {
   return {
     userLat: state.user.userLat,
     userLon: state.user.userLon,
-    cuisine: state.rest.cuisine
+    cuisine: state.rest.cuisine,
+    phone: state.rest.phone
   }
 }
 

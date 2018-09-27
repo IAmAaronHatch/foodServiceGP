@@ -48,6 +48,7 @@ let mapStateToProps = state => {
         userCity: state.user.userCity,
         cat: state.rest.userCuisine,
         price: state.rest.price,
+        phone: state.rest.phone
     }
 }
 

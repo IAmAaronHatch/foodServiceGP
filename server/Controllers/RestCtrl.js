@@ -3,7 +3,7 @@ const yelp = require('yelp-fusion');
 module.exports = {
     getRest: (req, res) => {
         const client = yelp.client(process.env.REACT_APP_API_YELP_KEY);
-        let {lat, lon, price, cat, local} =req.body
+        let { lat, lon, price, cat, local } = req.body
         const searchRequest = {
             term: 'food',
             latitude: lat,
@@ -12,7 +12,8 @@ module.exports = {
             categories: cat,
             limit: 50,
             price: `${price}`,
-            open_now: true
+            open_now: true,
+
         }
         client.search(searchRequest).then(response => {
             const firstResult = response.jsonBody.businesses;
@@ -21,6 +22,17 @@ module.exports = {
         }).catch(e => {
             console.log(e);
         })
+    },
+    getById: (req, res) => {
+        const client = yelp.client
+            (process.env.REACT_APP_API_YELP_KEY);
+        let { id } = req.params
+        client.business(id).then(response => {
+            res.send(response.jsonBody)
+        }).catch(e => {
+            console.log(e)
+        })
+
     },
     getCuisine: async (req, res) => {
         try {
