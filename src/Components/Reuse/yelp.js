@@ -1,7 +1,7 @@
 import yelp from 'yelp-fusion'
 import React, { Component } from 'react'
 
-const apiKey = 'uFNYN0fSsYbRqmJ039zwSyzkfQY3mhdL8st74PUblNPLQf7K8JyhmIyEDKwydfg8NLMzlRZ6nhoz-OfE4wfuhrhnLKH-Qkw4rS-t9KTN29E8FZbVvU8TGqrIYWaqW3Yx';
+const apiKey = '';
 
 const searchRequest = {
     term: 'food',
