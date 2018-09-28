@@ -1,9 +1,9 @@
 import React from 'react'
 
-function Nav (){
+function Nav() {
 	return (
 		<div>
-			<a href="/#/Login">Sign In/Register</a>
+			<a href="/#/">Sign In/Register</a>
 			<a href="/#/">New Search</a>
 			<a href="/#/favorites">Favorites</a>
 		</div>

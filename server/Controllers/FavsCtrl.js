@@ -40,12 +40,12 @@ module.exports = {
     //         res.status(500).send(error)
     //     }
     // },
-    // deleteFavorite: (req, res) => {
-    //     let {id} = req.params
-    //     let db = req.app.get('db')
-    //     db.deleteFavorite([id]).then(results => {
-    //         res.status(200).send(results)
-    //     })
-    // }
+    deleteFavorite: (req, res) => {
+        let {id} = req.params
+        let db = req.app.get('db')
+        db.deleteFavorite([id]).then(results => {
+            res.status(200).send(results)
+        })
+    }
 
 }
