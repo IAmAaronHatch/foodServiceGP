@@ -43,7 +43,7 @@ app.get('/api/cuisine', RestCtrl.getCuisine)
 //Favs
 app.get('/api/favorites', FavsCtrl.getFavorites)
 // app.put('/api/favorite', FavsCtrl.changeOrder)
-// app.post('/api/favorite/:restId', FavsCtrl.createFavorites)
+app.post('/api/favorite/:restId', FavsCtrl.createFavorite)
 // app.delete('/api/favorite', FavsCtrl.deleteFavorites)
 
 
@@ -53,5 +53,5 @@ app.get('/api/yelp/:id', RestCtrl.getById)
 
 
 app.listen(port, () => {
-        console.log(`Never gonna give ${port} up, Never gonna let ${port} down.`)
+        console.log(`Never gonna give ${port} up, Never gonna let ${port} down`)
 })
