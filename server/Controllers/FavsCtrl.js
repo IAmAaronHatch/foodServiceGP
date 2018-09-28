@@ -14,9 +14,20 @@ module.exports = {
             let { restId } = req.params
             let user_id  = req.session.user.id
             let { name } = req.body
-            let newFav = await db.createFavorites([restId, user_id, name])
+            let { phone } = req.body
+            console.log('ctrl', phone)
+            // get the ranks,
+            // check how many are in array with .length
+            // add +=1
+            // if length == 5, replace the 0 index and splice out index 5 so there is always 5 in arr.
+            let ranking = await db.createRank({user_id})
+            let newFav = []
+            if(ranking.length < 5) {
+                newFav = await db.createFavorites([restId, user_id, name, phone])
+            } else {
+                newFav = await db.updateFavoriteRank([restId, user_id, name, phone])
+            }
             res.status(200).send(newFav)
-
         } catch (error) {
             console.log(error)
             res.status(500).send(error)
