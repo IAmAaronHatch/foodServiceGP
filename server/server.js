@@ -26,8 +26,7 @@ app.use(session({
 
 app.use(bodyParser.json())
 
-app.get('/api/cuisine', RestCtrl.getCuisine)
-
+//Auth
 app.get('/auth/callback', AuthCtrl.auth)
 
 app.get('/api/currentUser', (req, res) => {
@@ -38,9 +37,13 @@ app.get('/api/logout', (req, res) => {
         res.sendStatus(200)
 })
 
-// app.get('/api/favorites/:id', FavsCtrl.getFavorites)
+//Food
+app.get('/api/cuisine', RestCtrl.getCuisine)
+
+//Favs
+app.get('/api/favorites', FavsCtrl.getFavorites)
 // app.put('/api/favorite', FavsCtrl.changeOrder)
-// app.post('/api/favorite', FavsCtrl.createFavorites)
+// app.post('/api/favorite/:restId', FavsCtrl.createFavorites)
 // app.delete('/api/favorite', FavsCtrl.deleteFavorites)
 
 

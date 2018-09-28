@@ -20,6 +20,7 @@ const SET_CITY = 'SET_CITY'
 export default function reducer(state = initialState, action) {
     switch (action.type) {
         case GET_USER + FULFILLED:
+            console.log(1234123, action.payload.data)
             return { ...state, data: action.payload.data }
         case SET_LAT:
             return { ...state, userLat: action.payload}
@@ -28,7 +29,7 @@ export default function reducer(state = initialState, action) {
         case SET_CITY:
             return {...state, userCity: action.payload}
         case LOGOUT + FULFILLED:
-            return { ...state, data: null }
+            return { ...state, data: action.payload }
         default: return state
     }
 }

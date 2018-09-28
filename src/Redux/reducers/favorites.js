@@ -42,10 +42,11 @@ export function getFavorites () {
     }
 }
 
-export function createFavorite () {
+export function createFavorite (restId, user_id) {
+    let newFav = axios.post(`/api/favorite/${restId}`, { user_id })
     return {
         type: CREATE_FAVORITES,
-        payload: axios.post('/api/favorite')
+        payload: newFav
     }
 }
 

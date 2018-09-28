@@ -8,7 +8,6 @@ let initialState = {
     userCuisine: 'restaurants',
     price: '1, 2, 3, 4',
     cuisine: [],
-    phone: "+18014671311"
 }
 //cuisine will be set to a number value to later be matched to a type of cuisine of the database
 
@@ -70,6 +69,7 @@ export function setPrice (num) {
         payload: num
     }
 }
+
 
 export function getCuisine (){
     let list = axios.get('/api/cuisine').then(results => {
