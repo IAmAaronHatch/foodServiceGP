@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import axios from 'axios'
 import { getRestaurants, getFiveList } from '../../Redux/reducers/rest';
 import {withRouter} from 'react-router-dom'
-
+import { RandomizePt1 } from '../../_util/methods'
 
 class RandomBtn extends Component {
  
@@ -17,9 +17,7 @@ class RandomBtn extends Component {
 
     randomize = (rest) => {
         let { getFiveList, history } = this.props
-        let sorted = [...rest]
-        let fiveList = sorted.sort(function (a, b) { return 0.5 - Math.random() })
-        fiveList.splice(4, 45)
+        let fiveList = RandomizePt1(rest)
         getFiveList(fiveList)
         history.push('/restaurants') 
     }

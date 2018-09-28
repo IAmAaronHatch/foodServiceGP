@@ -5,8 +5,8 @@ import Map from '../../RP/Map'
 import { connect } from 'react-redux'
 import RandomBtn from '../../Reuse/RandomBtn';
 import { setLat, setLon, setCity } from '../../../Redux/reducers/user'
-import { setCuisine, setPrice, getCuisine } from '../../../Redux/reducers/rest'
-import axios from 'axios'
+import { setCuisine, setPrice, setCuisineList } from '../../../Redux/reducers/rest'
+import { login, randomNum, error, yelpWithId, cuisineNames } from '../../../_util/methods'
 
 
 class Landing extends Component {
@@ -19,19 +19,11 @@ class Landing extends Component {
     }
   }
 componentDidMount = () => {
-  this.props.getCuisine()
+  cuisineNames().then(resp=>{
+
+    this.props.setCuisineList(resp.data)
+  })
 }
-  
-  login = () => {
-    let auth0domain = `https://${process.env.REACT_APP_AUTH0_DOMAIN}`
-    let clientId = process.env.REACT_APP_AUTH0_CLIENT_ID
-    let scope = encodeURIComponent('openid profile email')
-    let redirectUri = encodeURIComponent(`${window.location.origin}/auth/callback`)
-
-    let location = `${auth0domain}/authorize?client_id=${clientId}&scope=${scope}&redirect_uri=${redirectUri}&response_type=code`
-
-    window.location = location
-  }
 
   openModal = () => {
     this.setState({ modalIsOpen: true })
@@ -62,15 +54,10 @@ geoFindMe=()=> {
     setLon(lon)
   }
 
-  function error() {
-    alert('cannot find your location')
-  }
   navigator.geolocation.getCurrentPosition(success, error);
 }
 
-  randomNum = () => {
-    return Math.floor(Math.random() * 4) + 1
-  }
+  
 
   handleInput = (e) => {
     this.setState({
@@ -78,10 +65,8 @@ geoFindMe=()=> {
     })
   }
 
-  whatever = () => {
-    axios.get(`/api/yelp/${'WavvLdfdP6g8aZTtbBQHTw'}`).then(response => {
-      console.log(response.data)
-    })
+  yelpId = (restId) => {
+    yelpWithId(restId)
   }
   render() {
 
@@ -95,7 +80,7 @@ geoFindMe=()=> {
           <div className='dropdown'>
             <button className='dropbtn'>Price</button>
             <div className='dropdown-content'>
-              <span onClick={() => this.props.setPrice(this.randomNum())}>Random</span>
+              <span onClick={() => this.props.setPrice(randomNum())}>Random</span>
               <span onClick={() => this.props.setPrice('1')}>$</span>
               <span onClick={() => this.props.setPrice('2')}>$$</span>
               <span onClick={() => this.props.setPrice('3')}>$$$</span>
@@ -122,12 +107,10 @@ geoFindMe=()=> {
           <br />
 
 
-          <button onClick={this.login}>Login</button>
+          <button onClick={login}>Login</button>
           {/* Login successfully logs you in as well as takes you directly to favorites */}
 
           <RandomBtn />
-
-          <button onClick={this.whatever}>Yelp id Test</button>
         </Modal>
         <Map styles={{ height: '100vh' }} />
       </div>
@@ -144,4 +127,4 @@ let mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, { setLat, setLon, setCuisine, setPrice, setCity, getCuisine })(Landing);
+export default connect(mapStateToProps, { setLat, setLon, setCuisine, setPrice, setCity, setCuisineList })(Landing);
