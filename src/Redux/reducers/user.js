@@ -1,13 +1,11 @@
-import axios from 'axios'
 
 let initialState = {
-    data: null,
-    userLat: null,
-    userLon: null,
+    data: '',
+    userLat: '',
+    userLon: '',
     userCity: '',
 }
 
-const FULFILLED = '_FULFILLED'
 
 const GET_USER = 'GET_USER'
 const LOGOUT = 'LOGOUT'
@@ -19,16 +17,15 @@ const SET_CITY = 'SET_CITY'
 
 export default function reducer(state = initialState, action) {
     switch (action.type) {
-        case GET_USER + FULFILLED:
-            console.log(1234123, action.payload.data)
-            return { ...state, data: action.payload.data }
+        case GET_USER:
+            return { ...state, data: action.payload }
         case SET_LAT:
             return { ...state, userLat: action.payload}
         case SET_LON:
             return { ...state, userLon: action.payload }
         case SET_CITY:
             return {...state, userCity: action.payload}
-        case LOGOUT + FULFILLED:
+        case LOGOUT:
             return { ...state, data: action.payload }
         default: return state
     }
@@ -36,17 +33,17 @@ export default function reducer(state = initialState, action) {
 
 //Action Creators
 
-export function getUser() {
+export function getUser(name) {
     return {
         type: GET_USER,
-        payload: axios.get('/api/currentUser')
+        payload: name
     }
 }
 
-export function logout() {
+export function logout(val) {
     return {
         type: LOGOUT,
-        payload: axios.get('/api/logout')
+        payload: val
     }
 }
 

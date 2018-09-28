@@ -30,7 +30,7 @@ app.use(bodyParser.json())
 app.get('/auth/callback', AuthCtrl.auth)
 
 app.get('/api/currentUser', (req, res) => {
-    res.send(req.session.user)
+    res.send(req.session.user.name)
 })
 app.get('/api/logout', (req, res) => {
         req.session.destroy()
@@ -38,7 +38,7 @@ app.get('/api/logout', (req, res) => {
 })
 
 //Food
-app.get('/api/cuisine', RestCtrl.getCuisine)
+app.get('/api/cuisineNames', RestCtrl.getCuisine)
 
 //Favs
 app.get('/api/favorites', FavsCtrl.getFavorites)

@@ -7,13 +7,6 @@ import { connect } from 'react-redux'
 loadCss('https://js.arcgis.com/4.8/esri/css/main.css');
 
 class FullView extends Component {
-    constructor(props) {
-        super(props)
-
-        this.state = {
-
-        }
-    }
 
     componentDidMount() {
         if(!this.props.restLat){

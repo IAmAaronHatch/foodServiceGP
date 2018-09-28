@@ -1,16 +1,21 @@
 import React, { Component } from 'react'
-import { getUser, logout } from '../../../Redux/reducers/user'
 import { connect } from 'react-redux'
+// import axios from 'axios'
+import { getUser, logout } from '../../../Redux/reducers/user'
+import { getName, logoutUser } from '../../../_util/methods'
 
 class Favorites extends Component {
 
     componentDidMount() {
         let { getUser } = this.props;
-        getUser()
+        getName().then(results => {
+            getUser(results.data)
+        })
     }
     logout = () => {
         let { logout, history } = this.props;
-        logout()
+        logoutUser()
+        logout("")
         history.push('/')
     }
     render() {
@@ -21,7 +26,7 @@ class Favorites extends Component {
                 {
                     user ? 
                     <div>
-                        <p>{user.name}</p>
+                        <p>{user}</p>
                     </div> : <p>No one is logged in</p>
                 }
                 <button onClick={this.logout}>Logout</button>
