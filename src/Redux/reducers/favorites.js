@@ -43,8 +43,7 @@ export function getFavorites () {
 }
 
 export function createFavorite (restId, name, phone) {
-    let newFav = axios.post(`/api/favorite/${restId}`, { name, phone })
-    console.log('redux', phone)
+    let newFav = axios.post(`/api/favorite/newfavorite/${restId}`, { name, phone })
     return {
         type: CREATE_FAVORITES,
         payload: newFav
