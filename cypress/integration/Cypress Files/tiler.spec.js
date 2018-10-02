@@ -3,32 +3,49 @@ describe("Landing page", ()=>{
 		cy.visit('/')
 	})
 
-	// it("Finds location", ()=>{
-	// 	cy.get("#locator")
-	// 		.click()
-	// 	cy.get("#latInput")
-	// 		.should("be.hidden")
-	// 		.should('not.have.value', '')
-	// })
+	it("Finds location", ()=>{
+		cy.get("#locator")
+			.click()
+		cy.get("#latInput")
+			.invoke("show")
+			.should("not.have.value", "")
+	})
 
-	// it("Checks input", ()=>{
-	// 	const text = "Salt Lake City"
+	it("Checks input", ()=>{
+		const text = "Salt Lake City"
 
-	// 	cy.get("#cityInput")
-	// 		.type(text)
-	// 		.should("have.value", text)
+		cy.get("#cityInput")
+			.type(text)
+			.should("have.value", text)
 
-	// 	cy.get("#cityBtn")
-	// 		.click()
-	// })
+		cy.get("#cityBtn")
+			.click()
+	})
 
-	it("Selects a price", ()=>{
-		cy.get(".dropdown")
-			.find(".dropbtn")
+	it("Shows price list then hides price list", ()=>{
+		cy.get("#price2")
+			.should("not.exist")
+		cy.get("#price1")
 			.trigger("mouseover")
-		cy.get(".dropdown")
-			.find(".dropdown-content")
+		cy.get("#price2")
+			.should("be.visible")
+		cy.get("#price1")
+			.should("not.exist")
+		cy.get("#price2")
+			.trigger("mouseout")
+		cy.get("#price2")
+			.should("not.exist")
+		cy.get("#price1")
+			.should("be.visible")
+	})
+
+	it("Sets random price", ()=>{
+		cy.get("#price1")
+			.trigger("mouseover")
+		cy.get(".dropdown-content")
 			.first()
 			.click()
+		cy.get(".button2")
+			.should("contain","$")
 	})
 })
