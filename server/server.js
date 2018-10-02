@@ -44,9 +44,9 @@ app.get('/api/cuisineNames', RestCtrl.getCuisine)
 
 //Favs
 app.get('/api/favorites', FavsCtrl.getFavorites)
-// app.put('/api/favorite', FavsCtrl.changeOrder)
-app.post('/api/favorite/newfavorite/:restId', FavsCtrl.createFavorite)
-app.delete('/api/favorite/:id', FavsCtrl.deleteFavorite)
+app.put('/api/favorite/desc/:restId', FavsCtrl.changeDesc)
+app.post('/api/favorite/:restId', FavsCtrl.createFavorite)
+app.delete('/api/favorite/delete/:restId', FavsCtrl.deleteFavorite)
 
 
 // YELP API
