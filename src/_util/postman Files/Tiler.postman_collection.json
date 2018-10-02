@@ -1,0 +1,123 @@
+{
+	"info": {
+		"_postman_id": "a5dbe35b-53f6-42d0-99a4-547ee47c9338",
+		"name": "Group Project-Tiler",
+		"description": "Group project tests for Silver Platter",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Yelp By Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:3000/api/yelp/WavvLdfdP6g8aZTtbBQHTw",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"yelp",
+						"WavvLdfdP6g8aZTtbBQHTw"
+					]
+				},
+				"description": "Can pull information for one restaurant by the restaurant's id."
+			},
+			"response": []
+		},
+		{
+			"name": "Logout",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "68c2928e-c046-45b1-827a-3adc1f7ba6b1",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:3000/api/logout",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"logout"
+					]
+				},
+				"description": "Response will be true."
+			},
+			"response": []
+		},
+		{
+			"name": "Get Cuisine Names",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "17f972f7-d634-4cd7-9e63-1e3c7b6d86dc",
+						"type": "text/javascript",
+						"exec": [
+							"const res = pm.response.json()",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response length is 20\", function(){",
+							"    pm.expect(res.length).to.eql(20);",
+							"});",
+							"",
+							"pm.test(\"First cuisine is American\", function(){",
+							"    pm.expect(res[0].name).to.eql(\"American\");",
+							"});",
+							"",
+							"pm.test(\"Fifth cuisine is Chinese\", function(){",
+							"    pm.expect(res[4].name).to.eql(\"Chinese\");",
+							"});",
+							"",
+							"pm.test(\"Last cuisine_id is vegetarian\", function(){",
+							"    pm.expect(res[19].cuisine_id).to.eql(\"vegetarian\");",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:3000/api/cuisineNames",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"cuisineNames"
+					]
+				},
+				"description": "Request should return an array of cuisines in alphabetical order."
+			},
+			"response": []
+		}
+	]
+}

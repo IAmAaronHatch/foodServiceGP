@@ -23,7 +23,7 @@ module.exports = {
     },
     yelpWithId: (restId) => {
         axios.get(`/api/yelp/${restId}`).then(response => {
-            console.log(response.data)
+            return (response.data)
         })
 
         //WavvLdfdP6g8aZTtbBQHTw
@@ -33,7 +33,8 @@ module.exports = {
     },
     logoutUser: () => {
         axios.get('/api/logout').then(response => {
-            return true
+            console.log(response)
+            return (response.name)
         })
     },
     cuisineNames: () => {

@@ -108,7 +108,7 @@ class FullView extends Component {
             })
 
             function addStop(point) {
-                // Add a point at the location of the map click
+                // Adds passed in point as a graphic on the navigation map
                 var stop = new Graphic({
                     geometry: point,
                     symbol: stopSymbol

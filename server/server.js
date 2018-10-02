@@ -32,9 +32,11 @@ app.get('/auth/callback', AuthCtrl.auth)
 app.get('/api/currentUser', (req, res) => {
     res.send(req.session.user.name)
 })
+
 app.get('/api/logout', (req, res) => {
         req.session.destroy()
-        res.sendStatus(200)
+        console.log(req.session.user)
+        res.sendStatus(200).send(req.session.user)
 })
 
 //Food

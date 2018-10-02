@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { getFavorites } from '../../../Redux/reducers/favorites'
 // import axios from 'axios'
 import { getUser, logout } from '../../../Redux/reducers/user'
 import { getName, logoutUser } from '../../../_util/methods'
@@ -53,4 +54,4 @@ let mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps, { getUser, logout, getFavorites})(Favorites)
+export default connect(mapStateToProps, { getUser, logout, getFavorites })(Favorites)
