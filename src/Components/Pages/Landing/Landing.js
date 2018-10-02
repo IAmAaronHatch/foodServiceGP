@@ -98,7 +98,7 @@ geoFindMe=()=> {
           overlayClassName='Overlay'
         >
            {this.state.priceList? 
-          <div className='dropdown' onMouseLeave={this.changePriceList}>
+          <div className='dropdown' id="price2" onMouseLeave={this.changePriceList}>
             <button className='dropbtn button2'>{price !=="1, 2, 3, 4"? "$".repeat( +price) : "Price"}</button>
              <div className='dropdown-content' >
               <span onClick={() => setPrice(randomNum())}>Random</span>
@@ -109,13 +109,14 @@ geoFindMe=()=> {
             </div>
           </div>
             :
-            <div className='dropdown'  onMouseEnter={this.changePriceList}>
+            <div className='dropdown' id="price1" onMouseEnter={this.changePriceList}>
             <button className='dropbtn button1'>{price !=="1, 2, 3, 4"? "$".repeat( +price) : "Price"}</button> 
             </div>
             }
+
             {this.state.cuisineList?
-          <div className='type-drop'>
-            <button className='type-dropbtn button2' onMouseLeave={this.changeCuisineList}>{this.state.userCuisine || "Cuisine"}
+          <div className='type-drop' onMouseLeave={this.changeCuisineList}>
+            <button className='type-dropbtn button2' >{this.state.userCuisine || "Cuisine"}
             </button>
             <div className='type-dropcontent'>
             {cuisine.map((cuisine) => (
@@ -126,8 +127,8 @@ geoFindMe=()=> {
             </div>
           </div>
              :
-          <div className='type-drop'>
-            <button className='type-dropbtn button1' onMouseEnter={this.changeCuisineList}>{this.state.userCuisine || "Cuisine"}
+          <div className='type-drop' onMouseEnter={this.changeCuisineList}>
+            <button className='type-dropbtn button1'>{this.state.userCuisine || "Cuisine"}
             </button>
             </div>
             }
