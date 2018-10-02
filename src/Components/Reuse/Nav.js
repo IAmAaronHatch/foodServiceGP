@@ -7,6 +7,7 @@ function Nav() {
 			<a href="/#/">New Search</a>
 			<a href="/#/favorites">Favorites</a>
 		</div>
+		
 	)
 }
 
