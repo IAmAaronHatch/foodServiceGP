@@ -1,4 +1,7 @@
 const methods = require('./methods')
+const AuthCtrl = require('../../server/Controllers/AuthCtrl')
+const FavsCtrl = require('../../server/Controllers/FavsCtrl')
+const RestCtrl = require('../../server/Controllers/RestCtrl')
 const axios = require('axios')
 
 describe('Tests for Tiler', ()=>{
@@ -15,14 +18,6 @@ describe('Tests for Tiler', ()=>{
 		expect(list).toHaveLength(5)
 	})
 
-	test.only('cuisineNames should Return a list of names', ()=>{
-		return expect(axios.get('/api/cuisineNames')).toHaveLength(20)
-		// expect(names).toHaveLength(20)
-		// expect(names[0]).toBe("American")
-		// expect(names[5]).toBe("Fast Food")
-		// expect(names[10]).toBe("Japanese")
-		// expect(names[15]).toBe("Spanish")
-		// expect(names[20]).toBeUndefined()
-	})
+
 
 })
