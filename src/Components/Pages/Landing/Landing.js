@@ -16,7 +16,9 @@ class Landing extends Component {
     this.state = {
       modalIsOpen: true,
       input: '',
-      userCuisine: ""
+      userCuisine: "",
+      priceList: false,
+      cuisineList: false
     }
   }
 componentDidMount = () => {
@@ -74,6 +76,18 @@ geoFindMe=()=> {
     this.setState({userCuisine:name})
   }
 
+  changePriceList=()=>{
+    this.setState({
+      priceList: !this.state.priceList
+    })
+  }
+
+  changeCuisineList=()=>{
+    this.setState({
+      cuisineList: !this.state.cuisineList
+    })
+  }
+
   render() {
     let { price, setPrice, cuisine, setCuisine, userLat, setCity} = this.props
     return (
@@ -83,10 +97,10 @@ geoFindMe=()=> {
           className='modal'
           overlayClassName='Overlay'
         >
-          <div className='dropdown'>
-            <button className='dropbtn'>{price !=="1, 2, 3, 4"? "$".repeat( +price) : "Price"}</button>
-
-            <div className='dropdown-content' >
+           {this.state.priceList? 
+          <div className='dropdown' onMouseLeave={this.changePriceList}>
+            <button className='dropbtn button2'>{price !=="1, 2, 3, 4"? "$".repeat( +price) : "Price"}</button>
+             <div className='dropdown-content' >
               <span onClick={() => setPrice(randomNum())}>Random</span>
               <span onClick={() => setPrice('1')}>$</span>
               <span onClick={() => setPrice('2')}>$$</span>
@@ -94,8 +108,14 @@ geoFindMe=()=> {
               <span onClick={() => setPrice('4')}>$$$$</span>
             </div>
           </div>
+            :
+            <div className='dropdown'  onMouseEnter={this.changePriceList}>
+            <button className='dropbtn button1'>{price !=="1, 2, 3, 4"? "$".repeat( +price) : "Price"}</button> 
+            </div>
+            }
+            {this.state.cuisineList?
           <div className='type-drop'>
-            <button className='type-dropbtn'>{this.state.userCuisine || "Cuisine"}
+            <button className='type-dropbtn button2' onMouseLeave={this.changeCuisineList}>{this.state.userCuisine || "Cuisine"}
             </button>
             <div className='type-dropcontent'>
             {cuisine.map((cuisine) => (
@@ -103,9 +123,14 @@ geoFindMe=()=> {
               {cuisine.name}
               </span>
              ))}
-
             </div>
           </div>
+             :
+          <div className='type-drop'>
+            <button className='type-dropbtn button1' onMouseEnter={this.changeCuisineList}>{this.state.userCuisine || "Cuisine"}
+            </button>
+            </div>
+            }
 
           <button id="locator" onClick={this.geoFindMe}>Location</button>
              
@@ -118,7 +143,6 @@ geoFindMe=()=> {
 
 
           <button onClick={login}>Login</button>
-          {/* Login successfully logs you in as well as takes you directly to favorites */}
 
           <RandomBtn />
         </Modal>
