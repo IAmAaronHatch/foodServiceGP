@@ -62,6 +62,7 @@ export function setLon(lon) {
 }
 
 export function setCity (input) {
+    console.log(input)
     return {
         type: SET_CITY,
         payload: input

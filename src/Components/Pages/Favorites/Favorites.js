@@ -3,14 +3,17 @@ import { connect } from 'react-redux'
 // import axios from 'axios'
 import { getUser, logout } from '../../../Redux/reducers/user'
 import { getName, logoutUser } from '../../../_util/methods'
+import { getFavorites } from '../../../Redux/reducers/favorites';
+import ChildFav from './childFav'
 
 class Favorites extends Component {
 
     componentDidMount() {
-        let { getUser } = this.props;
+        let { getUser, getFavorites } = this.props;
         getName().then(results => {
             getUser(results.data)
         })
+        getFavorites()
     }
     logout = () => {
         let { logout, history } = this.props;
@@ -18,17 +21,25 @@ class Favorites extends Component {
         logout("")
         history.push('/')
     }
+    
     render() {
-        let { user } = this.props
+        let { user, favorites } = this.props
         return (
             <div>
                 Favorites
                 {
-                    user ? 
-                    <div>
-                        <p>{user}</p>
-                    </div> : <p>No one is logged in</p>
+                    user ?
+                        <div>
+                            <p>{user}</p>
+                        </div> : <p>No one is logged in</p>
                 }
+                <div>
+                    {favorites.map((fav, i) => {
+                        return (
+                            <ChildFav key={fav.id} fav={fav}/>
+                        )
+                    })}
+                </div>
                 <button onClick={this.logout}>Logout</button>
             </div>
         )
@@ -37,8 +48,9 @@ class Favorites extends Component {
 
 let mapStateToProps = state => {
     return {
-        user: state.user.data
+        user: state.user.data,
+        favorites: state.favorites.data
     }
 }
 
-export default connect(mapStateToProps, { getUser, logout })(Favorites)
+export default connect(mapStateToProps, { getUser, logout, getFavorites})(Favorites)

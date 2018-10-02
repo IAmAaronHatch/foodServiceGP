@@ -1,4 +1,7 @@
 UPDATE favorites
-SET ORDER = ${position}
-WHERE rest_id = ${rest_id}
-AND user_id = ${id}
+SET rank = ${rank}
+WHERE rest_id = ${restId}
+AND user_id = ${user_id};
+
+select * from favorites
+where user_id = ${user_id};
