@@ -4,6 +4,7 @@ import { getUser, logout } from '../../../Redux/reducers/user'
 import { getName, logoutUser } from '../../../_util/methods'
 import { getFavorites } from '../../../Redux/reducers/favorites';
 import ChildFav from './childFav'
+import Nav from '../../Reuse/Nav'
 
 class Favorites extends Component {
 
@@ -25,7 +26,7 @@ class Favorites extends Component {
         let { user, favorites } = this.props
         return (
             <div>
-                Favorites
+                <Nav/>
                 {
                     user ?
                         <div>

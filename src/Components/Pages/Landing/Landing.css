@@ -1,8 +1,11 @@
+/* 
+#bac1b8 grey
+#58a4b0 teal
+#0c7c59 green
+#2b303a black
+#d64933 red
+*/
 
-.topmodal {
-  display: flex;
-  flex-direction: row;
-}
 .dropbtn {
 
   color: white;
@@ -11,15 +14,15 @@
   border: none;
   cursor: pointer;
   margin-left: 10px;
-  
+  border-radius: 3px;
 }
 
 .button1{
-  background-color: #4CAF50;
+  background-color: #58a4b0;
 }
 
 .button2{
-  background-color: #c5e6c6;
+  background-color: #addae1;
 }
 
 .dropdown-content {
@@ -55,6 +58,7 @@
   font-size: 16px;
   border: none;
   cursor: pointer;
+  border-radius: 3px;
 }
 
 .type-dropcontent {
@@ -82,5 +86,32 @@
   bottom: 10%;
   position: absolute;
   background-color: rgba(245, 245, 245, 0.75);
-  border-radius: 5px;
+  border-radius: 10px;
+
+}
+
+.top-container {
+  height: 50%;
+  background-image: url('https://images.unsplash.com/photo-1521917441209-e886f0404a7b?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=c9da9e12bc69d92a619d44059a8d335f&auto=format&fit=crop&w=800&q=60') ;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.btm-container {
+display: flex;
+flex-direction: column;
+}
+
+#login {
+  width: 100px;
+}
+.logo {
+  color: #bac1b8;
+  font-size: 60px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif
 }
