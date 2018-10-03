@@ -7,29 +7,6 @@
 	},
 	"item": [
 		{
-			"name": "Yelp By Id",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {},
-				"url": {
-					"raw": "http://localhost:3000/api/yelp/WavvLdfdP6g8aZTtbBQHTw",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"api",
-						"yelp",
-						"WavvLdfdP6g8aZTtbBQHTw"
-					]
-				},
-				"description": "Can pull information for one restaurant by the restaurant's id."
-			},
-			"response": []
-		},
-		{
 			"name": "Logout",
 			"event": [
 				{

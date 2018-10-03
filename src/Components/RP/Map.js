@@ -113,8 +113,17 @@ class ESRIMap extends Component {
 					symbol
 				})
 				mapView.graphics.add(PG)
-				mapView.goTo({ target: PG, scale: 10000 })
+				mapView.goTo({ target: PG, zoom: 11 })
 			}
+
+			if(restaurants.length && !lon){
+				let {latitude, longitude} = restaurants[0].coordinates
+				setTimeout(() => {
+					console.log(1111111, latitude)
+					mapView.goTo({ target: new Point({latitude, longitude}), zoom: 11 })
+				}, 500);
+			}
+
 			if (prevProps.restaurants[0] !== restaurants[0]) {
 				this.clear()
 				restaurants.forEach((rest) => {
