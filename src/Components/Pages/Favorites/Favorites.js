@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { getFavorites } from '../../../Redux/reducers/favorites'
-// import axios from 'axios'
 import { getUser, logout } from '../../../Redux/reducers/user'
 import { getName, logoutUser } from '../../../_util/methods'
 import { getFavorites } from '../../../Redux/reducers/favorites';
