@@ -22,7 +22,8 @@ module.exports = {
         alert('cannot find your location')        
     },
     yelpWithId: (restId) => {
-        axios.get(`/api/yelp/${restId}`).then(response => {
+      return  axios.get(`/api/yelp/${restId}`).then(response => {
+            console.log(response.data)
             return (response.data)
         })
 

@@ -42,7 +42,7 @@ class ListView extends Component {
                                
                                 {
                                     user ? 
-                                        <button onClick={() => { this.props.createFavorite(rest.id, rest.name, rest.phone) }}>Add To Favorites</button>
+                                        <button onClick={() => { this.props.createFavorite(rest.id, rest.name, rest.phone, rest.coordinates.latitude, rest.coordinates.longitude) }}>Add To Favorites</button>
                                         : null
                                 }
                                 </div>

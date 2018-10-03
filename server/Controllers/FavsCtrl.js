@@ -15,9 +15,8 @@ module.exports = {
             let db = req.app.get('db')
             let user_id  = req.session.user.id
             let { restId } = req.params
-            let { name } = req.body
-            let { phone } = req.body
-            let newFav = await db.createFavorites([user_id, restId, name, phone])
+            let { name, phone, lat, lon } = req.body
+            let newFav = await db.createFavorites([user_id, restId, name, phone, lat, lon])
             res.status(200).send(newFav)
         } catch (error) {
             console.log('creating fav',error)

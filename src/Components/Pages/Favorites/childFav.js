@@ -1,6 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { deleteFavorite, changeDesc } from '../../../Redux/reducers/favorites'
+import { yelpWithId } from '../../../_util/methods'
+import { setRestLat, setRestLon } from '../../../Redux/reducers/rest'
+import { Link } from 'react-router-dom'
+
 
 class ChildFav extends Component {
     constructor() {
@@ -32,8 +36,17 @@ class ChildFav extends Component {
         })
     }
 
+    coords = async (fav) => {
+        let { setRestLat, setRestLon } = this.props
+        let { lat, lon } = fav
+        setRestLat(lat)
+        setRestLon(lon)
+        
+    }
+
     render() {
         let { fav, deleteFavorite } = this.props
+        console.log('favs', this.props.favorites)
         return (
             <div>
                 <div key={fav.id}>
@@ -51,7 +64,7 @@ class ChildFav extends Component {
                     }
                     <button onClick={() => this.toggleEdit(fav.description)}>Edit</button>
                     <br />
-                    <button>Navigate</button>
+                    <Link to={`/restaurants/${fav.rest_id}`} onClick={async () => await this.coords(fav)}>Navigate</Link>
                     <button onClick={() => deleteFavorite(fav.rest_id)}>Delete</button>
                 </div>
             </div>
@@ -66,4 +79,4 @@ let mapStateToProps = state => {
 }
 
 
-export default connect(mapStateToProps, {deleteFavorite, changeDesc})(ChildFav)
+export default connect(mapStateToProps, {deleteFavorite, changeDesc, setRestLat, setRestLon})(ChildFav)
