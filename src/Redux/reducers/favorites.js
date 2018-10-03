@@ -43,8 +43,8 @@ export function getFavorites () {
     }
 }
 
-export function createFavorite (restId, name, phone) {
-    let newFav = axios.post(`/api/favorite/${restId}`, { name, phone }).then(results => {
+export function createFavorite (restId, name, phone, lat, lon) {
+    let newFav = axios.post(`/api/favorite/${restId}`, { name, phone, lat, lon }).then(results => {
         return results.data
     })
     return {
