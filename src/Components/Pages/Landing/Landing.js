@@ -7,6 +7,7 @@ import RandomBtn from '../../Reuse/RandomBtn';
 import { setLat, setLon, setCity } from '../../../Redux/reducers/user'
 import { setCuisine, setPrice, setCuisineList } from '../../../Redux/reducers/rest'
 import { login, randomNum, error, yelpWithId, cuisineNames } from '../../../_util/methods'
+import Nav from '../../Reuse/Nav'
 
 
 class Landing extends Component {
@@ -146,6 +147,7 @@ geoFindMe=()=> {
           <button onClick={login}>Login</button>
 
           <RandomBtn />
+          <Nav/>
         </Modal>
         <Map styles={{ height: '100vh' }} />
       </div>
