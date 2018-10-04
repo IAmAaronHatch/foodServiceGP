@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { deleteFavorite, changeDesc } from '../../../Redux/reducers/favorites'
-import { yelpWithId } from '../../../_util/methods'
 import { setRestLat, setRestLon } from '../../../Redux/reducers/rest'
+import object from '../../../_util/methods'
 import { Link } from 'react-router-dom'
-
+import './childFav.css'
+let { deleteFav } = object;
 
 class ChildFav extends Component {
     constructor() {
@@ -12,13 +13,20 @@ class ChildFav extends Component {
 
         this.state = {
             canEdit: false,
-            editValue: ''
+            editValue: '',
+            isOpen: false
         }
     }
     toggleEdit = (desc) => {
         this.setState({
             canEdit: true,
             editValue: desc
+        })
+    }
+
+    toggleOpen = () => {
+        this.setState ({
+            isOpen: !this.state.isOpen
         })
     }
 
@@ -44,28 +52,46 @@ class ChildFav extends Component {
         
     }
 
+    dltFavorite = (restId) => {
+        let { deleteFavorite } = this.props
+        // deleteFav(restId).then(results => {
+        //     console.log(results)
+        //     return deleteFavorite( results.data)
+        // })
+        deleteFavorite(deleteFav(restId))
+    }
+
     render() {
         let { fav, deleteFavorite } = this.props
-        console.log('favs', this.props.favorites)
+        let { isOpen } = this.state
         return (
-            <div>
-                <div key={fav.id}>
-                    <h1>Name: {fav.name}</h1>
-                    <span>Phone: {fav.phone}</span>
-                    <br />
+            <div className='fav-main'>
+                <div key={fav.id}
+                className='fav-container'>
+                    <h1 onClick={this.toggleOpen}>Name: {fav.name}</h1>
                     {
-                        this.state.canEdit ?
-                            <div>
-                                <input value={this.state.editValue} onChange={this.handleUpdate} />
-                                <button onClick={() => this.saveUpdate(fav.rest_id)}>Save</button>
-                            </div>
-                            :
-                            <span>{fav.description}</span>
+                        isOpen ?
+                        <div className='opened-fav'>
+                                <span>Phone: {fav.phone}</span>
+                                <br />
+                                {
+                                    this.state.canEdit ?
+                                        <div>
+                                            <input value={this.state.editValue} onChange={this.handleUpdate} />
+                                            <button onClick={() => this.saveUpdate(fav.rest_id)}>Save</button>
+                                        </div>
+                                        :
+                                        <span>{fav.description}</span>
+                                }
+                                <button onClick={() => this.toggleEdit(fav.description)}>Edit</button>
+                                <br />
+                                <Link to={`/restaurants/${fav.rest_id}`} onClick={async () => await this.coords(fav)}>Navigate</Link>
+                                <button onClick={() => this.dltFavorite(fav.rest_id)}>Delete</button>
+                        </div> :
+                        null
+                        
                     }
-                    <button onClick={() => this.toggleEdit(fav.description)}>Edit</button>
-                    <br />
-                    <Link to={`/restaurants/${fav.rest_id}`} onClick={async () => await this.coords(fav)}>Navigate</Link>
-                    <button onClick={() => deleteFavorite(fav.rest_id)}>Delete</button>
+                    
                 </div>
             </div>
         )

@@ -3,10 +3,9 @@ import Map from '../RP/Map'
 import Nav from '../Reuse/Nav'
 import LessRandom from '../Reuse/lessRandom';
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
-import { createFavorite } from '../../Redux/reducers/favorites'
 import { setRestLat, setRestLon } from '../../Redux/reducers/rest'
-
+import './ListView.css'
+import ChildList from './ChildList';
 
 class ListView extends Component {
 
@@ -21,35 +20,21 @@ class ListView extends Component {
     }
 
     render() {
-        let { fiveList, user } = this.props
+        let { fiveList } = this.props
         return (
-            <div>
+            <div >
                 <Nav />
                 <div>
-                    <Map styles={{ height: '40vh' }} zoom='10' />
+                    <Map styles={{ height: '40vh', width: '100%' }} zoom='10' />
                 </div>
                 <div style={{ height: '60vh', backgroundColor: 'render' }}>
-                    <ul>
+                    <div className='top-list'>
                         {fiveList.map((rest) => (
-                            <li className="restListItem" key={rest.id} >
-                                <h3>Name:{rest.name}</h3>
-                                <h3>Phone Number: {rest.display_phone}</h3>
-                                <h3>Address: {rest.location.address1}</h3>
-                                <h3>Type: {rest.categories[0].alias}</h3>
-                                <h3>Price Range: {rest.price}</h3>
-                                <div>
-
-                               
-                                {
-                                    user ? 
-                                        <button onClick={() => { this.props.createFavorite(rest.id, rest.name, rest.phone, rest.coordinates.latitude, rest.coordinates.longitude) }}>Add To Favorites</button>
-                                        : null
-                                }
-                                </div>
-                                <Link  onClick={() => this.coords(rest.coordinates.latitude, rest.coordinates.longitude)} restaurant={rest} to={`/restaurants/${rest.id}`}>View More</Link>
-                            </li>
+                            <div className="restListItem" key={rest.id} >
+                                <ChildList key={rest.id} rest={rest}/>
+                            </div>
                         ))}
-                    </ul>
+                    </div>
                 </div>
                 <LessRandom />
             </div>
@@ -59,9 +44,9 @@ class ListView extends Component {
 
 let mapStateToProps = (state) => {
     return {
-        fiveList:state.rest.fiveList,
+        fiveList: state.rest.fiveList,
         user: state.user.data
     }
 }
 
-export default connect(mapStateToProps, { createFavorite, setRestLat, setRestLon})(ListView)
+export default connect(mapStateToProps, { setRestLat, setRestLon })(ListView)

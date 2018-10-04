@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { getFiveList } from '../../Redux/reducers/rest'
-import { RandomizePt1 } from '../../_util/methods'
-
+import object from '../../_util/methods.js'
+let { RandomizePt1 } = object
 class LessRandom extends Component {
 
     random = (rest) => {

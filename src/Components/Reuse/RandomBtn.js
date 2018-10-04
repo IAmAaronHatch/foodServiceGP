@@ -3,7 +3,9 @@ import { connect } from 'react-redux'
 import axios from 'axios'
 import { getRestaurants, getFiveList } from '../../Redux/reducers/rest';
 import {withRouter} from 'react-router-dom'
-import { RandomizePt1 } from '../../_util/methods'
+import object from '../../_util/methods'
+let { RandomizePt1} = object
+
 
 class RandomBtn extends Component {
  
@@ -28,6 +30,12 @@ class RandomBtn extends Component {
         }
 
     }
+
+    // if(this.props.userLat && this.props.userLon || this.props.userCity) {
+    //     return randombtn 
+    // } else {
+    //     return toast
+    // }
 
     render() {
         return (

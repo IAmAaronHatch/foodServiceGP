@@ -19,3 +19,34 @@ describe('Tests for Tiler', ()=>{
 
 
 })
+
+describe ('Test by Aaron Hatch', () => {
+
+	test('getCuisine should return an array', () => {
+		expect(RestCtrl.getCuisine).toBeInstanceOf(array)
+	})
+
+	// test('getCuisine should return 20 results', () => {
+	// 	expect(RestCtrl.getCuisine)
+	// })
+
+	// test('getCuisine should return a 500 error if error occurs', () => {
+
+	// })
+
+	// test('deleteFavorite should delete a fav', () => {
+
+	// })
+
+	// test('deleteFavorite should return a new Array', () => {
+
+	// })
+
+	
+})
+
+//Aaron Harris 
+
+// test('deleteFavorite should throw a 500 error if error occurs', () => {
+
+// })
