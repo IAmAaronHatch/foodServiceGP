@@ -5,8 +5,13 @@ const res = require ('./helpers/expressResponse')()
 
 
 
-// describe('Tests for Tiler', ()=>{
-// 	let {RandomizePt1, randomNum, cuisineNames, logoutUser} = methods;
+describe('Tests for Tiler', ()=>{
+	let {RandomizePt1, randomNum} = methods;
+	let {changeDesc, deleteFavorite} = FavsCtrl;
+
+	beforeEach(() => {
+		res.reset()
+	})
 
 	test('RandomNum should return a number between 1 and 4', ()=>{
 		let num = randomNum()
@@ -19,7 +24,76 @@ const res = require ('./helpers/expressResponse')()
 		expect(list).toHaveLength(5)
 	})
 
-// })
+	test("changeDesc error should return an error", async done=>{
+		let db={};
+		let error = "error";
+		let req = {
+			body: { desc:"here's a description"},
+			app: {
+				get: jest.fn(),
+			},
+			params: {restId: "restaurant id"},
+			session: {
+				user: {id:'1234'}
+			}
+		}
+		db.updateDesc= jest.fn(()=>{
+			return new Promise((resolve, reject) => {
+				reject()
+			})
+		})
+		await changeDesc(req, res)
+		done()
+		expect(res.status).toBeCalledWith(500)
+	})
+
+	it('deleteFavorite should send an array', async done => {
+		let db={};
+		let array = [1,2,3];
+		let req = {
+			body: { desc:"here's a description"},
+			app: {
+				get: jest.fn(),
+			},
+			params: {restId: "restaurant id"},
+			session: {
+				user: {id:'1234'}
+			}
+		}
+	
+		db.deleteFavorite = jest.fn(() => {
+			return new Promise((resolve, reject) => {
+				resolve()
+			})
+		})
+		await FavsCtrl.getFavorites(req, res)
+		done()
+		expect(res.status).toBeCalledWith(200)
+	})
+
+	test("deleteFavorite error should return an error", async done=>{
+		let db={};
+		let req = {
+			body: { desc:"here's a description"},
+			app: {
+				get: jest.fn(),
+			},
+			params: {restId: "restaurant id"},
+			session: {
+				user: {id:'1234'}
+			}
+		}
+		db.deleteFavorite= jest.fn(()=>{
+			return new Promise((resolve, reject) => {
+				reject()
+			})
+		})
+		await deleteFavorite(req, res)
+		done()
+		expect(res.status).toBeCalledWith(500)
+	})
+
+})
 
 describe ('Test by Aaron Hatch', () => {
 	let {getCuisine} = RestCtrl
@@ -73,14 +147,3 @@ describe ('Test by Aaron Hatch', () => {
 })
 
 //Aaron Harris 
-
-
-describe('Tests for Aaron Harris', () => {
-
-	test('Get favorites should return a array', async (req, res) => {
-		let { getFavorites } = FavsCtrl
-		let db = req.app.get('db')
-		let favorites = await db.getFavorites(4)
-		console.log(favorites)
-	})
-})
