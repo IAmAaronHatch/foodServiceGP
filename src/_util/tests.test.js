@@ -23,14 +23,10 @@ const res = require ('./helpers/expressResponse')()
 // })
 
 describe ('Test by Aaron Hatch', () => {
-	let {getCuisine} = RestCtrl
 
 	beforeEach(() => {
 		res.reset()
 	})
-	// test('getCuisine should return an array', (req, res) => {
-	// 	expect(Array.isArray(getCuisine())).toBe(true)
-	// })
 
 	it('getFavorites should return a favorites', async done => {
 		let db={};
@@ -54,34 +50,122 @@ describe ('Test by Aaron Hatch', () => {
 		expect(res.send).toBeCalledWith(array)
 	})
 
-	// test('getCuisine should return 20 results', () => {
-	// 	expect(getCuisine.length).toEqual(20)
-	// })
+	it('getFavorites should return an error', async done => {
+		let db = {};
+		let error = "error";
+		let req = {
+			app: {
+				get: jest.fn(),
+			},
+			session: {
+				user: '1234'
+			}
+		}
 
-	// test('deleteFavorite should throw a 500 error if error occurs', () => {
-		// FavsCtrl.deleteFavorite()
-	// })
+		db.getFavorites = jest.fn(() => {
+			return new Promise((resolve, reject) => {
+				reject()
+			})
+		})
+		await FavsCtrl.getFavorites(req, res)
+		done()
+		expect(res.send).toBeCalledWith(error)
+	})
 
-	// test('deleteFavorite should delete a fav', () => {
-		// FavsCtrl.deleteFavorite.length.toEqual(length - 1)
-	// })
+	it('createFavorite should return a new favorite', async done => {
+		let db = {};
+		let array = [1, 2, 3];
+		
+		let req = {
+			app: {
+				get: jest.fn(),
+			},
+			session: {
+				user: '1234'
+			},
+			params: {
+				restId: '12345'
+			},
+			body: {
+				name: '123',
+				phone: '1234',
+				lat: '1234',
+				lon: '1234'
+			}
+		}
 
-	// test('deleteFavorite should return a new Array', () => {
-		// FavsCtrl.deleteFavorite()
-		// expect(Array.isArray(deleteFavorite).toBe(true))
-	// })
-	
+		db.createFavorite = jest.fn(() => {
+			return new Promise((resolve, reject) => {
+				resolve()
+			})
+		})
+		await FavsCtrl.createFavorite(req, res)
+		done()
+		expect(res.send).toBeCalledWith(array)
+	})
+
+	it('createFavorites should return an error', async done => {
+		let db = {};
+		let error = "error";
+		let req = {
+			app: {
+				get: jest.fn(),
+			},
+			session: {
+				user: '1234'
+			}
+		}
+
+		db.createFavorite = jest.fn(() => {
+			return new Promise((resolve, reject) => {
+				reject()
+			})
+		})
+		await FavsCtrl.createFavorite(req, res)
+		done()
+		expect(res.send).toBeCalledWith(error)
+	})
+
+	it('changeDesc should return a new description', async done => {
+		let db = {};
+		let array = [1, 2, 3];
+
+		let req = {
+			app: {
+				get: jest.fn(),
+			},
+			session: {
+				user: '1234'
+			},
+			params: {
+				restId: '12345'
+			},
+			body: {
+				desc: '1234'
+			}
+		}
+
+		db.changeDesc = jest.fn(() => {
+			return new Promise((resolve, reject) => {
+				resolve()
+			})
+		})
+		await FavsCtrl.changeDesc(req, res)
+		done()
+		expect(res.send).toBeCalledWith(array)
+	})
+
 })
 
 //Aaron Harris 
 
 
-describe('Tests for Aaron Harris', () => {
+// describe('Tests for Aaron Harris', () => {
 
-	test('Get favorites should return a array', async (req, res) => {
-		let { getFavorites } = FavsCtrl
-		let db = req.app.get('db')
-		let favorites = await db.getFavorites(4)
-		console.log(favorites)
-	})
-})
+// 	test('Get favorites should return a array', async (req, res) => {
+// 		let { getFavorites } = FavsCtrl
+// 		let db = req.app.get('db')
+// 		let favorites = await db.getFavorites(4)
+// 		console.log(favorites)
+// 	})
+// })
