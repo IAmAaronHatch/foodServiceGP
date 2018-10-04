@@ -75,3 +75,13 @@ describe ('Test by Aaron Hatch', () => {
 
 //Aaron Harris 
 
+
+describe('Tests for Aaron Harris', () => {
+
+	test('Get favorites should return a array', async (req, res) => {
+		let { getFavorites } = FavsCtrl
+		let db = req.app.get('db')
+		let favorites = await db.getFavorites(4)
+		console.log(favorites)
+	})
+})
