@@ -1,4 +1,4 @@
-// const axios = require('axios')
+const axios = require('axios')
 
 module.exports = {
   auth: async (req, res) => {
@@ -12,12 +12,10 @@ module.exports = {
         grant_type: "authorization_code",
         redirect_uri: `${process.env.SERVER_PROTOCOL}://${req.headers.host}/auth/callback`
       }
-
       let auth0domain = `https://${process.env.REACT_APP_AUTH0_DOMAIN}`
-
+      
       let accessTokenResponse = await axios.post(`${auth0domain}/oauth/token`, payload)
       let accessToken = accessTokenResponse.data.access_token
-
       let userInfoResponse = await axios.get(`${auth0domain}/userinfo?access_token=${accessToken}`)
       let userInfo = userInfoResponse.data
 
