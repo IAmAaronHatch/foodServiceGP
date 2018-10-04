@@ -92,8 +92,7 @@
 .top-container {
   height: 50%;
   background-image: url('https://images.unsplash.com/photo-1521917441209-e886f0404a7b?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=c9da9e12bc69d92a619d44059a8d335f&auto=format&fit=crop&w=800&q=60') ;
-  /* https://images.unsplash.com/photo-1521017432531-fbd92d768814?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=e813bc9e93c2b7ede92476a3eddf3606&auto=format&fit=crop&w=800&q=60 
-  */
+  background-size: cover;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -106,6 +105,16 @@
 .btm-container {
 display: flex;
 flex-direction: column;
+align-items: center;
+justify-content: space-evenly;
+height: 50%;
+}
+
+#locator {
+  background-color: white;
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
 }
 
 #login {
