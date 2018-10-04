@@ -1,7 +1,9 @@
 const methods = require('./methods')
+const AuthCtrl = require('../../server/Controllers/AuthCtrl')
 const FavsCtrl = require('../../server/Controllers/FavsCtrl')
 const RestCtrl = require('../../server/Controllers/RestCtrl')
-const res = require ('./helpers/expressResponse')()
+const res = require('./helpers/expressResponse')()
+const yelp = require('yelp-fusion');
 
 
 
@@ -100,145 +102,148 @@ describe ('Test by Aaron Hatch', () => {
 	beforeEach(() => {
 		res.reset()
 	})
-
-	it('getFavorites should return a favorites', async done => {
-		let db={};
-		let array = [1,2,3];
+	it('getCuisine should return a list of cuisines', async done => {
+		let db = {};
+		let array = [1, 2, 3];
 		let req = {
 			app: {
 				get: jest.fn(),
-			},
-			session: {
-				user: '1234'
 			}
 		}
-	
-		db.getFavorites = jest.fn(() => {
+		db.getCuisine = jest.fn(() => {
 			return new Promise((resolve, reject) => {
 				resolve()
 			})
 		})
-		await FavsCtrl.getFavorites(req, res)
+		await RestCtrl.getCuisine(req, res)
 		done()
 		expect(res.send).toBeCalledWith(array)
 	})
-
-	it('getFavorites should return an error', async done => {
+	it('getCuisine should return an error', async done => {
 		let db = {};
 		let error = "error";
 		let req = {
 			app: {
 				get: jest.fn(),
-			},
-			session: {
-				user: '1234'
 			}
 		}
 
-		db.getFavorites = jest.fn(() => {
+		db.getCuisine = jest.fn(() => {
 			return new Promise((resolve, reject) => {
 				reject()
 			})
 		})
-		await FavsCtrl.getFavorites(req, res)
+		await RestCtrl.getCuisine(req, res)
 		done()
 		expect(res.send).toBeCalledWith(error)
 	})
 
-	it('createFavorite should return a new favorite', async done => {
-		let db = {};
-		let array = [1, 2, 3];
-		
+	it('getUser should return a user', async done => {
 		let req = {
-			app: {
-				get: jest.fn(),
-			},
 			session: {
-				user: '1234'
-			},
-			params: {
-				restId: '12345'
-			},
-			body: {
-				name: '123',
-				phone: '1234',
-				lat: '1234',
-				lon: '1234'
+				user: { name: 'Aaron' }
 			}
 		}
-
-		db.createFavorite = jest.fn(() => {
-			return new Promise((resolve, reject) => {
-				resolve()
-			})
-		})
-		await FavsCtrl.createFavorite(req, res)
+		AuthCtrl.getUser(req, res)
 		done()
-		expect(res.send).toBeCalledWith(array)
+		expect(res.send).toBeCalledWith(req.session.user.name)
 	})
 
-	it('createFavorites should return an error', async done => {
-		let db = {};
-		let error = "error";
+	it('getUser should return a error', async done => {
 		let req = {
-			app: {
-				get: jest.fn(),
-			},
 			session: {
-				user: '1234'
-			}
 		}
-
-		db.createFavorite = jest.fn(() => {
-			return new Promise((resolve, reject) => {
-				reject()
-			})
-		})
-		await FavsCtrl.createFavorite(req, res)
+	}
+		AuthCtrl.getUser(req, res)
 		done()
-		expect(res.send).toBeCalledWith(error)
+		expect(res.status).toBeCalledWith(500)
 	})
-
-	it('changeDesc should return a new description', async done => {
-		let db = {};
-		let array = [1, 2, 3];
-
+	it('logout should logout user', async done => {
 		let req = {
-			app: {
-				get: jest.fn(),
-			},
 			session: {
-				user: '1234'
-			},
-			params: {
-				restId: '12345'
-			},
-			body: {
-				desc: '1234'
+				destroy: jest.fn()
 			}
 		}
-
-		db.changeDesc = jest.fn(() => {
-			return new Promise((resolve, reject) => {
-				resolve()
-			})
-		})
-		await FavsCtrl.changeDesc(req, res)
+		AuthCtrl.logout(req, res)
 		done()
-		expect(res.send).toBeCalledWith(array)
+		expect(res.send).toBeCalledWith(200)
 	})
 
 })
 
-//Aaron Harris 
 
 
-// describe('Tests for Aaron Harris', () => {
 
-// 	test('Get favorites should return a array', async (req, res) => {
-// 		let { getFavorites } = FavsCtrl
-// 		let db = req.app.get('db')
-// 		let favorites = await db.getFavorites(4)
-// 		console.log(favorites)
-// 	})
-// })
+describe('Tests for Aaron Harris', () => {
+
+	beforeEach(() => {
+		res.reset()
+	})
+	it('getCuisine should return a list of cuisines', async done => {
+		let db = {};
+		let array = [1, 2, 3];
+		let req = {
+			app: {
+				get: jest.fn(),
+			}
+		}
+		db.getCuisine = jest.fn(() => {
+			return new Promise((resolve, reject) => {
+				resolve()
+			})
+		})
+		await RestCtrl.getCuisine(req, res)
+		done()
+		expect(res.send).toBeCalledWith(array)
+	})
+	it('getCuisine should return an error', async done => {
+		let db = {};
+		let error = "error";
+		let req = {
+			app: {
+				get: jest.fn(),
+			}
+		}
+
+		db.getCuisine = jest.fn(() => {
+			return new Promise((resolve, reject) => {
+				reject()
+			})
+		})
+		await RestCtrl.getCuisine(req, res)
+		done()
+		expect(res.send).toBeCalledWith(error)
+	})
+
+	it('getUser should return a user', async done => {
+		let req = {
+			session: {
+				user: { name: 'Aaron' }
+			}
+		}
+		AuthCtrl.getUser(req, res)
+		done()
+		expect(res.send).toBeCalledWith(req.session.user.name)
+	})
+
+	it('getUser should return a error', async done => {
+		let req = {
+			session: {
+		}
+	}
+		AuthCtrl.getUser(req, res)
+		done()
+		expect(res.status).toBeCalledWith(500)
+	})
+	it('logout should logout user', async done => {
+		let req = {
+			session: {
+				destroy: jest.fn()
+			}
+		}
+		AuthCtrl.logout(req, res)
+		done()
+		expect(res.send).toBeCalledWith(200)
+	})
+})
+
