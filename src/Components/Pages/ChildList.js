@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
+import { createFavorite } from '../../Redux/reducers/favorites'
+
 
 class ChildList extends Component {
     constructor(props) {
@@ -49,4 +51,4 @@ let mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps)(ChildList)
+export default connect(mapStateToProps, {createFavorite})(ChildList)

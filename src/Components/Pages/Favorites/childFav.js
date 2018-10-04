@@ -2,9 +2,10 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { deleteFavorite, changeDesc } from '../../../Redux/reducers/favorites'
 import { setRestLat, setRestLon } from '../../../Redux/reducers/rest'
+import object from '../../../_util/methods'
 import { Link } from 'react-router-dom'
 import './childFav.css'
-
+let { deleteFav } = object;
 
 class ChildFav extends Component {
     constructor() {
@@ -51,6 +52,15 @@ class ChildFav extends Component {
         
     }
 
+    dltFavorite = (restId) => {
+        let { deleteFavorite } = this.props
+        // deleteFav(restId).then(results => {
+        //     console.log(results)
+        //     return deleteFavorite( results.data)
+        // })
+        deleteFavorite(deleteFav(restId))
+    }
+
     render() {
         let { fav, deleteFavorite } = this.props
         let { isOpen } = this.state
@@ -76,7 +86,7 @@ class ChildFav extends Component {
                                 <button onClick={() => this.toggleEdit(fav.description)}>Edit</button>
                                 <br />
                                 <Link to={`/restaurants/${fav.rest_id}`} onClick={async () => await this.coords(fav)}>Navigate</Link>
-                                <button onClick={() => deleteFavorite(fav.rest_id)}>Delete</button>
+                                <button onClick={() => this.dltFavorite(fav.rest_id)}>Delete</button>
                         </div> :
                         null
                         

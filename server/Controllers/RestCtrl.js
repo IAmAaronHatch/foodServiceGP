@@ -39,6 +39,7 @@ module.exports = {
             const db = req.app.get('db')
 
             let cuisine = await db.getCuisine()
+            console.log('cuisine', cuisine)
             res.status(200).send(cuisine)
         }
         catch (error) {

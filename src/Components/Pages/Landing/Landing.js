@@ -6,8 +6,12 @@ import { connect } from 'react-redux'
 import RandomBtn from '../../Reuse/RandomBtn';
 import { setLat, setLon, setCity } from '../../../Redux/reducers/user'
 import { setCuisine, setPrice, setCuisineList } from '../../../Redux/reducers/rest'
-import { login, randomNum, error, yelpWithId, cuisineNames } from '../../../_util/methods'
 
+import object from '../../../_util/methods.js'
+
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+let { login, randomNum, error, yelpWithId, cuisineNames } = object
 
 class Landing extends Component {
   constructor() {
@@ -88,6 +92,12 @@ class Landing extends Component {
     })
   }
 
+  notify = () => {
+    toast.error('Please Select A Location Before Randomizing', { position: toast.POSITION.TOP_CENTER})
+
+    // <ToastContainer autoClose={10000} />
+  }
+
   render() {
     let { price, setPrice, cuisine, setCuisine, userLat, setCity, user } = this.props
     return (
@@ -164,8 +174,6 @@ class Landing extends Component {
             </div>
 
             <br />
-
-
 
             <RandomBtn />
           </div>

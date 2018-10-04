@@ -3,7 +3,6 @@ import Map from '../RP/Map'
 import Nav from '../Reuse/Nav'
 import LessRandom from '../Reuse/lessRandom';
 import { connect } from 'react-redux'
-import { createFavorite } from '../../Redux/reducers/favorites'
 import { setRestLat, setRestLon } from '../../Redux/reducers/rest'
 import './ListView.css'
 import ChildList from './ChildList';
@@ -50,4 +49,4 @@ let mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, { createFavorite, setRestLat, setRestLon })(ListView)
+export default connect(mapStateToProps, { setRestLat, setRestLon })(ListView)
