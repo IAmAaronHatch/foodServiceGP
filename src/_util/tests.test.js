@@ -56,4 +56,25 @@ describe('Tests for Aaron Harris', () => {
 		let favorites = await db.getFavorites(4)
 		console.log(favorites)
 	})
+	
+	test('', () => {
+		
+	})
+
+	test('', () => {
+		
+	})
+
+	test('', () => {
+		
+	})
+
+	test('', () => {
+		
+	})
+
+	test('', () => {
+		
+	})
+	
 })

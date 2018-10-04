@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import {loadModules, loadCss} from 'esri-loader'
+import { loadModules, loadCss } from 'esri-loader'
 import { setLat, setLon } from '../../../Redux/reducers/user'
 import { connect } from 'react-redux'
+import Nav from '../../Reuse/Nav';
 
 
 loadCss('https://js.arcgis.com/4.8/esri/css/main.css');
@@ -9,36 +10,36 @@ loadCss('https://js.arcgis.com/4.8/esri/css/main.css');
 class FullView extends Component {
 
     componentDidMount() {
-        if(!this.props.restLat){
+        if (!this.props.restLat) {
             this.props.history.push('/')
         }
 
-        let geoFindMe= async ()=> {
-            let { setLat, setLon} = this.props
+        let geoFindMe = async () => {
+            let { setLat, setLon } = this.props
             var output = document.getElementById("out");
-          
-            if (!navigator.geolocation){
-              output.innerHTML = "<p>Geolocation is not supported by your browser</p>";
-              return;
+
+            if (!navigator.geolocation) {
+                output.innerHTML = "<p>Geolocation is not supported by your browser</p>";
+                return;
             }
-          
+
             function success(position) {
-              var lat  = position.coords.latitude;
-              var lon = position.coords.longitude;
-              setLat(lat)
-              setLon(lon)
+                var lat = position.coords.latitude;
+                var lon = position.coords.longitude;
+                setLat(lat)
+                setLon(lon)
             }
-          
+
             function error() {
-              alert('cannot find your location')
+                alert('cannot find your location')
             }
-           await navigator.geolocation.getCurrentPosition(success, error);
-          }
-          geoFindMe()
+            await navigator.geolocation.getCurrentPosition(success, error);
+        }
+        geoFindMe()
 
         loadModules([
-			'esri/Map',
-			'esri/views/MapView',
+            'esri/Map',
+            'esri/views/MapView',
             "esri/Graphic",
             'esri/geometry/Point',
             "esri/layers/GraphicsLayer",
@@ -46,7 +47,7 @@ class FullView extends Component {
             "esri/tasks/support/RouteParameters",
             "esri/tasks/support/FeatureSet",
             "esri/core/urlUtils",
-		]).then(([Map, MapView, Graphic, Point, GraphicsLayer, RouteTask, RouteParameters, FeatureSet, urlUtils]) => {
+        ]).then(([Map, MapView, Graphic, Point, GraphicsLayer, RouteTask, RouteParameters, FeatureSet, urlUtils]) => {
             let { lat, lon, restLat, restLon } = this.props;
 
             urlUtils.addProxyRule({
@@ -66,7 +67,7 @@ class FullView extends Component {
                     wkid: 3857
                 }
             });
-        
+
             // Define the symbology used to display the stops
             const stopSymbol = {
                 type: "simple-marker", // autocasts as new SimpleMarkerSymbol()
@@ -76,8 +77,8 @@ class FullView extends Component {
                     width: 4
                 }
             };
-        
-              // Define the symbology used to display the route
+
+            // Define the symbology used to display the route
             const routeSymbol = {
                 type: "simple-line", // autocasts as SimpleLineSymbol()
                 color: [0, 0, 255, 0.5],
@@ -88,7 +89,7 @@ class FullView extends Component {
                 basemap: 'streets-navigation-vector',
                 layers: [routeLayer],
             });
-                
+
             //initial scale and map size
             const mapView = new MapView({
                 container: 'mapDiv',
@@ -101,7 +102,7 @@ class FullView extends Component {
                 latitude: lat,
                 longitude: lon
             })
-            
+
             let rest = new Point({
                 latitude: restLat,
                 longitude: restLon
@@ -115,7 +116,7 @@ class FullView extends Component {
                 });
 
                 routeLayer.add(stop);
-            
+
                 // Execute the route task if 2 or more stops are input
                 routeParams.stops.features.push(stop);
 
@@ -138,7 +139,7 @@ class FullView extends Component {
                 map,
                 mapView,
             });
-    
+
 
         });
     }
@@ -146,14 +147,18 @@ class FullView extends Component {
 
     render() {
         return (
-            <div id="mapDiv" style={{ minHeight: '100vh'}}></div>
+            <div>
+                    <Nav />
+                <div id="mapDiv" style={{ minHeight: '100vh' }}>
+                </div>
+            </div>
         )
     }
 }
 
-let mapStateToProps=state=>{
+let mapStateToProps = state => {
     return {
-		lat: state.user.userLat,
+        lat: state.user.userLat,
         lon: state.user.userLon,
         restLat: state.rest.restLat,
         restLon: state.rest.restLon
