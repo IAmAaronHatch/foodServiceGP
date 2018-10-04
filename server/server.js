@@ -26,6 +26,15 @@ app.use(session({
 
 app.use(bodyParser.json())
 
+app.use((req, res, next) => {
+    if(req.query.test === process.env.REQ_QUERY){
+        req.session.user = {
+            id: 4
+        }
+    }
+    next()
+})
+
 //Auth
 app.get('/auth/callback', AuthCtrl.auth)
 
@@ -33,10 +42,7 @@ app.get('/api/currentUser', (req, res) => {
     res.send(req.session.user.name)
 })
 
-app.get('/api/logout', (req, res) => {
-        req.session.destroy()
-        res.sendStatus(200).send(req.session.user)
-})
+app.get('/api/logout', AuthCtrl.logout)
 
 //Food
 app.get('/api/cuisineNames', RestCtrl.getCuisine)

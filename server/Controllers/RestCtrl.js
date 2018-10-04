@@ -23,15 +23,16 @@ module.exports = {
             console.log(e);
         })
     },
-    getById: (req, res) => {
-        const client = yelp.client
-            (process.env.REACT_APP_API_YELP_KEY);
+    getById: async (req, res) => {
+        try{
+        const client = yelp.client(process.env.REACT_APP_API_YELP_KEY);
         let { id } = req.params
-        client.business(id).then(response => {
-            res.send(response.jsonBody)
-        }).catch(e => {
+        let response = await client.business(id)
+        res.status(200).send(response.jsonBody)
+        }catch (e) {
             console.log(e)
-        })
+            res.status(500).send('We let you down')
+        }
 
     },
     getCuisine: async (req, res) => {
