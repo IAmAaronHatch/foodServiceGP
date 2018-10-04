@@ -9,8 +9,7 @@ import { setCuisine, setPrice, setCuisineList } from '../../../Redux/reducers/re
 
 import object from '../../../_util/methods.js'
 
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+
 let { login, randomNum, error, yelpWithId, cuisineNames } = object
 
 class Landing extends Component {
@@ -92,11 +91,7 @@ class Landing extends Component {
     })
   }
 
-  notify = () => {
-    toast.error('Please Select A Location Before Randomizing', { position: toast.POSITION.TOP_CENTER })
-
-    // <ToastContainer autoClose={10000} />
-  }
+  
 
   render() {
     let { price, setPrice, cuisine, setCuisine, userLat, setCity, user } = this.props
@@ -135,6 +130,9 @@ class Landing extends Component {
             </div>
 
             <div>
+
+              {/* PRICE LIST */}
+
               {this.state.priceList ?
                 <div className='dropdown' id="price2" onMouseLeave={this.changePriceList}>
                   <button className='dropbtn button2'>{price !== "1, 2, 3, 4" ? "$".repeat(+price) : "Price"}</button>
@@ -152,8 +150,10 @@ class Landing extends Component {
                 </div>
               }
 
+              {/* CUISINE LIST */}
+
               {this.state.cuisineList ?
-                <div className='type-drop' onMouseLeave={this.changeCuisineList}>
+                <div className='type-drop' id='cuisine2' onMouseLeave={this.changeCuisineList}>
                   <button className='type-dropbtn button2' >{this.state.userCuisine || "Cuisine"}
                   </button>
                   <div className='type-dropcontent'>
@@ -165,7 +165,7 @@ class Landing extends Component {
                   </div>
                 </div>
                 :
-                <div className='type-drop' onMouseEnter={this.changeCuisineList}>
+                <div className='type-drop' id='cuisine1' onMouseEnter={this.changeCuisineList}>
                   <button className='type-dropbtn button1'>{this.state.userCuisine || "Cuisine"}
                   </button>
                 </div>
