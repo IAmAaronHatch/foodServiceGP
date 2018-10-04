@@ -2,7 +2,7 @@ module.exports = {
     getFavorites: async (req, res) => {
         try {
             let db = req.app.get('db')
-            let { id } = req.session.user
+            let { id } = req.session.user 
             let favorites = await db.getFavorites({id})
             res.status(200).send(favorites)
         } catch (error) {

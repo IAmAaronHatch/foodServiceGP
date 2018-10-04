@@ -2,13 +2,16 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import axios from 'axios'
 import { getRestaurants, getFiveList } from '../../Redux/reducers/rest';
-import {withRouter} from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import object from '../../_util/methods'
-let { RandomizePt1} = object
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+let { RandomizePt1 } = object
 
 class RandomBtn extends Component {
- 
+
     newRestaurants = () => {
         let { userLat, userLon, cat, price, getRestaurants, userCity } = this.props
 
@@ -21,26 +24,39 @@ class RandomBtn extends Component {
         let { getFiveList, history } = this.props
         let fiveList = RandomizePt1(rest)
         getFiveList(fiveList)
-        history.push('/restaurants') 
+        history.push('/restaurants')
     }
 
     componentDidUpdate(prevProps) {
-        if (prevProps.rest.length !== this.props.rest.length){
+        if (prevProps.rest.length !== this.props.rest.length) {
             this.randomize(this.props.rest)
         }
 
     }
 
-    // if(this.props.userLat && this.props.userLon || this.props.userCity) {
-    //     return randombtn 
-    // } else {
-    //     return toast
-    // }
+    notify = () => {
+        toast.error('Please Select A Location Before Randomizing', { position: toast.POSITION.TOP_CENTER })
+
+    }
+
+    handleNewRestaurants = () => {
+        let { userLat, userLon, userCity } = this.props
+        if (userLat && userLon || userCity) {
+            this.newRestaurants()
+        } else {
+            this.notify()
+        }
+    }
 
     render() {
         return (
             <div>
-                <button onClick={this.newRestaurants}>Randomize!</button>
+                <button onClick={this.handleNewRestaurants}>Randomize!</button>
+                <ToastContainer
+                    autoClose={3000}
+                    hideProgressBar={true}
+                    closeOnClick
+                />
             </div>
         )
     }
@@ -58,4 +74,4 @@ let mapStateToProps = state => {
     }
 }
 
-export default withRouter(connect(mapStateToProps, { getRestaurants, getFiveList } )(RandomBtn))
+export default withRouter(connect(mapStateToProps, { getRestaurants, getFiveList })(RandomBtn))

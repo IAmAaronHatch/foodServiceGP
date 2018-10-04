@@ -26,6 +26,15 @@ app.use(session({
 
 app.use(bodyParser.json())
 
+app.use((req, res, next) => {
+    if(req.query.test === process.env.REQ_QUERY){
+        req.session.user = {
+            id: 4
+        }
+    }
+    next()
+})
+
 //Auth
 app.get('/auth/callback', AuthCtrl.auth)
 
