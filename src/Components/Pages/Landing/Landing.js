@@ -93,7 +93,7 @@ class Landing extends Component {
   }
 
   notify = () => {
-    toast.error('Please Select A Location Before Randomizing', { position: toast.POSITION.TOP_CENTER})
+    toast.error('Please Select A Location Before Randomizing', { position: toast.POSITION.TOP_CENTER })
 
     // <ToastContainer autoClose={10000} />
   }
@@ -112,26 +112,27 @@ class Landing extends Component {
               <h1>Silver Platter</h1>
             </div>
             <div>
-              <button id="locator" onClick={this.geoFindMe}>Location</button>
-
+              <img src={'https://static.thenounproject.com/png/677420-200.png'} id="locator" onClick={this.geoFindMe} />
               <input hidden id="latInput" value={userLat} onChange={() => { console.log('none') }} />
-
-              <span>- or -</span>
               <input id="cityInput" placeholder='City / Zip Code' onChange={this.handleInput} />
               <button id="cityBtn" onClick={() => setCity(this.state.input)}>Search</button>
             </div>
           </div>
 
 
+          {/*  ------------------------------------------------------------- */}
+
           <div className='btm-container'>
-            {
-              user ?
-                <div>
-                  <p>Welcome {user}</p>
-                  <button>Logout</button>
-                </div> :
-                <button onClick={login} id='login'>Login</button>
-            }
+            <div>
+              {
+                user ?
+                  <div>
+                    <p>Welcome {user}</p>
+                    <button>Logout</button>
+                  </div> :
+                  <button onClick={login} id='login'>Login</button>
+              }
+            </div>
 
             <div>
               {this.state.priceList ?

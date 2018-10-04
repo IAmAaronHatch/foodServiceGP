@@ -1,4 +1,4 @@
-import {getFavorites} from '../Redux/reducers/favorites';
+// const {getFavorites} = require('../Redux/reducers/favorites');
 const axios = require('axios')
 let someObj = {
     //Tiler
@@ -59,4 +59,4 @@ let someObj = {
     }
 }
 
-export default someObj;
+module.exports = someObj;
