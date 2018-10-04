@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { getUser, logout } from '../../../Redux/reducers/user'
-import { getName, logoutUser } from '../../../_util/methods'
+import object from '../../../_util/methods'
 import { getFavorites } from '../../../Redux/reducers/favorites';
 import ChildFav from './childFav'
+import Nav from '../../Reuse/Nav'
 
+let { getName, logoutUser, getFaves } = object
 class Favorites extends Component {
 
     componentDidMount() {
@@ -12,8 +14,11 @@ class Favorites extends Component {
         getName().then(results => {
             getUser(results.data)
         })
-        getFavorites()
+        
+        getFavorites(getFaves())
+
     }
+
     logout = () => {
         let { logout, history } = this.props;
         logoutUser()
@@ -25,7 +30,7 @@ class Favorites extends Component {
         let { user, favorites } = this.props
         return (
             <div>
-                Favorites
+                <Nav/>
                 {
                     user ?
                         <div>

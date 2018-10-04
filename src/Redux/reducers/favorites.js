@@ -28,23 +28,17 @@ export default function (state = initialState, action) {
     }
 }
 
-//getFavorites()
-//createFavorite()
-//updateOrder()
-//deleteFavorite()
 
-export function getFavorites () {
-    let favoritesList = axios.get('/api/favorites').then(results => {
-        return results.data
-    })
+
+export function getFavorites (val) {
     return {
         type: GET_FAVORITES,
-        payload: favoritesList
+        payload: val
     }
 }
 
-export function createFavorite (restId, name, phone) {
-    let newFav = axios.post(`/api/favorite/${restId}`, { name, phone }).then(results => {
+export function createFavorite (restId, name, phone, lat, lon) {
+    let newFav = axios.post(`/api/favorite/${restId}`, { name, phone, lat, lon }).then(results => {
         return results.data
     })
     return {
@@ -63,12 +57,10 @@ export function changeDesc (restId, desc) {
     }
 }
 
-export function deleteFavorite (restId) {
-    let deleted = axios.delete(`/api/favorite/delete/${restId}`).then(results => {
-        return results.data
-    })
+export function deleteFavorite (val) {
+    console.log(val)
     return {
         type: DELETE_FAVORITE,
-        payload: deleted
+        payload: val
     }
 }
