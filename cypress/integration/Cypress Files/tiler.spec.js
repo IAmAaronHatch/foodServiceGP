@@ -1,14 +1,9 @@
 describe("Landing page", ()=>{
 	beforeEach(()=>{
+		cy.viewport(1000,800
+		)
 		cy.visit('/')
-	})
 
-	it("Finds location", ()=>{
-		cy.get("#locator")
-			.click()
-		cy.get("#latInput")
-			.invoke("show")
-			.should("not.have.value", "")
 	})
 
 	it("Checks input", ()=>{
