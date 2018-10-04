@@ -3,8 +3,8 @@ const FavsCtrl = require('../../server/Controllers/FavsCtrl')
 const RestCtrl = require('../../server/Controllers/RestCtrl')
 
 
-describe('Tests for Tiler', ()=>{
-	let {RandomizePt1, randomNum, cuisineNames, logoutUser} = methods;
+describe('Tests for Tiler', () => {
+	let { RandomizePt1, randomNum, cuisineNames, logoutUser } = methods;
 
 	// test('RandomNum should return a number between 1 and 4', ()=>{
 	// 	let num = randomNum()
@@ -47,6 +47,13 @@ describe ('Test by Aaron Hatch', () => {
 
 //Aaron Harris 
 
-// test('deleteFavorite should throw a 500 error if error occurs', () => {
 
-// })
+describe('Tests for Aaron Harris', () => {
+
+	test('Get favorites should return a array', async (req, res) => {
+		let { getFavorites } = FavsCtrl
+		let db = req.app.get('db')
+		let favorites = await db.getFavorites(4)
+		console.log(favorites)
+	})
+})
