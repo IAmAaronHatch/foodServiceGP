@@ -6,8 +6,12 @@ import { connect } from 'react-redux'
 import RandomBtn from '../../Reuse/RandomBtn';
 import { setLat, setLon, setCity } from '../../../Redux/reducers/user'
 import { setCuisine, setPrice, setCuisineList } from '../../../Redux/reducers/rest'
-import { login, randomNum, error, yelpWithId, cuisineNames } from '../../../_util/methods'
 
+import object from '../../../_util/methods.js'
+
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+let { login, randomNum, error, yelpWithId, cuisineNames } = object
 
 class Landing extends Component {
   constructor() {
@@ -21,12 +25,12 @@ class Landing extends Component {
       cuisineList: false
     }
   }
-componentDidMount = () => {
-  cuisineNames().then(resp=>{
+  componentDidMount = () => {
+    cuisineNames().then(resp => {
 
-    this.props.setCuisineList(resp.data)
-  })
-}
+      this.props.setCuisineList(resp.data)
+    })
+  }
 
   openModal = () => {
     this.setState({ modalIsOpen: true })
@@ -40,27 +44,27 @@ componentDidMount = () => {
   }
 
 
-geoFindMe=()=> {
+  geoFindMe = () => {
 
-  let { setLat, setLon} = this.props
-  var output = document.getElementById("out");
+    let { setLat, setLon } = this.props
+    var output = document.getElementById("out");
 
-  if (!navigator.geolocation){
-    output.innerHTML = "<p>Geolocation is not supported by your browser</p>";
-    return;
+    if (!navigator.geolocation) {
+      output.innerHTML = "<p>Geolocation is not supported by your browser</p>";
+      return;
+    }
+
+    function success(position) {
+      var lat = position.coords.latitude;
+      var lon = position.coords.longitude;
+      setLat(lat)
+      setLon(lon)
+    }
+
+    navigator.geolocation.getCurrentPosition(success, error);
   }
 
-  function success(position) {
-    var lat  = position.coords.latitude;
-    var lon = position.coords.longitude;
-    setLat(lat)
-    setLon(lon)
-  }
 
-  navigator.geolocation.getCurrentPosition(success, error);
-}
-
-  
 
   handleInput = (e) => {
     this.setState({
@@ -72,80 +76,109 @@ geoFindMe=()=> {
     yelpWithId(restId)
   }
 
-  cuisineState=(name)=>{
-    this.setState({userCuisine:name})
+  cuisineState = (name) => {
+    this.setState({ userCuisine: name })
   }
 
-  changePriceList=()=>{
+  changePriceList = () => {
     this.setState({
       priceList: !this.state.priceList
     })
   }
 
-  changeCuisineList=()=>{
+  changeCuisineList = () => {
     this.setState({
       cuisineList: !this.state.cuisineList
     })
   }
 
+  notify = () => {
+    toast.error('Please Select A Location Before Randomizing', { position: toast.POSITION.TOP_CENTER })
+
+    // <ToastContainer autoClose={10000} />
+  }
+
   render() {
-    let { price, setPrice, cuisine, setCuisine, userLat, setCity} = this.props
+    let { price, setPrice, cuisine, setCuisine, userLat, setCity, user } = this.props
     return (
       <div>
         <Modal
           isOpen={this.state.modalIsOpen}
           className='modal'
-          overlayClassName='Overlay'
-        >
-           {this.state.priceList? 
-          <div className='dropdown' id="price2" onMouseLeave={this.changePriceList}>
-            <button className='dropbtn button2'>{price !=="1, 2, 3, 4"? "$".repeat( +price) : "Price"}</button>
-             <div className='dropdown-content' >
-              <span onClick={() => setPrice(randomNum())}>Random</span>
-              <span onClick={() => setPrice('1')}>$</span>
-              <span onClick={() => setPrice('2')}>$$</span>
-              <span id='priceList' onClick={() => setPrice('3')}>$$$</span>
-              <span onClick={() => setPrice('4')}>$$$$</span>
+          overlayClassName='Overlay'>
+
+          <div className='top-container'>
+            <div className='logo'>
+              <h1>Silver Platter</h1>
+            </div>
+            <div>
+              <img src={'https://static.thenounproject.com/png/677420-200.png'} id="locator" onClick={this.geoFindMe} />
+              <input hidden id="latInput" value={userLat} onChange={() => { console.log('none') }} />
+              <input id="cityInput" placeholder='City / Zip Code' onChange={this.handleInput} />
+              <button id="cityBtn" onClick={() => setCity(this.state.input)}>Search</button>
             </div>
           </div>
-            :
-            <div className='dropdown' id="price1" onMouseEnter={this.changePriceList}>
-            <button className='dropbtn button1'>{price !=="1, 2, 3, 4"? "$".repeat( +price) : "Price"}</button> 
-            </div>
-            }
 
-            {this.state.cuisineList?
-          <div className='type-drop' onMouseLeave={this.changeCuisineList}>
-            <button className='type-dropbtn button2' >{this.state.userCuisine || "Cuisine"}
-            </button>
-            <div className='type-dropcontent'>
-            {cuisine.map((cuisine) => (
-              <span key={cuisine.name} onClick={() =>{ setCuisine(cuisine.cuisine_id); this.cuisineState(cuisine.name)}}>
-              {cuisine.name}
-              </span>
-             ))}
+
+          {/*  ------------------------------------------------------------- */}
+
+          <div className='btm-container'>
+            <div>
+              {
+                user ?
+                  <div>
+                    <p>Welcome {user}</p>
+                    <button>Logout</button>
+                  </div> :
+                  <button onClick={login} id='login'>Login</button>
+              }
             </div>
+
+            <div>
+              {this.state.priceList ?
+                <div className='dropdown' id="price2" onMouseLeave={this.changePriceList}>
+                  <button className='dropbtn button2'>{price !== "1, 2, 3, 4" ? "$".repeat(+price) : "Price"}</button>
+                  <div className='dropdown-content' >
+                    <span onClick={() => setPrice(randomNum())}>Random</span>
+                    <span onClick={() => setPrice('1')}>$</span>
+                    <span onClick={() => setPrice('2')}>$$</span>
+                    <span id='priceList' onClick={() => setPrice('3')}>$$$</span>
+                    <span onClick={() => setPrice('4')}>$$$$</span>
+                  </div>
+                </div>
+                :
+                <div className='dropdown' id="price1" onMouseEnter={this.changePriceList}>
+                  <button className='dropbtn button1'>{price !== "1, 2, 3, 4" ? "$".repeat(+price) : "Price"}</button>
+                </div>
+              }
+
+              {this.state.cuisineList ?
+                <div className='type-drop' onMouseLeave={this.changeCuisineList}>
+                  <button className='type-dropbtn button2' >{this.state.userCuisine || "Cuisine"}
+                  </button>
+                  <div className='type-dropcontent'>
+                    {cuisine.map((cuisine) => (
+                      <span key={cuisine.name} onClick={() => { setCuisine(cuisine.cuisine_id); this.cuisineState(cuisine.name) }}>
+                        {cuisine.name}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+                :
+                <div className='type-drop' onMouseEnter={this.changeCuisineList}>
+                  <button className='type-dropbtn button1'>{this.state.userCuisine || "Cuisine"}
+                  </button>
+                </div>
+              }
+
+
+            </div>
+
+            <br />
+
+            <RandomBtn />
           </div>
-             :
-          <div className='type-drop' onMouseEnter={this.changeCuisineList}>
-            <button className='type-dropbtn button1'>{this.state.userCuisine || "Cuisine"}
-            </button>
-            </div>
-            }
 
-          <button id="locator" onClick={this.geoFindMe}>Location</button>
-             
-             <input hidden id="latInput" value={userLat} onChange={()=>{console.log('none')}}/>
-
-          <span>- or -</span>
-          <input id="cityInput" placeholder='city' onChange={this.handleInput} />
-          <button id="cityBtn" onClick={() => setCity(this.state.input)}>Search</button>
-          <br />
-
-
-          <button onClick={login}>Login</button>
-
-          <RandomBtn />
         </Modal>
         <Map styles={{ height: '100vh' }} />
       </div>
@@ -157,9 +190,10 @@ let mapStateToProps = state => {
   return {
     userLat: state.user.userLat,
     userLon: state.user.userLon,
+    user: state.user.data,
     cuisine: state.rest.cuisine,
     price: state.rest.price,
-    phone: state.rest.phone
+    phone: state.rest.phone,
   }
 }
 

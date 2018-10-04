@@ -1,10 +1,12 @@
-const methods = require('../../src/_util/methods')
+const methods = require('./methods')
 const FavsCtrl = require('../../server/Controllers/FavsCtrl')
 const RestCtrl = require('../../server/Controllers/RestCtrl')
+const res = require ('./helpers/expressResponse')()
 
 
-describe('Tests for Tiler', ()=>{
-	let {RandomizePt1, randomNum, cuisineNames, logoutUser} = methods;
+
+// describe('Tests for Tiler', ()=>{
+// 	let {RandomizePt1, randomNum, cuisineNames, logoutUser} = methods;
 
 	test('RandomNum should return a number between 1 and 4', ()=>{
 		let num = randomNum()
@@ -17,4 +19,68 @@ describe('Tests for Tiler', ()=>{
 		expect(list).toHaveLength(5)
 	})
 
+// })
+
+describe ('Test by Aaron Hatch', () => {
+	let {getCuisine} = RestCtrl
+
+	beforeEach(() => {
+		res.reset()
+	})
+	// test('getCuisine should return an array', (req, res) => {
+	// 	expect(Array.isArray(getCuisine())).toBe(true)
+	// })
+
+	it('getFavorites should return a favorites', async done => {
+		let db={};
+		let array = [1,2,3];
+		let req = {
+			app: {
+				get: jest.fn(),
+			},
+			session: {
+				user: '1234'
+			}
+		}
+	
+		db.getFavorites = jest.fn(() => {
+			return new Promise((resolve, reject) => {
+				resolve()
+			})
+		})
+		await FavsCtrl.getFavorites(req, res)
+		done()
+		expect(res.send).toBeCalledWith(array)
+	})
+
+	// test('getCuisine should return 20 results', () => {
+	// 	expect(getCuisine.length).toEqual(20)
+	// })
+
+	// test('deleteFavorite should throw a 500 error if error occurs', () => {
+		// FavsCtrl.deleteFavorite()
+	// })
+
+	// test('deleteFavorite should delete a fav', () => {
+		// FavsCtrl.deleteFavorite.length.toEqual(length - 1)
+	// })
+
+	// test('deleteFavorite should return a new Array', () => {
+		// FavsCtrl.deleteFavorite()
+		// expect(Array.isArray(deleteFavorite).toBe(true))
+	// })
+	
+})
+
+//Aaron Harris 
+
+
+describe('Tests for Aaron Harris', () => {
+
+	test('Get favorites should return a array', async (req, res) => {
+		let { getFavorites } = FavsCtrl
+		let db = req.app.get('db')
+		let favorites = await db.getFavorites(4)
+		console.log(favorites)
+	})
 })
