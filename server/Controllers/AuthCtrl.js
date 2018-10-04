@@ -23,17 +23,35 @@ module.exports = {
       let users = await db.findUserByAuthId(userInfo.sub)
 
       if (users.length) {
-          req.session.user = users[0]
-          res.redirect('/#/favorites')
-      }else{
-          let users = await db.createUser(userInfo)
-          req.session.user = users[0]
-          res.redirect('/')
+        req.session.user = users[0]
+        res.redirect('/#/favorites')
+      } else {
+        let users = await db.createUser(userInfo)
+        req.session.user = users[0]
+        res.redirect('/')
       }
     } catch (error) {
       console.log('we have a problem:', error)
       res.redirect('/error')
     }
+
+  },
+  getUser: async (req, res) => {
+    try {
+      res.status(200).send(req.session.user.name)
+    } catch (error) {
+      res.status(500).send(error)
+    }
+
+  },
+  logout: async (req, res) => {
+    try {
+      req.session.destroy()
+      res.status(200).send('user has logged out sucessfully.')
+    } catch (error) {
+      res.status(500).send(error)
+    }
+
 
   }
 }

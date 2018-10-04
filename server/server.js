@@ -42,10 +42,7 @@ app.get('/api/currentUser', (req, res) => {
     res.send(req.session.user.name)
 })
 
-app.get('/api/logout', (req, res) => {
-        req.session.destroy()
-        res.sendStatus(200).send(req.session.user)
-})
+app.get('/api/logout', AuthCtrl.logout)
 
 //Food
 app.get('/api/cuisineNames', RestCtrl.getCuisine)

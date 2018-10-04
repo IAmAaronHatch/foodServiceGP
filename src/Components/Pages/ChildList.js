@@ -36,7 +36,7 @@ class ChildList extends Component {
                                         : null
                                 }
                             </div>
-                            <Link onClick={() => this.coords(rest.coordinates.latitude, rest.coordinates.longitude)} restaurant={rest} to={`/restaurants/${rest.id}`}>View More</Link>
+                            <Link onClick={() => this.props.coords(rest.coordinates.latitude, rest.coordinates.longitude)} restaurant={rest} to={`/restaurants/${rest.id}`}>View More</Link>
                         </div> :
                         null
                 } 
