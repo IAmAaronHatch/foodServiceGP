@@ -18,8 +18,9 @@ class ChildFav extends Component {
         }
     }
     toggleEdit = (desc) => {
+        let {canEdit} = this.state
         this.setState({
-            canEdit: true,
+            canEdit: !canEdit,
             editValue: desc
         })
     }
@@ -68,25 +69,26 @@ class ChildFav extends Component {
             <div className='fav-main'>
                 <div key={fav.id}
                 className='fav-container'>
-                    <h1 onClick={this.toggleOpen}>Name: {fav.name}</h1>
+                    <h1 onClick={this.toggleOpen}>{fav.name}</h1>
                     {
                         isOpen ?
                         <div className='opened-fav'>
-                                <span>Phone: {fav.phone}</span>
+                                <span>Phone # {fav.phone}</span>
                                 <br />
                                 {
                                     this.state.canEdit ?
                                         <div>
-                                            <input value={this.state.editValue} onChange={this.handleUpdate} />
-                                            <button onClick={() => this.saveUpdate(fav.rest_id)}>Save</button>
+                                            <input id='edit-input' value={this.state.editValue} onChange={this.handleUpdate} />
+                                            <button id='save-me' onClick={() => this.saveUpdate(fav.rest_id)}>Save</button>
                                         </div>
                                         :
-                                        <span>{fav.description}</span>
+                                        <span>"{fav.description}"</span>
                                 }
-                                <button onClick={() => this.toggleEdit(fav.description)}>Edit</button>
+                                <button id='edit-me' onClick={() => this.toggleEdit(fav.description)}>Edit</button>
                                 <br />
-                                <Link to={`/restaurants/${fav.rest_id}`} onClick={async () => await this.coords(fav)}>Navigate</Link>
-                                <button onClick={() => this.dltFavorite(fav.rest_id)}>Delete</button>
+                                <Link id='nav-me' to={`/restaurants/${fav.rest_id}`} onClick={async () => await this.coords(fav)}>Navigate</Link>
+                                
+                                <img id='delete-me' onClick={() => this.dltFavorite(fav.rest_id)} src={'https://static.thenounproject.com/png/1244272-200.png'}/>
                         </div> :
                         null
                         

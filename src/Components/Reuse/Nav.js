@@ -1,47 +1,81 @@
 import React, { Component } from 'react'
 import './nav.css'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
-import methods from '../../_util/methods'
+import { logout } from '../../Redux/reducers/user'
+import { logoutUser } from '../../_util/methods'
+
+
 
 class Nav extends Component {
-	
+	constructor () {
+		super()
+		this.state = {
+			isOpen: false
+		}
+	}
+
 	openNav = () => {
-		document.getElementById("mySidenav").style.width = "80px";
+		let{isOpen} = this.state
+		this.setState({
+			isOpen: !isOpen
+		})
+
+		if(isOpen){
+			document.getElementById("mySidenav").style.width = "60px";
+		} else {
+			this.closeNav()
+		}
 	}
 	
 	closeNav = () => {
 		document.getElementById("mySidenav").style.width = "0px";
 	}
-	
+
+	logout = () => {
+		let { logout, history } = this.props
+		logout(logoutUser)
+		history.push('/')
+	}
+
 	render() {
-		let { logoutUser } = methods;
+		let { user } = this.props
 		return (
-			<div>
+			<div id='nav'>
 				<div id="mySidenav" className="sidenav">
-					<a href="javascript:void(0)" className="closebtn" onClick={this.closeNav}>&times;</a>
-					{this.props.user?
-					//need a different icon for logging out
-						<Link to='/' onClick={logoutUser}><img src={'https://static.thenounproject.com/png/1528129-200.png'} alt='signout'/></Link>
-					:
-						<Link to='/'><img src={'https://static.thenounproject.com/png/1528129-200.png'} alt='signin'/></Link>
-				}
-					<Link to='/'><img onClick={() => window.location.reload()} src={'https://static.thenounproject.com/png/113952-200.png'} alt='new search'/></Link>
+					{
+						user ?
+							
+							<img onClick={this.logout} id='logout' src={'https://static.thenounproject.com/png/1350667-200.png'}/>
+							:
+							<Link to='/'> <img src={'https://static.thenounproject.com/png/801390-200.png'} alt='signin' /> </Link>
+
+					}
+					
+					<Link to='/'><img src={'https://static.thenounproject.com/png/113952-200.png'} alt='new search'/></Link>
 					<Link to='/favorites'><img src={'https://static.thenounproject.com/png/670685-200.png'} alt='favorites'/></Link>
 				</div>
 
 				<div>
-					<span onClick={this.openNav}>Open</span>
+					<img style={imageSty} src={'https://static.thenounproject.com/png/918393-200.png'} onClick={this.openNav}/>
 				</div>
 			</div>
 		)
 	}
 }
 
-let mapStateToProps = (state)=>{
+let mapStateToProps = state => {
 	return {
 		user: state.user.data
 	}
 }
 
-export default connect(mapStateToProps)(Nav)
+export default withRouter(connect(mapStateToProps, {logout})(Nav))
+
+const imageSty = {
+	height: '20px',
+	width: '20px',
+	marginLeft: '1vw',
+	marginTop: '2vh' 
+
+}

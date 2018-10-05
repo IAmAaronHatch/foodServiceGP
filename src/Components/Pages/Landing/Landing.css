@@ -6,6 +6,15 @@
 #d64933 red
 */
 
+h3 {
+    color: #2b303a
+}
+h2 {
+color: #2b303a
+}
+span {
+color: #2b303a
+}
 
 
 .dropbtn {
@@ -16,7 +25,8 @@
   border: none;
   cursor: pointer;
   border-radius: 3px;
-  box-shadow: 5px 10px 18px #888888;
+  letter-spacing: 3px;
+  box-shadow: 5px 10px 25px #888888;
 }
 
 .button1{
@@ -31,7 +41,7 @@
   position: absolute;
   background-color: #f9f9f9;
   width: 8vw;
-  box-shadow: 5px 10px 18px #888888;
+  box-shadow: 5px 10px 12px #888888;
   z-index: 1;
   max-height: 3vh;
 }
@@ -63,7 +73,8 @@
   border: none;
   cursor: pointer;
   border-radius: 3px;
-  box-shadow: 5px 10px 18px #888888;
+  letter-spacing: 3px;
+  box-shadow: 5px 10px 25px #888888;
 }
 
 .type-dropcontent {
@@ -93,6 +104,8 @@
   position: absolute;
   background-color: rgba(255, 255, 255, 0.75);
   border-radius: 10px;
+    box-shadow: 2px 5px 50px #888888;
+
 }
 
 .top-container {
@@ -106,7 +119,7 @@
   border-top-right-radius: 10px;
   display: flex;
   flex-direction: column;
-  box-shadow: 5px 10px 18px #888888;
+  box-shadow: 1px 3px 30px #888888;
 }
 
 .btm-container {
@@ -168,11 +181,30 @@ height: 40%;
   margin-top: 1vh;
 }
 #login {
+  margin-top: 2vh;
   width: 3vw;
   border-radius: 10px;
 }
+#logout-btn {
+  width: 3vw;
+  height: 8vh;
+}
+.logout {
+  margin-top: 3vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 12vw;
+  height: 8vh;
+}
+.logout p {
+  color: white;
+  font-size: 20px;
+  font: bold;
+}
 .logo {
   color: rgb(220, 217, 217);
-  font-size: 60px;
+  font-size: 54px;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
