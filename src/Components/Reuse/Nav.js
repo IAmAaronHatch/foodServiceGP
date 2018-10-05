@@ -27,7 +27,7 @@ class Nav extends Component {
 			this.closeNav()
 		}
 	}
-
+	
 	closeNav = () => {
 		document.getElementById("mySidenav").style.width = "0px";
 	}

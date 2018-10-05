@@ -14,9 +14,7 @@ class Favorites extends Component {
         getName().then(results => {
             getUser(results.data)
         })
-
         getFavorites(getFaves())
-
     }
 
     logout = () => {
@@ -38,7 +36,7 @@ class Favorites extends Component {
                         </div> : <p>No one is logged in</p>
                 }
                 {
-                    user ? 
+                    user && favorites.length ? 
                         <div className='fav-list'>
                             {favorites.map((fav, i) => {
                                 return (
@@ -47,8 +45,23 @@ class Favorites extends Component {
                             })}
                         </div> :
                         <p>To View Favorites, Please Login</p>
+                            
                 }
-                
+            
+
+                {/* {favorites.length?
+                <div>
+                    {favorites.map((fav, i) => {
+                        return (
+                            <ChildFav key={fav.id} fav={fav}/>
+                        )
+                    })}
+                </div>
+                :
+                <div>
+                    <h3>You have not set any favorites!</h3>
+                </div>} */}
+
             </div>
         )
     }
