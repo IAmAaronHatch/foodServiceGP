@@ -89,7 +89,9 @@ const styles = {
     height: '7vh',
     backgroundColor: '#d64933',
     borderRadius: '5px',
-    boxShadow: '5px 10px 18px #888888',
+    boxShadow: '5px 10px 25px #888888',
     color: 'white',
-    fontSize: '16px'
+    fontSize: '16px',
+    letterSpacing: '3px',
+    marginBottom: '3vh'
 }

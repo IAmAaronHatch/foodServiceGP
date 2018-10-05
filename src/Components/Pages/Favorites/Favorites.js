@@ -14,7 +14,7 @@ class Favorites extends Component {
         getName().then(results => {
             getUser(results.data)
         })
-        
+
         getFavorites(getFaves())
 
     }
@@ -25,26 +25,30 @@ class Favorites extends Component {
         logout("")
         history.push('/')
     }
-    
+
     render() {
         let { user, favorites } = this.props
         return (
-            <div>
-                <Nav/>
+            <div className='favorite-all'>
+                    <Nav id='nav'/>
                 {
                     user ?
-                        <div>
-                            <p>{user}</p>
+                        <div className='welcome'>
+                            <h1 id='wel-user'> Welcome {user} to Your Favorites!</h1>
                         </div> : <p>No one is logged in</p>
                 }
-                <div>
-                    {favorites.map((fav, i) => {
-                        return (
-                            <ChildFav key={fav.id} fav={fav}/>
-                        )
-                    })}
-                </div>
-                <button onClick={this.logout}>Logout</button>
+                {
+                    user ? 
+                        <div className='fav-list'>
+                            {favorites.map((fav, i) => {
+                                return (
+                                    <ChildFav key={fav.id} fav={fav} />
+                                )
+                            })}
+                        </div> :
+                        <p>To View Favorites, Please Login</p>
+                }
+                
             </div>
         )
     }

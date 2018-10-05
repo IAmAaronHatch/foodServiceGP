@@ -18,27 +18,25 @@ class ChildList extends Component {
     }
 
     render() {
-        let { rest, user } = this.props
+        let { rest, user, coords } = this.props
         return (
             <div key={rest.id} >
                 <div className='info-box'>
-                    <h3 onClick={this.toggleOpen}>Name:{rest.name}</h3>
-                    <h3>Price Range: {rest.price}</h3>
+                    <h3 onClick={this.toggleOpen}>{rest.name}</h3>
+                    <h4>{rest.price}</h4>
 
                     {
                         this.state.isOpen ?
                             <div className='rest-box'>
-                                <h3>Phone Number: {rest.display_phone}</h3>
-                                <h3>Address: {rest.location.address1}</h3>
-                                <h3>Type: {rest.categories[0].alias}</h3>
-                                <div>
+                                <span id='display'>{rest.display_phone}</span>
+                                <span id='display'>{rest.location.address1}</span>
+                                <span id='display'>Cuisine: {rest.categories[0].alias}</span>
                                     {
                                         user ?
-                                            <button onClick={() => { this.props.createFavorite(rest.id, rest.name, rest.phone, rest.coordinates.latitude, rest.coordinates.longitude) }}>Add To Favorites</button>
+                                            <button className='favorite-btn' onClick={() => { this.props.createFavorite(rest.id, rest.name, rest.phone, rest.coordinates.latitude, rest.coordinates.longitude) }}>Add To Favorites</button>
                                             : null
                                     }
-                                </div>
-                                <Link onClick={() => this.coords(rest.coordinates.latitude, rest.coordinates.longitude)} restaurant={rest} to={`/restaurants/${rest.id}`}>Get Directions</Link>
+                                <Link className='navigate-btn' onClick={() => coords(rest.coordinates.latitude, rest.coordinates.longitude)} restaurant={rest} to={`/restaurants/${rest.id}`}>Get Directions</Link>
                             </div> :
                             null
                     }
