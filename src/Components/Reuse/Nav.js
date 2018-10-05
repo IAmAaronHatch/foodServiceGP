@@ -21,7 +21,7 @@ class Nav extends Component {
 				<div id="mySidenav" className="sidenav">
 					<a href="javascript:void(0)" className="closebtn" onClick={this.closeNav}>&times;</a>
 					<Link to='/'><img src={'https://static.thenounproject.com/png/1528129-200.png'} alt='signin'/></Link>
-					<Link to='/'><img src={'https://static.thenounproject.com/png/113952-200.png'} alt='new search'/></Link>
+					<Link to='/'><img onClick={() => window.location.reload()} src={'https://static.thenounproject.com/png/113952-200.png'} alt='new search'/></Link>
 					<Link to='/favorites'><img src={'https://static.thenounproject.com/png/670685-200.png'} alt='favorites'/></Link>
 				</div>
 

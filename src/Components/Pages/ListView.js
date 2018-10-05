@@ -35,7 +35,7 @@ class ListView extends Component {
                     <div className='top-list'>
                         {fiveList.map((rest) => (
                             <div className="restListItem" key={rest.id} >
-                                <ChildList key={rest.id} rest={rest} />
+                                <ChildList coords={this.coords} key={rest.id} rest={rest}/>
                             </div>
                         ))}
 
