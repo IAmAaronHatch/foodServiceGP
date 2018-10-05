@@ -22,21 +22,26 @@ class ListView extends Component {
     render() {
         let { fiveList } = this.props
         return (
-            <div >
+            <div className='main-listView' >
                 <Nav />
                 <div>
-                    <Map styles={{ height: '40vh', width: '100%' }} zoom='10' />
+                    <Map styles={{ height: '50vh', width: '80%', display: 'flex', justifyContent: 'center', marginLeft: '10vw', boxShadow: '0px 3px 8px #888888' }} zoom='10' />
                 </div>
+                <div className='lessRandom'>
+                    <LessRandom />
+                </div>
+                
                 <div style={{ height: '60vh', backgroundColor: 'render' }}>
                     <div className='top-list'>
                         {fiveList.map((rest) => (
                             <div className="restListItem" key={rest.id} >
-                                <ChildList key={rest.id} rest={rest}/>
+                                <ChildList key={rest.id} rest={rest} />
                             </div>
                         ))}
+
                     </div>
+
                 </div>
-                <LessRandom />
             </div>
         )
     }

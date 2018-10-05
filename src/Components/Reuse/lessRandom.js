@@ -13,7 +13,7 @@ class LessRandom extends Component {
     render() {
         return (
             <div>
-                <button onClick={() => this.random(this.props.rest)}>New List</button>          
+                <button style={styles} onClick={() => this.random(this.props.rest)}>Randomize!</button>          
             </div>
         )
     }
@@ -26,3 +26,13 @@ let mapStateToProps = state => {
 }
 
 export default connect(mapStateToProps, {getFiveList})(LessRandom)
+
+const styles = {
+    height: '3vh',
+    width: '8vw',
+    padding: '5px',
+    backgroundColor: '#d64933',
+    borderRadius: '5px',
+    fontSize: '16px',
+    color: 'white'
+}

@@ -7,6 +7,9 @@ import RandomBtn from '../../Reuse/RandomBtn';
 import { setLat, setLon, setCity } from '../../../Redux/reducers/user'
 import { setCuisine, setPrice, setCuisineList } from '../../../Redux/reducers/rest'
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import object from '../../../_util/methods.js'
 
 
@@ -91,10 +94,17 @@ class Landing extends Component {
     })
   }
 
-  
+  notify = (input) => {
+    toast.success('Successfully Picked A Location!', { position: toast.POSITION.TOP_CENTER })
+    this.props.setCity(input)
+  }
+
+
+
+
 
   render() {
-    let { price, setPrice, cuisine, setCuisine, userLat, setCity, user } = this.props
+    let { price, setPrice, cuisine, setCuisine, userLat, user } = this.props
     return (
       <div>
         <Modal
@@ -103,14 +113,26 @@ class Landing extends Component {
           overlayClassName='Overlay'>
 
           <div className='top-container'>
+            <div className='login-box'>
+              <div>
+                {
+                  user ?
+                    <div>
+                      <p>Welcome {user}</p>
+                      <button>Logout</button>
+                    </div> :
+                    <button onClick={login} id='login'>Login</button>
+                }
+              </div>
+            </div>
             <div className='logo'>
               <h1>Silver Platter</h1>
             </div>
-            <div>
+            <div className='top-btn-container'>
               <img src={'https://static.thenounproject.com/png/677420-200.png'} id="locator" onClick={this.geoFindMe} />
               <input hidden id="latInput" value={userLat} onChange={() => { console.log('none') }} />
               <input id="cityInput" placeholder='City / Zip Code' onChange={this.handleInput} />
-              <button id="cityBtn" onClick={() => setCity(this.state.input)}>Search</button>
+              <button id="cityBtn" onClick={() => this.notify(this.state.input)}>Search</button>
             </div>
           </div>
 
@@ -118,18 +140,7 @@ class Landing extends Component {
           {/*  ------------------------------------------------------------- */}
 
           <div className='btm-container'>
-            <div>
-              {
-                user ?
-                  <div>
-                    <p>Welcome {user}</p>
-                    <button>Logout</button>
-                  </div> :
-                  <button onClick={login} id='login'>Login</button>
-              }
-            </div>
-
-            <div>
+            <div className='btm-btn-box'>
 
               {/* PRICE LIST */}
 
