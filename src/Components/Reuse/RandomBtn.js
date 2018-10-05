@@ -11,13 +11,21 @@ import 'react-toastify/dist/ReactToastify.css';
 let { RandomizePt1 } = object
 
 class RandomBtn extends Component {
+    emptyArrAlert = () => {
+        toast.error("Oh No! There's No Results!", { position: toast.POSITION.TOP_CENTER })
+    }
 
     newRestaurants = () => {
         let { userLat, userLon, cat, price, getRestaurants, userCity } = this.props
 
         axios.post('/api/yelp', { lat: userLat, lon: userLon, price: price, cat: cat, local: userCity }).then(response => {
-            getRestaurants(response.data)
+            if(response.data.length === 0){
+                this.emptyArrAlert()
+            } else {
+                getRestaurants(response.data)
+            }
         })
+
     }
 
     randomize = (rest) => {
@@ -51,7 +59,7 @@ class RandomBtn extends Component {
     render() {
         return (
             <div>
-                <button onClick={this.handleNewRestaurants}>Randomize!</button>
+                <button style={styles} onClick={this.handleNewRestaurants} >Randomize!</button>
                 <ToastContainer
                     autoClose={3000}
                     hideProgressBar={true}
@@ -75,3 +83,13 @@ let mapStateToProps = state => {
 }
 
 export default withRouter(connect(mapStateToProps, { getRestaurants, getFiveList })(RandomBtn))
+
+const styles = {
+    width: '10vw',
+    height: '7vh',
+    backgroundColor: '#d64933',
+    borderRadius: '5px',
+    boxShadow: '5px 10px 18px #888888',
+    color: 'white',
+    fontSize: '16px'
+}

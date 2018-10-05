@@ -62,7 +62,7 @@ class ChildFav extends Component {
     }
 
     render() {
-        let { fav, deleteFavorite } = this.props
+        let { fav } = this.props
         let { isOpen } = this.state
         return (
             <div className='fav-main'>
