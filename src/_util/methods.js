@@ -4,8 +4,8 @@ let someObj = {
     //Tiler
     RandomizePt1(rest) {
         let sorted = [...rest]
-        let fiveList = sorted.sort(function (a, b) { return 0.5 - Math.random() })
-        fiveList.splice(4, 45)
+        let fullList = sorted.sort(function (a, b) { return 0.5 - Math.random() })
+        let fiveList = fullList.length>5? fullList.slice(fullList.length-5, fullList.length) : fullList
         return fiveList
     },
     randomNum() {

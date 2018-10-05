@@ -14,9 +14,7 @@ class Favorites extends Component {
         getName().then(results => {
             getUser(results.data)
         })
-        
         getFavorites(getFaves())
-
     }
 
     logout = () => {
@@ -33,10 +31,11 @@ class Favorites extends Component {
                 <Nav/>
                 {
                     user ?
-                        <div>
+                    <div>
                             <p>{user}</p>
                         </div> : <p>No one is logged in</p>
                 }
+                {favorites.length?
                 <div>
                     {favorites.map((fav, i) => {
                         return (
@@ -44,6 +43,10 @@ class Favorites extends Component {
                         )
                     })}
                 </div>
+                :
+                <div>
+                    <h3>You have not set any favorites!</h3>
+                </div>}
                 <button onClick={this.logout}>Logout</button>
             </div>
         )
