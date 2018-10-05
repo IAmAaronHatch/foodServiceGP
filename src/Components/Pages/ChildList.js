@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { createFavorite } from '../../Redux/reducers/favorites'
+import { setRestLat, setRestLon } from '../../Redux/reducers/rest'
 import './ListView.css'
 
 class ChildList extends Component {
@@ -15,6 +16,13 @@ class ChildList extends Component {
 
     toggleOpen = () => {
         this.setState({ isOpen: !this.state.isOpen })
+    }
+
+    coords = (lat, lon) => {
+        let { setRestLat, setRestLon } = this.props
+        setRestLat(lat)
+        setRestLon(lon)
+        
     }
 
     render() {
@@ -55,4 +63,4 @@ let mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, { createFavorite })(ChildList)
+export default connect(mapStateToProps, { createFavorite, setRestLat, setRestLon })(ChildList)
