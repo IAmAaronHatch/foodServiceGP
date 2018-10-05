@@ -36,31 +36,27 @@ class Favorites extends Component {
                         </div> : <p>No one is logged in</p>
                 }
                 {
-                    user && favorites.length ? 
+                    user ? 
                         <div className='fav-list'>
-                            {favorites.map((fav, i) => {
+                        {
+                            favorites.length > 0 ?
+                                    
+                            favorites.map((fav, i) => {
                                 return (
                                     <ChildFav key={fav.id} fav={fav} />
                                 )
-                            })}
-                        </div> :
-                        <p>To View Favorites, Please Login</p>
+                            })
+                            :
+                                    <h3>You have not set any favorites!</h3>
+                        }
+                            
+                        </div> 
+                        :
+                        <p>To View Favorites, Please Login</p>   
                             
                 }
             
 
-                {/* {favorites.length?
-                <div>
-                    {favorites.map((fav, i) => {
-                        return (
-                            <ChildFav key={fav.id} fav={fav}/>
-                        )
-                    })}
-                </div>
-                :
-                <div>
-                    <h3>You have not set any favorites!</h3>
-                </div>} */}
 
             </div>
         )
