@@ -38,7 +38,7 @@ class Nav extends Component {
 	}
 }
 
-mapStateToProps = (state)=>{
+let mapStateToProps = (state)=>{
 	return {
 		user: state.user.data
 	}
