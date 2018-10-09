@@ -1,8 +1,19 @@
+.favorite-all {
+
+    height: 80vh;
+    width: 80vw;
+    margin-left: 10vw;
+    box-shadow: 5px 10px 25px #888888;
+    margin-top: 8vh;
+    background-color: whitesmoke;
+}
+
 .fav-main {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: space-evenly;
+    margin-top: 10vh;
 }
 
 .fav-container {
@@ -10,13 +21,82 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    border: black 1px solid;
     margin-bottom: 10px;
-    width: 60%;
+    width: 90%;
+    margin-left: 30px;
+    margin-right: 30px;
 }
 .opened-fav {
     display: flex;
     flex-direction: column;
     font-size: 18px;
+    align-items: center;
+    justify-content: center;
 
+}
+
+.fav-list {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40vh
+}
+
+.welcome {
+    letter-spacing: 3px;
+    color: #2b303a;
+    
+}
+#wel-user {
+    margin-top: 10vh;
+}
+
+#nav {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+#edit-me {
+    width: 6vh;
+    height: 4vh;
+    border-radius: 5px;
+    background-color: #58a4b0;
+    color: white;
+    letter-spacing: 2px;
+    font-size: 14px;
+    margin-top: 1vh;
+}
+#edit-input {
+    width: 10vw;
+    height: 3vh;
+}
+ #nav-me {
+    background-color: #2b303a;
+    color: white;
+     letter-spacing: 2px;
+     margin-bottom: 1vh;
+    height: 4vh;
+    width: 8vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+ }
+
+ #delete-me {
+     background-color: #d64933;
+     color: white;
+     letter-spacing: 2px;
+    border-radius: 50%;
+    height: 30px;
+    width: 30px
+ }
+#save-me {
+    height: 3vh;
+    width: 3vw;
+    border-radius: 5px;
+    background-color: #58a4b0;
+    color: white;
+    letter-spacing: 2px
 }

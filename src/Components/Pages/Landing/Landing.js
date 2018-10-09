@@ -4,7 +4,7 @@ import Modal from 'react-modal'
 import Map from '../../RP/Map'
 import { connect } from 'react-redux'
 import RandomBtn from '../../Reuse/RandomBtn';
-import { setLat, setLon, setCity } from '../../../Redux/reducers/user'
+import { setLat, setLon, setCity, logout } from '../../../Redux/reducers/user'
 import { setCuisine, setPrice, setCuisineList } from '../../../Redux/reducers/rest'
 
 import { ToastContainer, toast } from 'react-toastify';
@@ -13,7 +13,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import object from '../../../_util/methods.js'
 
 
-let { login, randomNum, error, yelpWithId, cuisineNames } = object
+let { login, randomNum, error, yelpWithId, cuisineNames, logoutUser } = object
 
 class Landing extends Component {
   constructor() {
@@ -100,6 +100,10 @@ class Landing extends Component {
   }
 
 
+  logout = () => {
+    let {logout} = this.props 
+    logout(logoutUser)
+  }
 
 
 
@@ -117,9 +121,9 @@ class Landing extends Component {
               <div>
                 {
                   user ?
-                    <div>
+                    <div className='logout'>
                       <p>Welcome {user}</p>
-                      <button>Logout</button>
+                      <button onClick={this.logout} id='logout-btn'>Logout</button>
                     </div> :
                     <button onClick={login} id='login'>Login</button>
                 }
@@ -208,4 +212,4 @@ let mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, { setLat, setLon, setCuisine, setPrice, setCity, setCuisineList })(Landing);
+export default connect(mapStateToProps, { setLat, setLon, setCuisine, setPrice, setCity, setCuisineList, logout })(Landing);

@@ -149,7 +149,7 @@ class FullView extends Component {
         return (
             <div>
                     <Nav />
-                <div id="mapDiv" style={{ minHeight: '100vh' }}>
+                <div id="mapDiv" style={{ minHeight: '90vh', width: '90vw', marginTop: '4vh', marginLeft: '4vw', boxShadow: '5px 10px 25px #888888' }}>
                 </div>
             </div>
         )
