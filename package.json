@@ -53,7 +53,6 @@
   "bugs": {
     "url": "https://github.com/IAmAaronHatch/foodServiceGP/issues"
   },
-  "homepage": "https://github.com/IAmAaronHatch/foodServiceGP#readme",
   "nodemonConfig": {
     "ext": "js, sql",
     "ignore": [
