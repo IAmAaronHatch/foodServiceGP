@@ -7,39 +7,39 @@ const yelp = require('yelp-fusion');
 
 
 
-describe('Tests for Tiler', ()=>{
-	let {RandomizePt1, randomNum} = methods;
-	let {changeDesc, deleteFavorite} = FavsCtrl;
+describe('Tests for Tiler', () => {
+	let { RandomizePt1, randomNum } = methods;
+	let { changeDesc, deleteFavorite } = FavsCtrl;
 
 	beforeEach(() => {
 		res.reset()
 	})
 
-	test('RandomNum should return a number between 1 and 4', ()=>{
+	test('RandomNum should return a number between 1 and 4', () => {
 		let num = randomNum()
 		expect(num).toBeGreaterThan(0)
 		expect(num).toBeLessThanOrEqual(4)
 	})
 
-	test('RandomizePt1 should return a list of 5', ()=>{
-		let list = RandomizePt1([1,2,3,,,4,5,6,7,8,9,10,49,50])
+	test('RandomizePt1 should return a list of 5', () => {
+		let list = RandomizePt1([1, 2, 3, , , 4, 5, 6, 7, 8, 9, 10, 49, 50])
 		expect(list).toHaveLength(5)
 	})
 
-	test("changeDesc error should return an error", async done=>{
-		let db={};
+	test("changeDesc error should return an error", async done => {
+		let db = {};
 		let error = "error";
 		let req = {
-			body: { desc:"here's a description"},
+			body: { desc: "here's a description" },
 			app: {
 				get: jest.fn(),
 			},
-			params: {restId: "restaurant id"},
+			params: { restId: "restaurant id" },
 			session: {
-				user: {id:'1234'}
+				user: { id: '1234' }
 			}
 		}
-		db.updateDesc= jest.fn(()=>{
+		db.updateDesc = jest.fn(() => {
 			return new Promise((resolve, reject) => {
 				reject()
 			})
@@ -50,19 +50,19 @@ describe('Tests for Tiler', ()=>{
 	})
 
 	it('deleteFavorite should send an array', async done => {
-		let db={};
-		let array = [1,2,3];
+		let db = {};
+		let array = [1, 2, 3];
 		let req = {
-			body: { desc:"here's a description"},
+			body: { desc: "here's a description" },
 			app: {
 				get: jest.fn(),
 			},
-			params: {restId: "restaurant id"},
+			params: { restId: "restaurant id" },
 			session: {
-				user: {id:'1234'}
+				user: { id: '1234' }
 			}
 		}
-	
+
 		db.deleteFavorite = jest.fn(() => {
 			return new Promise((resolve, reject) => {
 				resolve()
@@ -73,19 +73,19 @@ describe('Tests for Tiler', ()=>{
 		expect(res.status).toBeCalledWith(200)
 	})
 
-	test("deleteFavorite error should return an error", async done=>{
-		let db={};
+	test("deleteFavorite error should return an error", async done => {
+		let db = {};
 		let req = {
-			body: { desc:"here's a description"},
+			body: { desc: "here's a description" },
 			app: {
 				get: jest.fn(),
 			},
-			params: {restId: "restaurant id"},
+			params: { restId: "restaurant id" },
 			session: {
-				user: {id:'1234'}
+				user: { id: '1234' }
 			}
 		}
-		db.deleteFavorite= jest.fn(()=>{
+		db.deleteFavorite = jest.fn(() => {
 			return new Promise((resolve, reject) => {
 				reject()
 			})
@@ -97,7 +97,7 @@ describe('Tests for Tiler', ()=>{
 
 })
 
-describe ('Test by Aaron Hatch', () => {
+describe('Test by Aaron Hatch', () => {
 
 	beforeEach(() => {
 		res.reset()
@@ -152,8 +152,8 @@ describe ('Test by Aaron Hatch', () => {
 	it('getUser should return a error', async done => {
 		let req = {
 			session: {
+			}
 		}
-	}
 		AuthCtrl.getUser(req, res)
 		done()
 		expect(res.status).toBeCalledWith(500)
@@ -229,8 +229,8 @@ describe('Tests for Aaron Harris', () => {
 	it('getUser should return a error', async done => {
 		let req = {
 			session: {
+			}
 		}
-	}
 		AuthCtrl.getUser(req, res)
 		done()
 		expect(res.status).toBeCalledWith(500)

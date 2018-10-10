@@ -34,6 +34,7 @@ app.use((req, res, next) => {
     }
     next()
 })
+app.use(express.static(__dirname+'/../build'))
 
 //Auth
 app.get('/auth/callback', AuthCtrl.auth)
