@@ -25,7 +25,6 @@ app.use(session({
 }))
 
 app.use(bodyParser.json())
-
 app.use((req, res, next) => {
     if(req.query.test === process.env.REQ_QUERY){
         req.session.user = {
@@ -34,7 +33,7 @@ app.use((req, res, next) => {
     }
     next()
 })
-app.use(express.static(__dirname+'/../build'))
+app.use(express.static(`${__dirname}/../build`));
 
 //Auth
 app.get('/auth/callback', AuthCtrl.auth)
@@ -59,6 +58,10 @@ app.delete('/api/favorite/delete/:restId', FavsCtrl.deleteFavorite)
 app.post('/api/yelp', RestCtrl.getRest)
 app.get('/api/yelp/:id', RestCtrl.getById)
 
+
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../build/index.html'));
+});
 
 app.listen(port, () => {
         console.log(`Never gonna give ${port} up, Never gonna let ${port} down`)
